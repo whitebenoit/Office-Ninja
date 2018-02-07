@@ -1881,10 +1881,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraDistance: 3
   cameraHeight: 1.2
-  forwardCameraDistance: 3
+  forwardCameraDistance: 2
   linearLerpSpeed: 0.1
   angularLerpSpeed: 0.05
-  currCameraPos: 3
+  currCameraPos: 1
   gO: {fileID: 680316462}
 --- !u!1 &1405664937
 GameObject:
@@ -2233,7 +2233,7 @@ GameObject:
   - component: {fileID: 1762729881}
   - component: {fileID: 1762729880}
   m_Layer: 0
-  m_Name: CameraSwitchBack
+  m_Name: CameraSwitchLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2250,7 +2250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cc34fcd7ea6f042864ca5e6207aa3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newCameraPosition: 3
+  newCameraPosition: 1
 --- !u!65 &1762729881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2767,7 +2767,7 @@ GameObject:
   - component: {fileID: 1941591230}
   - component: {fileID: 1941591229}
   m_Layer: 0
-  m_Name: CameraSwitchRight
+  m_Name: CameraSwitchFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2784,7 +2784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05cc34fcd7ea6f042864ca5e6207aa3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newCameraPosition: 0
+  newCameraPosition: 2
 --- !u!65 &1941591230
 BoxCollider:
   m_ObjectHideFlags: 0

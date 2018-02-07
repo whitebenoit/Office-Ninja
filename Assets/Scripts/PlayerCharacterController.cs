@@ -17,6 +17,7 @@ public class PlayerCharacterController : MonoBehaviour {
     private Rigidbody pcc_rigidbody;
     private Collider pcc_collider;
 
+    public delegate void NextAction();
 
     private void Awake()
     {

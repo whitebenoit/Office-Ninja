@@ -18,35 +18,38 @@ public class MainCameraController : MonoBehaviour {
 
     private Vector3 objPosition;
     private Quaternion objRotation;
+    private Vector3 gOforward;
 
 
     private void Update()
     {
         objPosition = new Vector3();
         objRotation = new Quaternion();
+        gOforward = gO.transform.forward;
 
         objPosition += gO.transform.position + cameraHeight * Vector3.up;
         switch (currCameraPos)
         {
             case cameraPosition.right:
-                objPosition += cameraDistance * Vector3.right + forwardCameraDistance * Vector3.forward;
-                objRotation = Quaternion.Euler(0, -90f, 0);
-                break;
-            case cameraPosition.left:
-                objPosition += -cameraDistance * Vector3.right - forwardCameraDistance * Vector3.forward;
-                objRotation = Quaternion.Euler(0, 90f, 0);
-                break;
-            case cameraPosition.front:
-                objPosition += cameraDistance * Vector3.forward + forwardCameraDistance * Vector3.right;
+                objPosition += cameraDistance * Vector3.forward + forwardCameraDistance * Vector3.right * Math.Sign(gOforward.x);
                 objRotation = Quaternion.Euler(0, -180f, 0);
                 break;
-            case cameraPosition.back:
-                objPosition += -cameraDistance * Vector3.forward - forwardCameraDistance * Vector3.right;
+            case cameraPosition.left:
+                objPosition += -cameraDistance * Vector3.forward + forwardCameraDistance * Vector3.right * Math.Sign(gOforward.x);
                 objRotation = Quaternion.Euler(0, 0, 0);
+                break;
+            case cameraPosition.front:
+                objPosition += cameraDistance * Vector3.right + forwardCameraDistance * Vector3.forward * Math.Sign(gOforward.z);
+                objRotation = Quaternion.Euler(0, -90f, 0);
+                break;
+            case cameraPosition.back:
+                objPosition += -cameraDistance * Vector3.right + forwardCameraDistance * Vector3.forward * Math.Sign(gOforward.z);
+                objRotation = Quaternion.Euler(0, 90f, 0);
                 break;
             default:
                 break;
         }
+        //Debug.Log("gOforward : " + gOforward.ToString());
 
         transform.position = Vector3.Lerp(transform.position, objPosition, linearLerpSpeed);
         transform.rotation = Quaternion.Lerp(transform.rotation, objRotation, angularLerpSpeed);
