@@ -17,7 +17,11 @@ public abstract class AI_State : ScriptableObject {
 
     
 
-
+    /// <summary>
+    /// Executes all the actions (and BeforeActions and AfterActions) then return the next State
+    /// </summary>
+    /// <param name="brain"> behavior brain </param>
+    /// <returns></returns>
     public AI_State UpdateState(AI_BehaviorBrain brain)
     {
         BeforeActions(brain);

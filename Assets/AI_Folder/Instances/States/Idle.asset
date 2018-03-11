@@ -9,13 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc3e0cc455f6b394faa97ba7be5af18c, type: 3}
-  m_Name: StatePatrolOnly
+  m_Name: Idle
   m_EditorClassIdentifier: 
-  actionsList:
-  - condition: {fileID: 11400000, guid: 4774021224e23d74b9e4fa9a206f735a, type: 2}
-    action: {fileID: 11400000, guid: b680186830f3ffe40bdad294e9cab588, type: 2}
+  actionsList: []
   transitionsList: []
-  testTransitionLIST:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}

@@ -25,6 +25,15 @@ public class PlayerInputController : MonoBehaviour {
     {
         pic_charContr.Move(MovementDirectionCalc());
 
+        if (Input.GetButtonDown("Hide"))
+            pic_charContr.DoAction(PlayerCharacterController.ActionListElement.HIDE);
+        else if (Input.GetButtonDown("Interact"))
+            pic_charContr.DoAction(PlayerCharacterController.ActionListElement.INTERACT);
+        else if (Input.GetButtonDown("Dash"))
+            pic_charContr.DoAction(PlayerCharacterController.ActionListElement.DASH);
+        else if (Input.GetButtonDown("Use"))
+            pic_charContr.DoAction(PlayerCharacterController.ActionListElement.USE);
+
     }
 
     private Vector3 MovementDirectionCalc()

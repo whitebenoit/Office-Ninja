@@ -5,9 +5,11 @@ using UnityEngine;
 public class Tags : MonoBehaviour {
 
 
-    public string untagged = "Untagged";
-    public string player = "Player";
-    public string mainCamera = "MainCamera";
-    public string gameController = "GameController";
+    public const string untagged = "Untagged";
+    public const string player = "Player";
+    public const string mainCamera = "MainCamera";
+    public const string gameController = "GameController";
+    public const string interactibleObject = "InteractibleObject";
+    
 
 }

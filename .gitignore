@@ -3,8 +3,10 @@
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
-[Rr]essources/
+[R]essources/
 *Ressources.meta
+[Ee]xternal_Resources
+*External_Resources.meta
 [Ss]tandard Assets/
 *Standard Assets.meta
 /Assets/AssetStoreTools*

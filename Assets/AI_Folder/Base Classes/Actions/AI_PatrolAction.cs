@@ -15,7 +15,7 @@ public class AI_PatrolAction : AI_Action
 
     private void Patrol(AI_BehaviorBrain brain)
     {
-        NavMeshAgent agent = brain.GetComponent<NavMeshAgent>();
+        NavMeshAgent agent = brain.navMeshAgent;
         AI_PatrolData patrolData = brain.GetComponent<AI_PatrolData>();
         Transform[] patrolPoints = patrolData.patrolPoints;
         int currentTransformIndex = patrolData.currentTransformIndex;
