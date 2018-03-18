@@ -139,7 +139,7 @@ public class SplineLine : MonoBehaviour {
         return ( currIndex + Line.GetParametricLength(points[currIndex], points[currIndex + 1], dist - currDist)) / GetLineCount;  
     }
 
-    public Vector3 GetPointAtDistFromParametric( float movedDist, float originT)
+    public float GetLengthAtDistFromParametric(float movedDist, float originT)
     {
         float newT = this.GetParametricLength(movedDist + this.GetLength(originT));
         if (newT >= 1)
@@ -147,37 +147,90 @@ public class SplineLine : MonoBehaviour {
             if (Loop) newT -= 1f;
             else newT = 1f;
         }
-        return this.GetPoint(newT);
+        return newT;
+    }
+
+    public Vector3 GetPointAtDistFromParametric( float movedDist, float originT)
+    {
+        return GetPoint(GetLengthAtDistFromParametric(movedDist, originT));
+    }
+
+
+    public Vector3 GetPreviousControlPoint (float t)
+    {
+        float tempT = t;
+        if (Loop)
+        {
+            while (tempT > 1f) tempT -= 1f;
+            while (tempT < 0f) tempT += 1f;
+        }
+        tempT = Mathf.Clamp01(tempT) * GetLineCount;
+        int i = (int)tempT;
+        return GetControlPoint(i);
+    }
+
+    public Vector3 GetNextControlPoint(float t)
+    {
+        float tempT = t;
+        if (Loop)
+        {
+            while (tempT > 1f) tempT -= 1f;
+            while (tempT < 0f) tempT += 1f;
+        }
+        tempT = Mathf.Clamp01(tempT) * GetLineCount;
+        int i = (int)tempT;
+        return GetControlPoint(i+1);
+    }
+
+    public Vector3 GetDirection(float t)
+    {
+        return GetNextControlPoint(t) - GetPreviousControlPoint(t);
     }
 
 
 
+    //public void AddCurve()
+    //{
+    //    int ptLength = points.Length;
+    //    Array.Resize(ref points, ptLength + 1);
+    //    ptLength++;
+    //    if (Loop)
+    //    {
+    //        points[ptLength - 1] = points[0];
+    //        if (ptLength >= 3)
+    //        {
+    //            points[ptLength - 2] = (points[0] + points[ptLength - 3]) / 2;
+    //        }
+    //        else
+    //        {
+    //            points[ptLength - 2] = points[0] + Vector3.right;
+    //        }
+            
+    //    }
+    //    else
+    //    {
+    //        Vector3 point = points[ptLength - 1];
+    //        point.x += 1f;
+    //        points[ptLength - 1] = point;
+    //    }
+    //}
 
-    public void AddCurve()
+    public void AddCurve(int index)
     {
         int ptLength = points.Length;
-        Array.Resize(ref points, ptLength + 1);
-        ptLength++;
-        if (Loop)
-        {
-            points[ptLength - 1] = points[0];
-            if (ptLength >= 3)
-            {
-                points[ptLength - 2] = (points[0] + points[ptLength - 3]) / 2;
-            }
-            else
-            {
-                points[ptLength - 2] = points[0] + Vector3.right;
-                //Loop = false;
-                //points[ptLength].x = points[0].x + 1f;
-            }
-            
-        }
+        if (index == -1 || ptLength <= 1) AddCurve(ptLength -1);
         else
         {
-            Vector3 point = points[ptLength - 1];
-            point.x += 1f;
-            points[ptLength - 1] = point;
+            if (ptLength > 1)
+            {
+                Array.Resize(ref points, ptLength + 1);
+                ptLength++;
+                for (int i = ptLength - 1; i > index; i--)
+                {
+                    points[i] = points[i - 1];
+                }
+                points[index] = (points[index + 1] + points[index - 1]) / 2;
+            }
         }
     }
 

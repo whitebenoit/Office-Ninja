@@ -8,10 +8,10 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class SplinePlayerCharacterController : MonoBehaviour
 {
-    public float charSpeed = 0.1f;
+    public float charSpeed = 1f;
     public float turnSmooth = 15f;
     public float speedDamptime = 0.1f;
-    public SplineBezier bzSpline;
+    public SplineLine lSpline;
     public float progress = 0;
     public Vector3 TESTSplinePosition;
 
@@ -149,35 +149,42 @@ public class SplinePlayerCharacterController : MonoBehaviour
         }
     }
 
+    //private void Update()
+    //{
+    //    progress = lSpline.GetLengthAtDistFromParametric(charSpeed, progress);
+    //    transform.position = lSpline.GetPoint(progress);
+    //}
+
     public void Move(Vector3 direction)
     {
-        if (bzSpline != null)
+        if (lSpline != null)
         {
-            float dotMagnitude = Vector3.Dot(bzSpline.GetDirectionFromDistance(progress), direction);
-            if (dotMagnitude > 0.1f)
+            float dotMagnitude = Vector3.Dot(lSpline.GetDirection(progress).normalized, direction);
+            if (Math.Abs(dotMagnitude) > 0.05f)
             {
                 // Lerp-Rotate the rigidbody toward the direction
-                Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * bzSpline.GetDirectionFromDistance(progress), Vector3.up);
+                //Math.Sign(dotMagnitude) * charSpeed * Time.deltaTime
+                progress = lSpline.GetLengthAtDistFromParametric(Math.Sign(dotMagnitude) * charSpeed * Time.deltaTime, progress);
+                Vector3 newPosition = lSpline.GetPoint(progress);
+
+                Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * lSpline.GetDirection(progress).normalized, Vector3.up);
                 Quaternion newRotation = Quaternion.Lerp(pcc_rigidbody.rotation, targetRotation, turnSmooth);
-                pcc_rigidbody.MoveRotation(newRotation);
-                if(progress<= bzSpline.splineLength)
-                {
-                    progress += charSpeed * Time.deltaTime;
-                }
-                transform.position = bzSpline.GetPointFromDistance(progress);
+
+                transform.SetPositionAndRotation(newPosition, newRotation);
+
+                Debug.ClearDeveloperConsole();
+                Debug.Log("targetRotation =" + targetRotation.ToString());
+                //pcc_rigidbody.rotation = targetRotation;
+                //Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * lSpline.GetDirection(progress).normalized, Vector3.up);
+                //Quaternion newRotation = Quaternion.Lerp(pcc_rigidbody.rotation, targetRotation, turnSmooth);
+                //pcc_rigidbody.MoveRotation(targetRotation);
+
                 pcc_animator.SetFloat("Speed", 5.7f, speedDamptime, Time.deltaTime);
             }
             else
             {
                 pcc_animator.SetFloat("Speed", 0f, speedDamptime, Time.deltaTime);
             }
-            //if (direction.magnitude > 0.1f)
-            //{
-            //    progress += direction.magnitude/1000;
-            //    if (progress >= 1.0f) progress -= 1.0f;
-            //    TESTSplinePosition = bzSpline.GetPoint(progress);
-            //    transform.position = bzSpline.GetPoint(progress);
-            //}
         }
         
     }

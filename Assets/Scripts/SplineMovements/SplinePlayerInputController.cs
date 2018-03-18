@@ -53,7 +53,6 @@ public class SplinePlayerInputController : MonoBehaviour
             {
                 moveDirection = v * Vector3.forward + h * Vector3.right;
             }
-
             return moveDirection;
         }
     }

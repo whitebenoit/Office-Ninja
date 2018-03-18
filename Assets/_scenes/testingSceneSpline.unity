@@ -773,7 +773,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!95 &281402783
 Animator:
@@ -788,7 +788,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 6ff906f6735d3df4894441460ac2a7b6, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -801,7 +801,7 @@ Transform:
   m_PrefabInternal: {fileID: 1939033056}
   m_GameObject: {fileID: 281402780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.2368383, y: -0.5, z: 0.8585584}
+  m_LocalPosition: {x: -3.36, y: -0.5, z: 0.8585584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2112925648}
@@ -809,7 +809,7 @@ Transform:
   - {fileID: 1135840772}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -5.29}
 --- !u!114 &281402785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,7 +835,7 @@ MonoBehaviour:
   charSpeed: 5.7
   turnSmooth: 15
   speedDamptime: 0.1
-  bzSpline: {fileID: 1022378547}
+  lSpline: {fileID: 1781147230}
   progress: 0
   TESTSplinePosition: {x: 0, y: 0, z: 0}
 --- !u!1 &304545587
@@ -1484,6 +1484,7 @@ GameObject:
   - component: {fileID: 525336846}
   - component: {fileID: 525336845}
   - component: {fileID: 525336844}
+  - component: {fileID: 525336848}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1554,6 +1555,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &525336848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 525336843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bde586865dcbe14294c5de0a45a35ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraDistance: 10
+  cameraHeight: 1
+  forwardCameraDistance: 3
+  linearLerpSpeed: 0.1
+  angularLerpSpeed: 0.05
+  currCameraPos: 1
+  gO: {fileID: 281402780}
 --- !u!1 &537344174
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,13 +3379,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f779ae5f70a7f4d9a13c800707211a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  t: 0.121
+  t: 0.7720546
+  cDistance: 9.1
   points:
   - {x: 0, y: 0, z: 1}
+  - {x: 0.1489563, y: 0, z: 3.6065679}
   - {x: 1.8635687, y: 0, z: 1.0422609}
   - {x: 4.6823306, y: 0, z: -0.14908887}
-  - {x: 2.910569, y: 0, z: -1.963858}
-  loop: 0
+  - {x: 3.2693634, y: 0, z: -1.2049502}
+  - {x: 2.1618912, y: 0, z: -1.1594714}
+  - {x: 1.3226652, y: 0, z: -1.102249}
+  - {x: 1.8802997, y: 0, z: -0.10426529}
+  - {x: 2.3448806, y: 0, z: 3.8522863}
+  loop: 1
 --- !u!4 &951718224
 Transform:
   m_ObjectHideFlags: 0
@@ -5801,10 +5826,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79f779ae5f70a7f4d9a13c800707211a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  t: 0
+  t: 0.13333334
+  cDistance: 8
   points:
   - {x: 1, y: 0, z: 0}
-  - {x: 13, y: 0, z: 0}
+  - {x: 11, y: 0, z: 0}
+  - {x: 13, y: 0, z: 2}
   - {x: 12.961064, y: 0, z: 23.140259}
   - {x: -11, y: 0, z: 23}
   - {x: -11, y: 0, z: 0}
@@ -6493,7 +6520,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4834058310670926, guid: 2db4a083806af9d4798dbc1dd5723b17, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.2368383
+      value: -3.36
       objectReference: {fileID: 0}
     - target: {fileID: 4834058310670926, guid: 2db4a083806af9d4798dbc1dd5723b17, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6526,6 +6553,16 @@ Prefab:
     - target: {fileID: 1272859578592112, guid: 2db4a083806af9d4798dbc1dd5723b17, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 54840381200868392, guid: 2db4a083806af9d4798dbc1dd5723b17,
+        type: 2}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 95880317872806110, guid: 2db4a083806af9d4798dbc1dd5723b17,
+        type: 2}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114335363578839854, guid: 2db4a083806af9d4798dbc1dd5723b17, type: 2}

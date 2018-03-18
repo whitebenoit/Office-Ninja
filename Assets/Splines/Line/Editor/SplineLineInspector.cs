@@ -43,7 +43,7 @@ public class SplineLineInspector : Editor {
         if (GUILayout.Button("Add Curve"))
         {
             Undo.RecordObject(spline, "Add Curve");
-            spline.AddCurve();
+            spline.AddCurve(selectedIndex);
             EditorUtility.SetDirty(spline);
         }
     }
