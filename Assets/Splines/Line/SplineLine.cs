@@ -8,8 +8,29 @@ public class SplineLine : MonoBehaviour {
     [Range(0f,1f)]
     public float t;
 
+    public float cDistance;
+
     [SerializeField]
     private Vector3[] points;
+
+    [SerializeField]
+    private bool loop = false;
+
+    public bool Loop
+    {
+        get
+        {
+            return loop;
+        }
+        set
+        {
+            loop = value;
+            if (value == true)
+            {
+                SetControlPoint(0, points[0]);
+            }
+        }
+    }
 
     public int GetControlPointCount
     {
@@ -24,10 +45,16 @@ public class SplineLine : MonoBehaviour {
     }
     public void SetControlPoint(int index, Vector3 point)
     {
+        if (loop)
+        {
+            if (index == 0)
+            {
+                points[points.Length - 1] = point;
+            }
+        }
         points[index] = point;
     }
 
-    
 
     public int GetLineCount
     {
@@ -55,17 +82,113 @@ public class SplineLine : MonoBehaviour {
 
     }
 
+    public float GetLength(float t)
+    {
+        float lgth = 0f;
+        int i;
+        if (t >= 1f)
+        {
+            t = 1f;
+            i = GetLineCount - 1;
+        }
+        else
+        {
+            t = Mathf.Clamp01(t) * GetLineCount;
+            i = (int)t;
+            t -= i;
+        }
+
+        for (int j = 0; j < i; j++)
+        {
+            lgth += Vector3.Distance(points[j], points[j + 1]);
+        }
+        lgth += Line.GetLength(points[i], points[i + 1], t);
+        return lgth;
+    }
+
+    public float GetParametricLength(float dist)
+    {
+        float fullLength = GetLength(1f);
+        while (dist < 0f)
+        {
+            if (Loop) { dist += fullLength; }
+            else { return 0f; }
+        }
+        while (dist > fullLength)
+        {
+            if (Loop) { dist -= fullLength; }
+            else { return 1f; }
+        }
+
+        float currDist = 0f;
+        int currIndex = 0;
+
+        for (int i = 0; i < GetLineCount; i++)
+        {
+            float lineDist = Vector3.Distance(points[i], points[i + 1]);
+            if(currDist + lineDist >= dist)
+            {
+                currIndex = i;
+                break;
+            }
+            else
+            {
+                currDist += lineDist;
+            }
+        }
+        return ( currIndex + Line.GetParametricLength(points[currIndex], points[currIndex + 1], dist - currDist)) / GetLineCount;  
+    }
+
+    public Vector3 GetPointAtDistFromParametric( float movedDist, float originT)
+    {
+        float newT = this.GetParametricLength(movedDist + this.GetLength(originT));
+        if (newT >= 1)
+        {
+            if (Loop) newT -= 1f;
+            else newT = 1f;
+        }
+        return this.GetPoint(newT);
+    }
+
+
+
 
     public void AddCurve()
     {
-        Vector3 point = points[points.Length - 1];
-        Array.Resize(ref points, points.Length + 1);
-        point.x += 1f;
-        points[points.Length - 1] = point;
+        int ptLength = points.Length;
+        Array.Resize(ref points, ptLength + 1);
+        ptLength++;
+        if (Loop)
+        {
+            points[ptLength - 1] = points[0];
+            if (ptLength >= 3)
+            {
+                points[ptLength - 2] = (points[0] + points[ptLength - 3]) / 2;
+            }
+            else
+            {
+                points[ptLength - 2] = points[0] + Vector3.right;
+                //Loop = false;
+                //points[ptLength].x = points[0].x + 1f;
+            }
+            
+        }
+        else
+        {
+            Vector3 point = points[ptLength - 1];
+            point.x += 1f;
+            points[ptLength - 1] = point;
+        }
     }
 
     public void RemovePoint(int index)
     {
+        if (index == -1)
+        {
+            if (Loop) { index = points.Length - 2; }
+            else { index = points.Length - 1; }
+        }
+           
         Vector3[] dest = new Vector3[points.Length - 1];
         if (index > 0)
             Array.Copy(points, 0, dest, 0, index);
@@ -73,16 +196,15 @@ public class SplineLine : MonoBehaviour {
             Array.Copy(points, index + 1, dest, index, points.Length - index - 1);
         points = dest;
     }
+    
+    public void Reset()
+    {
+        points = new Vector3[] {
+            new Vector3(1f, 0f, 0f),
+            new Vector3(2f, 0f, 0f),
+            new Vector3(3f, 0f, 0f),
+            new Vector3(4f, 0f, 0f)
+        };
 
-    //public static T[] RemoveAt<T>(this T[] source, int index)
-    //{
-    //    T[] dest = new T[source.Length - 1];
-        //if (index > 0)
-        //    Array.Copy(source, 0, dest, 0, index);
-
-        //if (index<source.Length - 1)
-        //    Array.Copy(source, index + 1, dest, index, source.Length - index - 1);
-
-    //    return dest;
-    //}
+    }
 }

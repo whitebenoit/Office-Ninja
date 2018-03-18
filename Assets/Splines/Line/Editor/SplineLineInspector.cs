@@ -22,26 +22,48 @@ public class SplineLineInspector : Editor {
     {
         //DrawDefaultInspector();
         spline = target as SplineLine;
+        DrawLoopToggle();
         DrawTSelector();
+        DrawDistSelector();
         if (selectedIndex >= 0 && selectedIndex < spline.GetControlPointCount)
         {
             DrawSelectedPointInspector();
         }
+
+        EditorGUILayout.BeginHorizontal();
+        DrawAddCurveButton();
+        DrawRemoveCurveButton();
+        EditorGUILayout.EndHorizontal();
+
+    }
+
+    private void DrawAddCurveButton()
+    {
+
         if (GUILayout.Button("Add Curve"))
         {
             Undo.RecordObject(spline, "Add Curve");
             spline.AddCurve();
             EditorUtility.SetDirty(spline);
         }
-        
+    }
 
+    private void DrawRemoveCurveButton()
+    {
+
+        if (GUILayout.Button("Remove Curve"))
+        {
+            Undo.RecordObject(spline, "Remove Curve");
+            spline.RemovePoint(selectedIndex);
+            EditorUtility.SetDirty(spline);
+        }
     }
 
     private void DrawSelectedPointInspector()
     {
         GUILayout.Label("Selected Point");
         EditorGUI.BeginChangeCheck();
-        Vector3 point = EditorGUILayout.Vector3Field("Position", spline.GetControlPoint(selectedIndex));
+        Vector3 point = EditorGUILayout.Vector3Field("Position "+ selectedIndex, spline.GetControlPoint(selectedIndex));
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(spline, "Move Point");
@@ -61,8 +83,37 @@ public class SplineLineInspector : Editor {
             Undo.RecordObject(spline, "T change");
             EditorUtility.SetDirty(spline);
             spline.t = t;
+            spline.cDistance = spline.GetLength(t);
         }
         EditorGUILayout.EndHorizontal();
+    }
+
+    private void DrawDistSelector()
+    {
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.Label("Dist value");
+        EditorGUI.BeginChangeCheck();
+        float dist = EditorGUILayout.Slider(spline.cDistance, 0f, spline.GetLength(1f));
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(spline, "Dist change");
+            EditorUtility.SetDirty(spline);
+            spline.cDistance = dist;
+            spline.t = spline.GetParametricLength(dist);
+        }
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private void DrawLoopToggle()
+    {
+        EditorGUI.BeginChangeCheck();
+        bool loop = EditorGUILayout.Toggle("Loop",spline.Loop);
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(spline, "Toggle Loop");
+            EditorUtility.SetDirty(spline);
+            spline.Loop = loop;
+        }
     }
 
     private void OnSceneGUI()
@@ -78,14 +129,14 @@ public class SplineLineInspector : Editor {
         {
             points[i] = ShowPoint(i);
             if (i + 1 != length)
+            {
                 Handles.DrawLine(handleTransform.TransformPoint(spline.GetControlPoint(i)), handleTransform.TransformPoint(spline.GetControlPoint(i + 1)));
-
+            }
         }
-
-        Debug.Log("t_value = "+spline.t+" Point ="+spline.GetPoint(spline.t));
         Handles.color = Color.red;
-        Handles.Button(spline.GetPoint(spline.t), Quaternion.identity, handleSize, pickSize, Handles.DotHandleCap);
-        
+        float size = HandleUtility.GetHandleSize(points[0]);
+        Handles.Button(spline.GetPoint(spline.t), Quaternion.identity, size*handleSize, size * pickSize, Handles.DotHandleCap);
+        // Debug.Log("Length :" + spline.GetLength(spline.t) + "Param : "+ spline.GetParametricLength(spline.GetLength(spline.t)));
     }
 
 
