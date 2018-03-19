@@ -7,7 +7,7 @@ using UnityEngine;
 public abstract class ObjectInteractionController : MonoBehaviour {
 
     public Vector3 buttonPosition = new Vector3(-6, 2, 2);
-    private GameObject buttonUIGO_TEST ;
+    //private GameObject buttonUIGO_TEST ;
     private ButtonUIImageController btnUIImageController;
     private PlayerCharacterController pcc;
     private GameObject buttonCanvasGO;

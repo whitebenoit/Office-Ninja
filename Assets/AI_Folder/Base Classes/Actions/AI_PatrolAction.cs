@@ -7,6 +7,8 @@ using UnityEngine.AI;
 [CreateAssetMenu(menuName = "AI_Enjmin/Action/Patrol")]
 public class AI_PatrolAction : AI_Action
 {
+    private SplineLine ptrSplineLine;
+    public float currentTransformProgress;
 
     public override void Act(AI_BehaviorBrain brain)
     {
@@ -15,22 +17,23 @@ public class AI_PatrolAction : AI_Action
 
     private void Patrol(AI_BehaviorBrain brain)
     {
+        
         NavMeshAgent agent = brain.navMeshAgent;
         AI_PatrolData patrolData = brain.GetComponent<AI_PatrolData>();
-        Transform[] patrolPoints = patrolData.patrolPoints;
-        int currentTransformIndex = patrolData.currentTransformIndex;
+        ptrSplineLine = patrolData.ptrSplineLine;
+        currentTransformProgress = patrolData.currentTransformProgress;
 
         if (agent != null)
         {
-            if(agent.destination != patrolPoints[currentTransformIndex].position)
-            {
-                agent.destination = patrolPoints[currentTransformIndex].position;
-            }
+            //Vector3 nextDest = ptrSplineLine.GetNextControlPoint(currentTransformProgress);
+            agent.destination = ptrSplineLine.transform.TransformPoint(ptrSplineLine.GetNextControlPoint(currentTransformProgress));
             agent.isStopped = false;
             if (agent.remainingDistance <= agent.stoppingDistance
                 && !agent.pathPending)
             {
-                patrolData.currentTransformIndex = (currentTransformIndex + 1) % patrolPoints.Length;
+                int pointCnt = ptrSplineLine.GetControlPointCount;
+                int nextPointIndex = ptrSplineLine.GetNextControlPointIndex((int)(currentTransformProgress * pointCnt));
+                patrolData.currentTransformProgress = (float)nextPointIndex / pointCnt;
             }
         }
     }

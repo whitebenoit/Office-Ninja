@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class SplineCameraController : MonoBehaviour {
 
-    public float cameraDistance = 10;
+    public float cameraDistance = 4;
     public float cameraHeight = 1;
-    public float forwardCameraDistance = 3;
+    public float forwardCameraDistance = 2;
     public float linearLerpSpeed = 0.1f;
     public float angularLerpSpeed = 0.05f;
 
     public enum cameraPosition { right, left, front, back };
-    public cameraPosition currCameraPos;
+    public cameraPosition currCameraPos = cameraPosition.left;
 
     public GameObject gO;
 

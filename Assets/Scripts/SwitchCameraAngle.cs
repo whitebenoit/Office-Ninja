@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchCameraAngle : MonoBehaviour {
-    public MainCameraController.cameraPosition newCameraPosition;
+    public SplineCameraController.cameraPosition newCameraPosition;
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            MainCameraController mCC = Camera.main.GetComponent<MainCameraController>();
+            SplineCameraController mCC = Camera.main.GetComponent<SplineCameraController>();
             if(mCC != null)
             {
                 mCC.currCameraPos = newCameraPosition;

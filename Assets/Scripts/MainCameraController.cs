@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class MainCameraController : MonoBehaviour {
 
-    public float cameraDistance = 10;
+    public float cameraDistance = 3;
     public float cameraHeight = 1;
-    public float forwardCameraDistance = 3;
+    public float forwardCameraDistance = 2;
     public float linearLerpSpeed = 0.1f;
     public float angularLerpSpeed = 0.05f;
 

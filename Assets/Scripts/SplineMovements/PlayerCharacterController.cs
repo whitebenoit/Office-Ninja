@@ -1,22 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Collider))]
 [RequireComponent(typeof(Animator))]
-public class PlayerCharacterController : MonoBehaviour {
-
-    public float turnSmooth = 15f;
-    public float speedDamptime = 0.1f;
+public abstract class PlayerCharacterController : MonoBehaviour {
 
 
-    private Animator pcc_animator;
-    private Rigidbody pcc_rigidbody;
-    private Collider pcc_collider;
+    protected Animator pcc_animator;
+    protected Rigidbody pcc_rigidbody;
+    protected Collider pcc_collider;
 
     [HideInInspector]
     public enum ActionListElement { HIDE, INTERACT, DASH, USE };
+
+    [HideInInspector]
+    public enum StatusListElement { ROOTED, HIDDEN };
+    public Dictionary<StatusListElement,bool> currPlayerStatus;
 
     public delegate void NextAction(ObjectInteractionController oicCaller, Collider other);
     public struct NextActionStruct
@@ -34,13 +36,24 @@ public class PlayerCharacterController : MonoBehaviour {
     [HideInInspector]
     public List<NextActionStruct> useActionList = new List<NextActionStruct>();
 
-    private void Awake()
+    protected void Awake()
     {
         pcc_animator = GetComponent<Animator>();
         pcc_rigidbody = GetComponent<Rigidbody>();
         pcc_collider = GetComponent<Collider>();
+
+        currPlayerStatus = new Dictionary<StatusListElement, bool>();
+        foreach (StatusListElement key in Enum.GetValues(typeof(StatusListElement)))
+        {
+            currPlayerStatus.Add(key, false);
+        }
+    }
+    public void Move(Vector3 direction)
+    {
+        if(!currPlayerStatus[StatusListElement.ROOTED]) ImplementedMove(direction);
     }
 
+    public abstract void ImplementedMove(Vector3 direction);
 
     public void AddAction(ActionListElement actionName, NextAction nextAction, ObjectInteractionController oicCaller, Collider other)
     {
@@ -90,13 +103,13 @@ public class PlayerCharacterController : MonoBehaviour {
                 listToRemoveFrom = null;
                 break;
         }
-        
-        if(listToRemoveFrom != null)
+
+        if (listToRemoveFrom != null)
         {
             for (int i = 0; i < listToRemoveFrom.Count; i++)
             {
                 NextActionStruct currNAS = listToRemoveFrom[i];
-                if(oicCaller == currNAS.oicCaller
+                if (oicCaller == currNAS.oicCaller
                     && other == currNAS.other
                     && nextAction == currNAS.Interaction)
                 {
@@ -113,7 +126,7 @@ public class PlayerCharacterController : MonoBehaviour {
         switch (actionName)
         {
             case ActionListElement.HIDE:
-                if(hideActionList.Count != 0)
+                if (hideActionList.Count != 0)
                 {
                     NextActionStruct NAStruct = hideActionList[0];
                     NAStruct.Interaction(NAStruct.oicCaller, NAStruct.other);
@@ -145,20 +158,4 @@ public class PlayerCharacterController : MonoBehaviour {
         }
     }
 
-    public void Move(Vector3 direction)
-    {
-        if(direction.magnitude > 0.1f)
-        {
-            // Lerp-Rotate the rigidbody toward the direction
-            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-            Quaternion newRotation = Quaternion.Lerp(pcc_rigidbody.rotation, targetRotation, turnSmooth);
-            pcc_rigidbody.MoveRotation(newRotation);
-
-            pcc_animator.SetFloat("Speed",5.7f, speedDamptime, Time.deltaTime);
-        }
-        else
-        {
-            pcc_animator.SetFloat("Speed",0f,speedDamptime, Time.deltaTime);
-        }
-    }
 }

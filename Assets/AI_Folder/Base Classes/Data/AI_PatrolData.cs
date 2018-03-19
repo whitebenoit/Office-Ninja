@@ -6,13 +6,15 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AI_PatrolData : MonoBehaviour {
 
-    public Transform[] patrolPoints;
-    public int startPatrolPointIndex = 0;
-    public int currentTransformIndex;
+    public SplineLine ptrSplineLine;
+    public float speed = 0.05f;
+    public float startPatrolPointProgress = 0;
+    public float currentTransformProgress;
 
     private void OnEnable()
     {
-        currentTransformIndex = startPatrolPointIndex;
+        currentTransformProgress = startPatrolPointProgress;
+        transform.GetComponent<NavMeshAgent>().speed = speed;
     }
 
 }

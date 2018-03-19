@@ -55,6 +55,16 @@ public class SplineLine : MonoBehaviour {
         points[index] = point;
     }
 
+    public int GetNextControlPointIndex(int index)
+    {
+        int indexMax = points.Length - 1;
+        if (index < indexMax) { return index + 1; }
+        else
+        {
+            if (Loop) { return 0;}
+            else { return indexMax; }
+        }
+    }
 
     public int GetLineCount
     {
