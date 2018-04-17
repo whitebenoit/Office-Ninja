@@ -39,6 +39,7 @@ public class SplineLine : MonoBehaviour {
             return points.Length;
         }
     }
+
     public Vector3 GetControlPoint(int index)
     {
         return points[index];
@@ -168,6 +169,10 @@ public class SplineLine : MonoBehaviour {
 
     public Vector3 GetPreviousControlPoint (float t)
     {
+        if (t == 1.0f)
+        {
+            return GetControlPoint(GetLineCount-1);
+        }
         float tempT = t;
         if (Loop)
         {
@@ -181,6 +186,10 @@ public class SplineLine : MonoBehaviour {
 
     public Vector3 GetNextControlPoint(float t)
     {
+        if (t == 1.0f)
+        {
+            return GetControlPoint(GetLineCount);
+        }
         float tempT = t;
         if (Loop)
         {

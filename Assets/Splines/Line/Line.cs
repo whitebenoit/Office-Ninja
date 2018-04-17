@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Line  {
+public static class Line  {
 
-    Vector3 originPt;
-    Vector3 endPt;
+    //Vector3 originPt;
+    //Vector3 endPt;
 
     public static Vector3 GetPoint(Vector3 originPt, Vector3 endPt, float t)
     {
@@ -27,11 +27,10 @@ public class Line  {
         return dist/ Vector3.Distance(originPt, endPt);
     }
 
-
-    public Vector3 GetPoint(float t)
-    {
-        return GetPoint(originPt, endPt, t);
-    }
+    //public Vector3 GetPoint(float t)
+    //{
+    //    return GetPoint(originPt, endPt, t);
+    //}
 
 
 }

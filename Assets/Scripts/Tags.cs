@@ -10,6 +10,8 @@ public class Tags : MonoBehaviour {
     public const string mainCamera = "MainCamera";
     public const string gameController = "GameController";
     public const string interactibleObject = "InteractibleObject";
-    
+    public const string sight = "Sight";
+
+
 
 }

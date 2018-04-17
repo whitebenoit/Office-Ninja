@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InteractibleObject
   - Envirronment
+  - Sight
   layers:
   - Default
   - TransparentFX
