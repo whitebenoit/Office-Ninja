@@ -29,14 +29,17 @@ public class InstantiatorInspector : Editor
     {
         //DrawDefaultInspector();
         instan = target as Instantiator;
+        //DrawDebug("Cuurent Timer", instan.timerValue.ToString());
+        //DrawDebug("Cuurent isDelayPassed", instan.isDelayPassed.ToString());
         EditorGUILayout.LabelField("Properties");
         DrawToggle("Start on Awake", ref instan.startOnAwake);
         DrawProperty("Delay", ref instan.isDelay, ref instan.delay);
         DrawProperty("Cooldown", ref instan.isCooldown, ref instan.cooldown);
         DrawProperty("MaxInst", ref instan.isMaxInst, ref instan.maxInst);
+        if (instan.isMaxInst)
+            DrawToggle("Stop at Max Instance", ref instan.isStopOnMax);
         DrawVector3("Instantiate Position", ref instan.instantiatePosition);
         DrawGameObject("GameObject Instantiated", ref instan.gOToInst);
-        //Debug.Log("Delay :" + instan.delay);
 
     }
 
@@ -115,6 +118,11 @@ public class InstantiatorInspector : Editor
             EditorUtility.SetDirty(instan);
             property = propertyTemp;
         }
+    }
+
+    private void DrawDebug(string name, string property)
+    {
+        EditorGUILayout.LabelField(name+" = "+property);
     }
 
     private void DrawVector3(string name, ref Vector3 property)

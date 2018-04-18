@@ -1008,14 +1008,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 794abc01a1c365644874fa4ee47af384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gOToInst: {fileID: 0}
-  posToInst: {x: 0, y: 0, z: 0}
-  isDelay: 1
-  delay: 100
-  isCooldown: 0
-  cooldown: 0
-  isMaxInst: 0
-  maxInst: 0
+  gOToInst: {fileID: 1973401500704294, guid: 76aaf8c94b209ac458edeff5cd2da300, type: 2}
+  startOnAwake: 1
+  isDelay: 0
+  delay: 352
+  isCooldown: 1
+  cooldown: 3
+  isMaxInst: 1
+  maxInst: 5
+  instantiatePosition: {x: 0.9598866, y: 1, z: -1.042106}
 --- !u!4 &367103121
 Transform:
   m_ObjectHideFlags: 0
@@ -1023,7 +1024,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 367103119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 10, z: 12}
+  m_LocalPosition: {x: 1.16, y: 10, z: 0.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

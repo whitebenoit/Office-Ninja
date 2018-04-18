@@ -5,56 +5,134 @@ using UnityEngine;
 public class Instantiator : MonoBehaviour {
 
     private bool isActive;
-    private float timerValue;
-    private float hardMinCooldown = 0.2f;
+    public float timerValue;
     public GameObject gOToInst;
     private List<GameObject> gOToInstList = new List<GameObject>();
 
     public bool startOnAwake = true;
+    public bool stopAtMax = true;
 
     public bool isDelay;
     public float delay;
+    public bool isDelayPassed = false;
 
     public bool isCooldown;
     public float cooldown;
+    private float hardMinCooldown = 0.2f;
 
     public bool isMaxInst;
+    public bool isStopOnMax;
     public int maxInst;
+    private int hardMinMaxInst = 1;
 
     public Vector3 instantiatePosition;
 
 
-
-	// Use this for initialization
-	void Start () {
-        isActive = startOnAwake;
-        if (isActive)
-            timerValue = 0.0f;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    private void ActiveRoutine()
+    {
         timerValue += Time.fixedDeltaTime;
+        if( isDelayOk() 
+            && isCdOk()
+            && isMaxInstOk())
+        {
+            this.Instantiate();
+            timerValue = 0.0f;
+        }
+    }
 
+    private bool isDelayOk()
+    {
+        if (isDelay)
+        {
+            if (!isDelayPassed )
+            {
+                if (timerValue >= delay)
+                {
+                    isDelayPassed = true;
+                    Instantiate();
+                    timerValue = 0.0f;
+                    return false;
+                }
+                else return false;
+            }
+            return true;
+        }
+        else return true;
+    }
+
+    private bool isCdOk()
+    {
         float cd;
-        if(isCooldown) { cd = cooldown; }
+        if (isCooldown) { cd = cooldown; }
         else { cd = 1.0f; }
-
-        int mxObj;
-        if (isMaxInst) {mxObj = Mathf.Max(maxInst,1);}
-        else { mxObj = 50; }
 
         if (timerValue >= Mathf.Max(cd, hardMinCooldown))
         {
-            if (gOToInstList.Count >= mxObj)
+            //timerValue = 0.0f;
+            return true;
+        }
+        else return false;
+    }
+
+    private bool isMaxInstOk()
+    {
+        int mxObj;
+        if (isMaxInst) { mxObj = Mathf.Max(maxInst, hardMinMaxInst); }
+        else { mxObj = 50; }
+
+        if (gOToInstList.Count >= mxObj)
+        {
+            if(isStopOnMax) { return false; }
+            else
             {
-                Destroy(gOToInstList[0]);
-                gOToInstList.RemoveAt(0);
+                int objNumToRemove = gOToInstList.Count - mxObj;
+                for (int i = 0; i < objNumToRemove; i++)
+                {
+                    Destroy(gOToInstList[i]);
+                }
+                gOToInstList.RemoveRange(0, objNumToRemove);
+                return true;
             }
-            GameObject tempGO = Instantiate(gOToInst, transform.TransformPoint(instantiatePosition), new Quaternion(0, 0, 0, 0));
-            gOToInstList.Add(tempGO);
-            //gOToInstList.Add(Instantiate(gOToInst, transform.TransformPoint(instantiatePosition), new Quaternion(0,0,0,0)));
-            timerValue = 0.0f;
+        }
+        else return true;
+
+
+    }
+
+    private void Instantiate()
+    {
+        GameObject tempGO = Instantiate(gOToInst, transform.TransformPoint(instantiatePosition), new Quaternion(0, 0, 0, 0));
+        gOToInstList.Add(tempGO);
+    } 
+
+
+	// Use this for initialization
+	void Start () {
+        if (startOnAwake) { Activate(); }
+        else { Deactivate(); }
+	}
+
+    public void Activate()
+    {
+        isActive = true;
+        isDelayPassed = false;
+        timerValue = 0.0f;
+    }
+
+    public void Deactivate()
+    {
+        isActive = false;
+    } 
+	
+	// Update is called once per frame
+	void Update () {
+        if (isActive)
+        {
+            this.ActiveRoutine();
         }
 	}
+    
+
+
+
 }
