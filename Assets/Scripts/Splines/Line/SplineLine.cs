@@ -207,6 +207,29 @@ public class SplineLine : MonoBehaviour {
     }
 
 
+    public Vector3 GetNearestPointOnSpline(Vector3 outsidePt)
+    {
+        Vector3 resultPoint = new Vector3();
+        float currDist = -1;
+        for (int i = 1; i < points.Length; i++)
+        {
+            Vector3 startPointLine = this.transform.TransformPoint(points[i - 1]);
+            Vector3 endPointLine = this.transform.TransformPoint(points[i]);
+            Vector3 tempPoint = Line.GetNearestPointOnLine(startPointLine, endPointLine, outsidePt);
+            float tempDist = Vector3.Distance(tempPoint, outsidePt);
+            if(tempDist < currDist || currDist <= 0)
+            {
+                currDist = tempDist;
+                resultPoint = tempPoint;
+            }
+        }
+        return resultPoint;
+    }
+
+
+
+
+
 
     //public void AddCurve()
     //{
@@ -224,7 +247,7 @@ public class SplineLine : MonoBehaviour {
     //        {
     //            points[ptLength - 2] = points[0] + Vector3.right;
     //        }
-            
+
     //    }
     //    else
     //    {
@@ -279,4 +302,8 @@ public class SplineLine : MonoBehaviour {
         };
 
     }
+
+
+
+
 }

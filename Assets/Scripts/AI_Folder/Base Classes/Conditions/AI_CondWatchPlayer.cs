@@ -16,7 +16,11 @@ public class AI_CondWatchPlayer : AI_Condition {
 
     private void Awake()
     {
-        gameObjectToWatchFor = GameObject.FindGameObjectsWithTag(tag)[0];
+        GameObject[] lsGO = GameObject.FindGameObjectsWithTag(tag);
+        if(lsGO.Length > 0)
+        {
+             gameObjectToWatchFor = GameObject.FindGameObjectsWithTag(tag)[0];
+        }
     }
 
 
@@ -41,7 +45,7 @@ public class AI_CondWatchPlayer : AI_Condition {
         if (! gameObjectToWatchFor.GetComponent<SplinePlayerCharacterController>().currPlayerStatus[statusHIDDEN])
         {
             Vector3 gORelatPos = gameObjectToWatchFor.transform.position - brain.transform.position;
-            Debug.Log("gameObjectToWatchFor" + gameObjectToWatchFor.transform.position);
+            //Debug.Log("gameObjectToWatchFor" + gameObjectToWatchFor.transform.position);
             if (gORelatPos.magnitude < watchRange)
             {
                 Debug.Log("Player Found");

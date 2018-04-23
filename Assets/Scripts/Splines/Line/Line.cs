@@ -32,5 +32,24 @@ public static class Line  {
     //    return GetPoint(originPt, endPt, t);
     //}
 
+    public static Vector3 GetNearestPointOnLine(Vector3 originPt, Vector3 endPt, Vector3 outsidePt)
+    {
+        Vector3 sgmVect = endPt - originPt;
+        Vector3 pointVect = outsidePt - originPt;
+
+        float scalProd = Vector3.Dot(pointVect, sgmVect.normalized);
+
+        if(scalProd <= 0)
+        {
+            return originPt;
+        }else if (scalProd >= sgmVect.magnitude)
+        {
+            return endPt;
+        }
+        else
+        {
+            return scalProd * sgmVect.normalized + originPt;
+        }
+    }
 
 }

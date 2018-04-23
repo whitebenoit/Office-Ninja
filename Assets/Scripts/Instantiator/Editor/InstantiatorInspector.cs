@@ -40,7 +40,7 @@ public class InstantiatorInspector : Editor
             DrawToggle("Stop at Max Instance", ref instan.isStopOnMax);
         DrawVector3("Instantiate Position", ref instan.instantiatePosition);
         DrawGameObject("GameObject Instantiated", ref instan.gOToInst);
-
+        //DrawInstanModifier("Instant Modifier", ref instan.instanModifier, ref instan.gOToInst);
     }
 
 
@@ -149,6 +149,27 @@ public class InstantiatorInspector : Editor
         }
     }
     //Draw Scene Functions
+
+        /*
+    private void DrawInstanModifier(string name, ref InstanModifier property, ref GameObject gOProperty)
+    {
+        if(gOProperty != null)
+        {
+            EditorGUI.BeginChangeCheck();
+            InstanModifier propertyTemp = (InstanModifier)EditorGUILayout.ObjectField(name, property, typeof(InstanModifier));
+            if (EditorGUI.EndChangeCheck())
+            {
+                Undo.RecordObject(instan, name + " change");
+                EditorUtility.SetDirty(instan);
+                property = propertyTemp;
+            }
+            if (propertyTemp != null)
+            {
+                propertyTemp.AddGUI(instan, gOProperty);
+            }
+        }
+    }
+    */
 
     private void DrawSceneHandle(string name, ref Vector3 position,ref bool isSelected)
     {

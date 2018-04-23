@@ -8,6 +8,7 @@ public class Instantiator : MonoBehaviour {
     public float timerValue;
     public GameObject gOToInst;
     private List<GameObject> gOToInstList = new List<GameObject>();
+    public Vector3 instantiatePosition;
 
     public bool startOnAwake = true;
     public bool stopAtMax = true;
@@ -25,7 +26,8 @@ public class Instantiator : MonoBehaviour {
     public int maxInst;
     private int hardMinMaxInst = 1;
 
-    public Vector3 instantiatePosition;
+    public InstanModifier instanModifier;
+
 
 
     private void ActiveRoutine()
@@ -102,12 +104,14 @@ public class Instantiator : MonoBehaviour {
     private void Instantiate()
     {
         GameObject tempGO = Instantiate(gOToInst, transform.TransformPoint(instantiatePosition), new Quaternion(0, 0, 0, 0));
+        instanModifier.Modify(tempGO);
         gOToInstList.Add(tempGO);
     } 
 
 
 	// Use this for initialization
 	void Start () {
+        instanModifier = GetComponent<InstanModifier>();
         if (startOnAwake) { Activate(); }
         else { Deactivate(); }
 	}

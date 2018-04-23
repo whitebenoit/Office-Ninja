@@ -148,11 +148,11 @@ public class SplineLineInspector : Editor {
         Handles.color = Color.white;
         if (Handles.Button(point, handleRotation, size* handleSize, size* pickSize, Handles.DotHandleCap))
         {
-        //    selectedIndex = index;
-        //    Repaint();
-        //}
-        //if (selectedIndex == index)
-        //{
+            selectedIndex = index;
+            Repaint();
+        }
+        if (selectedIndex == index)
+        {
             EditorGUI.BeginChangeCheck();
             point = Handles.DoPositionHandle(point, handleRotation);
             if (EditorGUI.EndChangeCheck())

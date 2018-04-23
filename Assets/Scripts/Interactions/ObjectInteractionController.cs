@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public abstract class ObjectInteractionController : MonoBehaviour {
 
-    public Vector3 buttonPosition = new Vector3(-6, 2, 2);
+    public Vector3 buttonPosition = new Vector3(0, 1, 0);
     //private GameObject buttonUIGO_TEST ;
     private ButtonUIImageController btnUIImageController;
     private PlayerCharacterController pcc;
@@ -17,6 +17,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
     private void Awake()
     {
         buttonCanvasGO = (GameObject)Instantiate(Resources.Load("Prefabs/ButtonUICanvas"), this.transform.TransformVector(buttonPosition), new Quaternion());
+        buttonCanvasGO.transform.position = this.transform.TransformPoint(buttonPosition);
         buttonCanvasGO.transform.SetParent(this.transform);
         btnUIImageController = buttonCanvasGO.GetComponent<ButtonUIImageController>();
         HideInteraction();
