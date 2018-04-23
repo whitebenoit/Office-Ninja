@@ -17,8 +17,13 @@ public class DebugNearestPointInspector : Editor {
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
-        dnp = target as DebugNearestPoint;
 
+        dnp = target as DebugNearestPoint;
+        SplineLine spline = dnp.spline;
+        Vector3 position = dnp.transform.position;
+
+
+        DrawDebug("Nearest Progress :", spline.GetNearestProgressOnSpline(position).ToString());
 
     }
 
@@ -44,5 +49,10 @@ public class DebugNearestPointInspector : Editor {
         Handles.DrawLine(nearestPoint, position);
         Handles.Button(nearestPoint, Quaternion.identity, size * handleSize, size * pickSize, Handles.DotHandleCap);
 
+    }
+
+    private void DrawDebug(string name, string property)
+    {
+        EditorGUILayout.LabelField(name + " = " + property);
     }
 }

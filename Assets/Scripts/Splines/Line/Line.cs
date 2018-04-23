@@ -52,4 +52,25 @@ public static class Line  {
         }
     }
 
+    public static float GetNearestProgressOnLine(Vector3 originPt, Vector3 endPt, Vector3 outsidePt)
+    {
+        Vector3 sgmVect = endPt - originPt;
+        Vector3 pointVect = outsidePt - originPt;
+
+        float scalProd = Vector3.Dot(pointVect, sgmVect.normalized);
+
+        if (scalProd <= 0)
+        {
+            return 0;
+        }
+        else if (scalProd >= sgmVect.magnitude)
+        {
+            return 1;
+        }
+        else
+        {
+            return scalProd / sgmVect.magnitude;
+        }
+    }
+
 }

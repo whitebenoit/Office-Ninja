@@ -226,6 +226,24 @@ public class SplineLine : MonoBehaviour {
         return resultPoint;
     }
 
+    public float GetNearestProgressOnSpline(Vector3 outsidePt)
+    {
+        float tempT = -1 ;
+        float currDist = -1;
+        for (int i = 1; i < points.Length; i++)
+        {
+            Vector3 startPointLine = this.transform.TransformPoint(points[i - 1]);
+            Vector3 endPointLine = this.transform.TransformPoint(points[i]);
+            Vector3 tempPoint = Line.GetNearestPointOnLine(startPointLine, endPointLine, outsidePt);
+            float tempDist = Vector3.Distance(tempPoint, outsidePt);
+            if (tempDist < currDist || currDist <= 0)
+            {
+                currDist = tempDist;
+                tempT = i - 1 + Line.GetNearestProgressOnLine(startPointLine, endPointLine, outsidePt); ;
+            }
+        }
+        return tempT/this.GetLineCount;
+    }
 
 
 
