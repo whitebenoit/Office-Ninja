@@ -104,7 +104,10 @@ public class Instantiator : MonoBehaviour {
     private void Instantiate()
     {
         GameObject tempGO = Instantiate(gOToInst, transform.TransformPoint(instantiatePosition), new Quaternion(0, 0, 0, 0));
-        instanModifier.Modify(tempGO);
+        if(instanModifier != null)
+        {
+            instanModifier.Modify(tempGO);
+        }
         gOToInstList.Add(tempGO);
     } 
 

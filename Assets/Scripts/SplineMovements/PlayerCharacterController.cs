@@ -8,17 +8,31 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public abstract class PlayerCharacterController : MonoBehaviour {
 
-
-    protected Animator pcc_animator;
-    protected Rigidbody pcc_rigidbody;
+    [HideInInspector]
+    public Animator pcc_animator;
+    [HideInInspector]
+    public Rigidbody pcc_rigidbody;
     protected Collider pcc_collider;
 
     [HideInInspector]
     public enum ActionListElement { HIDE, INTERACT, DASH, USE };
 
     [HideInInspector]
-    public enum StatusListElement { ROOTED, HIDDEN };
+    public enum StatusListElement { NINJA, ROOTED, HIDDEN, READING };
     public Dictionary<StatusListElement,bool> currPlayerStatus;
+
+    public delegate void MoveAction(Vector3 direction, ObjectInteractionController oicCaller, Collider other);
+    public struct MoveStruct
+    {
+        public ObjectInteractionController oicCaller;
+        public Collider other;
+        public MoveAction moveAction;
+
+        public void Move(Vector3 direction)
+        {
+            moveAction(direction, oicCaller, other);
+        }
+    }
 
     public delegate void NextAction(ObjectInteractionController oicCaller, Collider other);
     public struct NextActionStruct
@@ -27,6 +41,8 @@ public abstract class PlayerCharacterController : MonoBehaviour {
         public Collider other;
         public NextAction Interaction;
     }
+
+    
     [HideInInspector]
     public List<NextActionStruct> hideActionList = new List<NextActionStruct>();
     [HideInInspector]
@@ -35,6 +51,9 @@ public abstract class PlayerCharacterController : MonoBehaviour {
     public List<NextActionStruct> dashActionList = new List<NextActionStruct>();
     [HideInInspector]
     public List<NextActionStruct> useActionList = new List<NextActionStruct>();
+    [HideInInspector]
+    public List<MoveStruct> moveList = new List<MoveStruct>();
+
 
     protected void Awake()
     {
@@ -48,12 +67,57 @@ public abstract class PlayerCharacterController : MonoBehaviour {
             currPlayerStatus.Add(key, false);
         }
     }
-    public void Move(Vector3 direction)
+
+
+
+    public void AddMove(MoveAction moveAction, ObjectInteractionController oicCaller, Collider other)
     {
-        if(!currPlayerStatus[StatusListElement.ROOTED]) ImplementedMove(direction);
+        MoveStruct MStructToAdd = new MoveStruct
+        {
+            moveAction = moveAction,
+            oicCaller = oicCaller,
+            other = other
+        };
+        moveList.Add(MStructToAdd);
     }
 
+    public void RemoveMove(MoveAction moveAction, ObjectInteractionController oicCaller, Collider other)
+    {
+        MoveStruct MStructToAdd = new MoveStruct
+        {
+            moveAction = moveAction,
+            oicCaller = oicCaller,
+            other = other
+        };
+        if (moveList != null)
+        {
+            for (int i = 0; i < moveList.Count; i++)
+            {
+                if(moveAction == moveList[i].moveAction
+                    && oicCaller == moveList[i].oicCaller
+                    && other == moveList[i].other)
+                {
+                    moveList.Remove(moveList[i]);
+                    break;
+                }
+            }
+        }
+    }
+
+    public void Move(Vector3 direction)
+    {
+        if(!currPlayerStatus[StatusListElement.ROOTED])
+        { 
+            if (moveList.Count != 0)
+            {
+                moveList[0].Move(direction);
+            }else ImplementedMove(direction);
+        }
+    }
+        
     public abstract void ImplementedMove(Vector3 direction);
+
+
 
     public void AddAction(ActionListElement actionName, NextAction nextAction, ObjectInteractionController oicCaller, Collider other)
     {

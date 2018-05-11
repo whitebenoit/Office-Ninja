@@ -33,7 +33,10 @@ public abstract class AI_State : ScriptableObject {
     {
         for (int i = 0; i < actionsList.Length; i++)
         {
-            actionsList[i].action.Act(brain);
+            if (actionsList[i].condition.Evaluate(brain))
+            {
+                actionsList[i].action.Act(brain);
+            }
             BetweenActions(brain);
         }
     }

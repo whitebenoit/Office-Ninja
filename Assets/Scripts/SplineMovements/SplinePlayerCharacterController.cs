@@ -11,7 +11,7 @@ public class SplinePlayerCharacterController : PlayerCharacterController
     public float speedDamptime = 0.1f;
     public SplineLine lSpline;
     public float progress = 0;
-    public Vector3 TESTSplinePosition;
+    //public Vector3 TESTSplinePosition;
 
    
 

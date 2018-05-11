@@ -12,7 +12,7 @@ public class ToiletInteractionController : ObjectInteractionController
         {
             string saveName = "Save_001";
             GameData gd = SaveManager.LoadFile(saveName);
-            //Debug.Log("Toilet Num Before" + gd.toiletNum.ToString());
+            //Debug.Log(Time.time + " |Toilet Num Before" + gd.toiletNum.ToString());
 
             gd.toiletNum = toiletNum;
             gd.sceneName = SceneManager.GetActiveScene().name;
@@ -22,7 +22,12 @@ public class ToiletInteractionController : ObjectInteractionController
 
             //SaveManager.Load(saveName);
             //gd = SaveManager.LoadFile(saveName);
-            //Debug.Log("Toilet Num After" + gd.toiletNum.ToString());
+            //Debug.Log(Time.time + " |Toilet Num After" + gd.toiletNum.ToString());
         }
+    }
+
+    protected override void ModifiedMove(Vector3 direction, ObjectInteractionController oicCaller, Collider other)
+    {
+        throw new System.NotImplementedException();
     }
 }

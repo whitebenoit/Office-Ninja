@@ -41,9 +41,15 @@ public class SaveManager {
         return gd;
     }
 
-    public static void Load(string saveName)
+    public static void Load(string saveName,MonoBehaviour caller)
     {
         GameData gd = SaveManager.LoadFile(saveName);
+
+        GameMasterManager gMM = GameMasterManager.Instance;
+        gMM.gd_nextLevel = gd;
+
         SceneManager.LoadScene(gd.sceneName);
+        
     }
+
 }

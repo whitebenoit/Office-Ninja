@@ -5,12 +5,12 @@ using UnityEngine;
 public class PrinterInteractionController : ObjectInteractionController
 {
     public Transform hidePosition;
-    public Transform outPosition;
+    //public Transform outPosition;
     public override void Interaction(ObjectInteractionController oicCaller, Collider other)
     {
         if (other.tag == Tags.player)
         {
-            PlayerCharacterController otherPcc = other.transform.GetComponent<PlayerCharacterController>();
+            SplinePlayerCharacterController otherPcc = other.transform.GetComponent<SplinePlayerCharacterController>();
             bool isHidden = otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.HIDDEN];
             bool isRooted = otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.HIDDEN];
             if (!isHidden)
@@ -23,11 +23,18 @@ public class PrinterInteractionController : ObjectInteractionController
             {
                 otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.HIDDEN] = false;
                 otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
+                otherPcc.progress = otherPcc.lSpline.GetNearestProgressOnSpline(this.transform.position);
+
                 otherPcc.Move(otherPcc.transform.forward);
             }
 
         }
         
         
+    }
+
+    protected override void ModifiedMove(Vector3 direction, ObjectInteractionController oicCaller, Collider other)
+    {
+        throw new System.NotImplementedException();
     }
 }

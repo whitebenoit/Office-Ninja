@@ -12,6 +12,8 @@ public class Tags : MonoBehaviour {
     public const string interactibleObject = "InteractibleObject";
     public const string sight = "Sight";
     public const string respawn = "Respawn";
+    public const string textUI = "TextUI";
+
 
 
 

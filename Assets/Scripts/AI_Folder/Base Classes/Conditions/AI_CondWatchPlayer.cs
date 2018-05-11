@@ -12,7 +12,7 @@ public class AI_CondWatchPlayer : AI_Condition {
 
     public float height = 1;
     public float watchRange = 2;
-    public float watchRadius = 35;
+    public float watchRadius = 90;
 
     private void Awake()
     {
@@ -48,7 +48,7 @@ public class AI_CondWatchPlayer : AI_Condition {
             //Debug.Log("gameObjectToWatchFor" + gameObjectToWatchFor.transform.position);
             if (gORelatPos.magnitude < watchRange)
             {
-                Debug.Log("Player Found");
+                //Debug.Log("Player Found");
                 Vector3 frwdVect = brain.transform.forward;
                 float angle = Vector3.Angle(frwdVect, gORelatPos);
                 if (angle < watchRadius) return true;
