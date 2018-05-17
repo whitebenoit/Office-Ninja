@@ -3901,6 +3901,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPosition: {x: 0, y: 1, z: -5}
   actionType: 1
+  isModifyingMove: 0
   toiletNum: 100
 --- !u!23 &703451809
 MeshRenderer:
@@ -4854,6 +4855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPosition: {x: 0, y: 1, z: -5}
   actionType: 1
+  isModifyingMove: 0
   toiletNum: 101
 --- !u!23 &992662569
 MeshRenderer:
@@ -5606,26 +5608,6 @@ Prefab:
       propertyPath: ptrSplineLine
       value: 
       objectReference: {fileID: 1346033619}
-    - target: {fileID: 65459383517097544, guid: a0a1a19fcb2ea4f45b7a83055733f871,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65459383517097544, guid: a0a1a19fcb2ea4f45b7a83055733f871,
-        type: 2}
-      propertyPath: m_Center.x
-      value: 0.007890049
-      objectReference: {fileID: 0}
-    - target: {fileID: 65459383517097544, guid: a0a1a19fcb2ea4f45b7a83055733f871,
-        type: 2}
-      propertyPath: m_Center.z
-      value: 9.4491184e-17
-      objectReference: {fileID: 0}
-    - target: {fileID: 65459383517097544, guid: a0a1a19fcb2ea4f45b7a83055733f871,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 0.14673926
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0a1a19fcb2ea4f45b7a83055733f871, type: 2}
   m_IsPrefabParent: 0
@@ -10733,6 +10715,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPosition: {x: 0, y: 1, z: -5}
   actionType: 1
+  isModifyingMove: 0
   toiletNum: 202
 --- !u!23 &2121458056
 MeshRenderer:
@@ -10938,6 +10921,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonPosition: {x: 0, y: 1, z: -5}
   actionType: 1
+  isModifyingMove: 0
   toiletNum: 303
 --- !u!23 &2127663192
 MeshRenderer:

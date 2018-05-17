@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TextInteractionController : ObjectInteractionController
 {
-    public string text;
+    public string[] text;
     //private Canvas canvas;
     private TextManager textMan;
 
@@ -22,12 +22,17 @@ public class TextInteractionController : ObjectInteractionController
             bool isReading = otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.READING];
             if (isReading)
             {
-                if (textMan.isFinished)
+                if (textMan.isPaused)
+                {
+                    textMan.NextTextPart();
+                }
+                else if (textMan.isFinished)
                 {
                     otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.READING] = false;
                     otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
                     textMan.textComp.text = "";
-                    textMan.transform.parent.gameObject.SetActive(false);
+                    textMan.gameObject.SetActive(false);
+                    //textMan.transform.parent.gameObject.SetActive(false);
                 }
                 else
                 {
@@ -39,9 +44,10 @@ public class TextInteractionController : ObjectInteractionController
                 // Start reading
                 otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.READING] = true;
                 otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = true;
-                textMan.textComp.text = text;
-                textMan.transform.parent.gameObject.SetActive(true);
-                textMan.TypeText();
+                //textMan.textComp.text = text;
+                textMan.gameObject.SetActive(true);
+                //textMan.transform.parent.gameObject.SetActive(true);
+                textMan.TypeText(text);
             }
         }
     }

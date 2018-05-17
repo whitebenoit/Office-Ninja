@@ -3,7 +3,7 @@
 /[Oo]bj/
 /[Bb]uild/
 /[Bb]uilds/
-[R]essources/
+Ressources/IgnoredRessources*
 *Ressources.meta
 [Ee]xternal_Resources
 *External_Resources.meta

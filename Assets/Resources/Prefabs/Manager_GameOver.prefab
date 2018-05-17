@@ -2493,8 +2493,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16, z: 0.6}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.14673926, y: 0.16, z: 1}
+  m_Center: {x: 0.007890049, y: 0, z: 9.4491184e-17}
 --- !u!95 &95683414603609170
 Animator:
   serializedVersion: 3
@@ -2504,10 +2504,10 @@ Animator:
   m_GameObject: {fileID: 1504175276069600}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b235179bd2a63d1468dd430670338c55, type: 3}
-  m_Controller: {fileID: 9100000, guid: 6ff906f6735d3df4894441460ac2a7b6, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5a30213c5af78e84db6170858e7dc2b1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2541,6 +2541,7 @@ MonoBehaviour:
   initialState: {fileID: 11400000, guid: 06c66c1e04699c64dbb88299abebd9f1, type: 2}
   currentState: {fileID: 0}
   navMeshAgent: {fileID: 0}
+  brain_animator: {fileID: 0}
 --- !u!137 &137580722728569578
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2728,7 +2729,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 500
-  m_StoppingDistance: 0
+  m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

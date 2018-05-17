@@ -9,6 +9,7 @@ public class AI_PatrolAction : AI_Action
 {
     private SplineLine ptrSplineLine;
     public float currentTransformProgress;
+    public float speedDamptime = 0.1f;
 
     public override void Act(AI_BehaviorBrain brain)
     {
@@ -35,6 +36,10 @@ public class AI_PatrolAction : AI_Action
                 int nextPointIndex = ptrSplineLine.GetNextControlPointIndex((int)(currentTransformProgress * pointCnt));
                 patrolData.currentTransformProgress = (float)nextPointIndex / pointCnt;
             }
+            float agSpeed = agent.speed;
+            if (agSpeed > 0.1f) brain.brain_animator.SetFloat("Speed", agent.speed, speedDamptime, Time.deltaTime);
+            else brain.brain_animator.SetFloat("Speed", 0f, speedDamptime, Time.deltaTime);
+
         }
     }
 }

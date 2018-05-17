@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public abstract class ObjectInteractionController : MonoBehaviour {
 
+    public bool isNinjaOnly = false;
+    public bool isSalaryManOnly = false;
     public Vector3 buttonPosition = new Vector3(0, 2, 0);
     //private GameObject buttonUIGO_TEST ;
     private ButtonUIImageController btnUIImageController;
@@ -21,7 +23,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
 
     private void Awake()
     {
-        Debug.Log(transform.gameObject.name);
+        //Debug.Log(transform.gameObject.name);
         SpawnButton();
     }
 
@@ -31,7 +33,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
         buttonCanvasGO.transform.position = this.transform.TransformPoint(buttonPosition);
         buttonCanvasGO.transform.SetParent(this.transform);
         btnUIImageController = buttonCanvasGO.GetComponent<ButtonUIImageController>();
-        HideInteraction();
+        buttonCanvasGO.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,7 +41,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
         //Debug.Log("Enter:"+transform.gameObject.name);
         AddInteraction(other);
         if (isModifyingMove) AddMove(other);
-        ShowInteraction();
+        ShowInteraction(other);
     }
 
   
@@ -48,7 +50,12 @@ public abstract class ObjectInteractionController : MonoBehaviour {
     {
         RemoveInteraction(other);
         if (isModifyingMove) RemoveMove(other);
-        HideInteraction();
+        HideInteraction(other);
+    }
+
+    private bool checkTransfoStatus(bool isNinja)
+    {
+        return (!isNinjaOnly && !isSalaryManOnly) || (isNinja && isNinjaOnly) || (!isNinja && isSalaryManOnly) ;
     }
 
 
@@ -59,7 +66,11 @@ public abstract class ObjectInteractionController : MonoBehaviour {
             pcc = other.GetComponent<PlayerCharacterController>();
             if (pcc != null)
             {
-                pcc.AddAction(actionType, Interaction, this, other);
+                bool isNinja = pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA];
+                if (checkTransfoStatus(isNinja))
+                {
+                    pcc.AddAction(actionType, Interaction, this, other);
+                }
             }
         }
     }
@@ -71,7 +82,11 @@ public abstract class ObjectInteractionController : MonoBehaviour {
             pcc = other.GetComponent<PlayerCharacterController>();
             if (pcc != null)
             {
-                pcc.RemoveAction(actionType, Interaction, this, other);
+                bool isNinja = pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA];
+                if (checkTransfoStatus(isNinja))
+                {
+                    pcc.RemoveAction(actionType, Interaction, this, other);
+                }
             }
         }
     }
@@ -83,7 +98,11 @@ public abstract class ObjectInteractionController : MonoBehaviour {
             pcc = other.GetComponent<PlayerCharacterController>();
             if (pcc != null)
             {
-                pcc.AddMove(ModifiedMove, this, other);
+                bool isNinja = pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA];
+                if (checkTransfoStatus(isNinja))
+                {
+                    pcc.AddMove(ModifiedMove, this, other);
+                }
             }
         }
     }
@@ -95,20 +114,47 @@ public abstract class ObjectInteractionController : MonoBehaviour {
             pcc = other.GetComponent<PlayerCharacterController>();
             if (pcc != null)
             {
-                pcc.RemoveMove(ModifiedMove, this, other);
+                bool isNinja = pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA];
+                if (checkTransfoStatus(isNinja))
+                {
+                    pcc.RemoveMove(ModifiedMove, this, other);
+                }
             }
         }
     }
 
 
-    private void ShowInteraction()
+    private void ShowInteraction(Collider other)
     {
-        buttonCanvasGO.SetActive(true);
+        if (other.tag == Tags.player)
+        {
+            pcc = other.GetComponent<PlayerCharacterController>();
+            if (pcc != null)
+            {
+                bool isNinja = pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA];
+                if (checkTransfoStatus(isNinja))
+                {
+                    buttonCanvasGO.SetActive(true);
+                }
+            }
+        }
+        
     }
 
-    private void HideInteraction()
+    private void HideInteraction(Collider other)
     {
-        buttonCanvasGO.SetActive(false);
+        if (other.tag == Tags.player)
+        {
+            pcc = other.GetComponent<PlayerCharacterController>();
+            if (pcc != null)
+            {
+                bool isNinja = pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA];
+                if (checkTransfoStatus(isNinja))
+                {
+                    buttonCanvasGO.SetActive(false);
+                }
+            }
+        }
     }
 
 }
