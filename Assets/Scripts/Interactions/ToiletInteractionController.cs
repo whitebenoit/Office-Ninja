@@ -13,13 +13,29 @@ public class ToiletInteractionController : ObjectInteractionController
             PlayerCharacterController pcc = other.GetComponent<PlayerCharacterController>();
             if(pcc != null)
             {
+                pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = true;
                 if (pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA])
                 {
-                    TransformToSalaryman(pcc);
+                    FadeInOutController.instance.FadeIn(() =>
+                    {
+                        TransformToSalaryman(pcc);
+                        FadeInOutController.instance.FadeOut(() =>
+                        {
+                            pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
+                        });
+                    });
+                    
                 }
                 else
                 {
-                    TransformToNinja(pcc);
+                    FadeInOutController.instance.FadeIn(() =>
+                    {
+                        TransformToNinja(pcc);
+                        FadeInOutController.instance.FadeOut(() =>
+                        {
+                            pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
+                        });
+                    });
                 }
             }
             this.SaveGame();
@@ -39,12 +55,12 @@ public class ToiletInteractionController : ObjectInteractionController
 
     private void TransformToNinja(PlayerCharacterController pcc)
     {
-        pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA] = true;
+        pcc.ChangeStatus(PlayerCharacterController.StatusListElement.NINJA, true);
     }
 
     private void TransformToSalaryman(PlayerCharacterController pcc)
     {
-        pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA] = false;
+        pcc.ChangeStatus(PlayerCharacterController.StatusListElement.NINJA, false);
     }
 
     protected override void ModifiedMove(Vector3 direction, ObjectInteractionController oicCaller, Collider other)

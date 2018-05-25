@@ -1,0 +1,341 @@
+
+ON-Ninja.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm-L-D
+  rotate: false
+  xy: 191, 424
+  size: 79, 89
+  orig: 81, 91
+  offset: 1, 1
+  index: -1
+Arm-R-D
+  rotate: false
+  xy: 208, 27
+  size: 60, 133
+  orig: 62, 135
+  offset: 1, 1
+  index: -1
+Arm-R-U
+  rotate: true
+  xy: 654, 4
+  size: 115, 140
+  orig: 117, 142
+  offset: 1, 1
+  index: -1
+Bande
+  rotate: false
+  xy: 599, 262
+  size: 347, 204
+  orig: 349, 206
+  offset: 1, 1
+  index: -1
+Bande 2
+  rotate: true
+  xy: 2, 8
+  size: 413, 204
+  orig: 415, 206
+  offset: 1, 1
+  index: -1
+Bande 3
+  rotate: true
+  xy: 272, 20
+  size: 493, 204
+  orig: 495, 206
+  offset: 1, 1
+  index: -1
+Bande 4
+  rotate: true
+  xy: 191, 515
+  size: 507, 163
+  orig: 509, 165
+  offset: 1, 1
+  index: -1
+Bande 5
+  rotate: false
+  xy: 2, 423
+  size: 187, 599
+  orig: 189, 601
+  offset: 1, 1
+  index: -1
+Bandeau Down
+  rotate: false
+  xy: 654, 131
+  size: 94, 43
+  orig: 96, 45
+  offset: 1, 1
+  index: -1
+Bandeau Up
+  rotate: false
+  xy: 750, 131
+  size: 94, 43
+  orig: 96, 45
+  offset: 1, 1
+  index: -1
+Cloud Back
+  rotate: true
+  xy: 356, 548
+  size: 474, 242
+  orig: 476, 244
+  offset: 1, 1
+  index: -1
+Cloud Left
+  rotate: false
+  xy: 600, 754
+  size: 393, 268
+  orig: 395, 270
+  offset: 1, 1
+  index: -1
+Cloud Middle
+  rotate: true
+  xy: 478, 64
+  size: 155, 116
+  orig: 157, 118
+  offset: 1, 1
+  index: -1
+Cloud Right
+  rotate: false
+  xy: 600, 468
+  size: 355, 284
+  orig: 357, 286
+  offset: 1, 1
+  index: -1
+Eyes Down
+  rotate: false
+  xy: 356, 529
+  size: 68, 17
+  orig: 70, 19
+  offset: 1, 1
+  index: -1
+Eyes Up
+  rotate: false
+  xy: 208, 2
+  size: 68, 16
+  orig: 70, 18
+  offset: 1, 1
+  index: -1
+Foot Idle copie
+  rotate: true
+  xy: 478, 221
+  size: 79, 118
+  orig: 81, 120
+  offset: 1, 1
+  index: -1
+Foot-L-tip
+  rotate: false
+  xy: 478, 5
+  size: 82, 57
+  orig: 84, 59
+  offset: 1, 1
+  index: -1
+Foot-R
+  rotate: true
+  xy: 654, 176
+  size: 84, 276
+  orig: 86, 278
+  offset: 1, 1
+  index: -1
+Foot-R-tip
+  rotate: true
+  xy: 208, 162
+  size: 91, 62
+  orig: 93, 64
+  offset: 1, 1
+  index: -1
+Hand-L-Dash
+  rotate: true
+  xy: 932, 121
+  size: 109, 86
+  orig: 111, 88
+  offset: 1, 1
+  index: -1
+Hand-L-Repos
+  rotate: true
+  xy: 957, 422
+  size: 89, 58
+  orig: 91, 60
+  offset: 1, 1
+  index: -1
+Hand-L-surprise
+  rotate: false
+  xy: 948, 332
+  size: 71, 88
+  orig: 73, 90
+  offset: 1, 1
+  index: -1
+Hand-R-Screwdriver
+  rotate: true
+  xy: 478, 376
+  size: 170, 119
+  orig: 172, 121
+  offset: 1, 1
+  index: -1
+Hand-R-base
+  rotate: true
+  xy: 478, 302
+  size: 72, 119
+  orig: 74, 121
+  offset: 1, 1
+  index: -1
+Hand-R-hide
+  rotate: false
+  xy: 957, 636
+  size: 59, 116
+  orig: 61, 118
+  offset: 1, 1
+  index: -1
+Hand-R-repos
+  rotate: false
+  xy: 957, 513
+  size: 58, 121
+  orig: 60, 123
+  offset: 1, 1
+  index: -1
+Hand-R-surprise
+  rotate: true
+  xy: 948, 232
+  size: 98, 70
+  orig: 100, 72
+  offset: 1, 1
+  index: -1
+Hip
+  rotate: true
+  xy: 865, 9
+  size: 110, 95
+  orig: 112, 97
+  offset: 1, 1
+  index: -1
+Leg-R-D
+  rotate: false
+  xy: 598, 9
+  size: 54, 221
+  orig: 56, 223
+  offset: 1, 1
+  index: -1
+Leg-R-U
+  rotate: false
+  xy: 208, 255
+  size: 62, 167
+  orig: 64, 169
+  offset: 1, 1
+  index: -1
+Neck
+  rotate: false
+  xy: 796, 8
+  size: 67, 111
+  orig: 69, 113
+  offset: 1, 1
+  index: -1
+
+ON-Ninja2.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm-L-U
+  rotate: true
+  xy: 873, 176
+  size: 78, 146
+  orig: 80, 148
+  offset: 1, 1
+  index: -1
+Body
+  rotate: false
+  xy: 346, 117
+  size: 135, 137
+  orig: 137, 139
+  offset: 1, 1
+  index: -1
+Chest
+  rotate: false
+  xy: 2, 64
+  size: 186, 190
+  orig: 188, 192
+  offset: 1, 1
+  index: -1
+Foot-L
+  rotate: true
+  xy: 693, 41
+  size: 77, 80
+  orig: 79, 82
+  offset: 1, 1
+  index: -1
+Hand-L-Poison
+  rotate: false
+  xy: 609, 45
+  size: 82, 80
+  orig: 84, 82
+  offset: 1, 1
+  index: -1
+Hand-R-dash
+  rotate: true
+  xy: 661, 127
+  size: 69, 102
+  orig: 71, 104
+  offset: 1, 1
+  index: -1
+Hand-R-hide copie
+  rotate: true
+  xy: 190, 2
+  size: 75, 103
+  orig: 77, 105
+  offset: 1, 1
+  index: -1
+Hand-R-stealth
+  rotate: true
+  xy: 483, 79
+  size: 80, 124
+  orig: 82, 126
+  offset: 1, 1
+  index: -1
+Head
+  rotate: false
+  xy: 190, 79
+  size: 154, 175
+  orig: 156, 177
+  offset: 1, 1
+  index: -1
+Leg-L-D
+  rotate: true
+  xy: 661, 198
+  size: 56, 210
+  orig: 58, 212
+  offset: 1, 1
+  index: -1
+Leg-L-U
+  rotate: true
+  xy: 2, 5
+  size: 57, 160
+  orig: 59, 162
+  offset: 1, 1
+  index: -1
+Small Cloud Back
+  rotate: false
+  xy: 346, 23
+  size: 105, 92
+  orig: 107, 94
+  offset: 1, 1
+  index: -1
+Small Cloud Left
+  rotate: false
+  xy: 765, 120
+  size: 101, 76
+  orig: 103, 78
+  offset: 1, 1
+  index: -1
+Small Cloud Right
+  rotate: false
+  xy: 868, 98
+  size: 101, 76
+  orig: 103, 78
+  offset: 1, 1
+  index: -1
+Tie
+  rotate: false
+  xy: 483, 161
+  size: 176, 93
+  orig: 178, 95
+  offset: 1, 1
+  index: -1

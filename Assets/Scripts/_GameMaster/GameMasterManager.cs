@@ -1,29 +1,62 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMasterManager  {
+public class GameMasterManager : MonoBehaviour  {
 
     public GameData gd_nextLevel = new GameData();
     public string saveName = "Save_001";
 
-    private static GameMasterManager instance;
+    private static GameMasterManager _instance = null;
+    private static bool initialized = false;
     private GameMasterManager() {}
+    
+    public List<MonoBehaviour> DontDestroyList { get; set; }
 
-    public static GameMasterManager Instance
+
+    public static GameMasterManager instance
     {
         get
         {
-            if (instance == null)
+            if (_instance == null)
             {
-                instance = new GameMasterManager();
+                _instance = (GameMasterManager)FindObjectOfType(typeof(GameMasterManager));
+                if (_instance == null)
+                {
+                    // Create gameObject and add component
+                    _instance = (new GameObject("GameMasterManagerObj")).AddComponent<GameMasterManager>();
+                }
             }
-            return instance;
+            return _instance;
         }
     }
 
+    private void Awake()
+    {
+        instance.Init();
+    }
+
+    void Init()
+    {
+        if (!initialized)
+        {
+            DontDestroyList = new List<MonoBehaviour>();
+            initialized = true;
+            instance.DontDestroyOnLoadGM(instance);
+        }
+    }
+
+    public void DontDestroyOnLoadGM(MonoBehaviour mB)
+    {
+        instance.DontDestroyList.Add(mB);
+        GameObject.DontDestroyOnLoad(mB);
+    }
+    
     public void LevelSetUp()
     {
+        //ReAwakeNotDestroyOnLoad();
+
         if(gd_nextLevel != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
@@ -58,7 +91,14 @@ public class GameMasterManager  {
         }
 
     }
-	
+
+    //private void ReAwakeNotDestroyOnLoad()
+    //{
+    //    foreach (MonoBehaviour mB in DontDestroyList)
+    //    {
+    //    }
+    //}
+
     public void Restart(MonoBehaviour caller)
     {
         gd_nextLevel = SaveManager.LoadFile(saveName);

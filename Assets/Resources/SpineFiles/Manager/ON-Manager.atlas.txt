@@ -1,0 +1,152 @@
+
+ON-Manager.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm-L-D
+  rotate: false
+  xy: 739, 183
+  size: 236, 250
+  orig: 238, 252
+  offset: 1, 1
+  index: -1
+Arm-L-U
+  rotate: false
+  xy: 2, 124
+  size: 248, 285
+  orig: 250, 287
+  offset: 1, 1
+  index: -1
+Arm-R-D
+  rotate: false
+  xy: 252, 127
+  size: 232, 282
+  orig: 234, 284
+  offset: 1, 1
+  index: -1
+Arm-R-U
+  rotate: false
+  xy: 486, 137
+  size: 251, 273
+  orig: 253, 275
+  offset: 1, 1
+  index: -1
+Body
+  rotate: false
+  xy: 2, 687
+  size: 522, 323
+  orig: 524, 325
+  offset: 1, 1
+  index: -1
+Chest
+  rotate: false
+  xy: 2, 411
+  size: 474, 274
+  orig: 476, 276
+  offset: 1, 1
+  index: -1
+Foot-L
+  rotate: false
+  xy: 213, 20
+  size: 108, 102
+  orig: 110, 104
+  offset: 1, 1
+  index: -1
+Foot-L-Tip
+  rotate: false
+  xy: 2, 30
+  size: 209, 92
+  orig: 211, 94
+  offset: 1, 1
+  index: -1
+Foot-R
+  rotate: true
+  xy: 902, 72
+  size: 109, 106
+  orig: 111, 108
+  offset: 1, 1
+  index: -1
+Foot-R-Tip
+  rotate: true
+  xy: 646, 18
+  size: 117, 60
+  orig: 119, 62
+  offset: 1, 1
+  index: -1
+Hand-L
+  rotate: true
+  xy: 694, 435
+  size: 178, 157
+  orig: 180, 159
+  offset: 1, 1
+  index: -1
+Hand-L-Cup
+  rotate: true
+  xy: 816, 627
+  size: 202, 196
+  orig: 204, 198
+  offset: 1, 1
+  index: -1
+Hand-R
+  rotate: false
+  xy: 853, 457
+  size: 166, 168
+  orig: 168, 170
+  offset: 1, 1
+  index: -1
+Head
+  rotate: true
+  xy: 478, 412
+  size: 201, 214
+  orig: 203, 216
+  offset: 1, 1
+  index: -1
+Hip
+  rotate: false
+  xy: 526, 831
+  size: 408, 179
+  orig: 410, 181
+  offset: 1, 1
+  index: -1
+Leg-L-D
+  rotate: true
+  xy: 486, 2
+  size: 133, 158
+  orig: 135, 160
+  offset: 1, 1
+  index: -1
+Leg-L-U
+  rotate: true
+  xy: 526, 615
+  size: 214, 288
+  orig: 216, 290
+  offset: 1, 1
+  index: -1
+Leg-R-D
+  rotate: true
+  xy: 739, 45
+  size: 136, 161
+  orig: 138, 163
+  offset: 1, 1
+  index: -1
+Tie
+  rotate: false
+  xy: 936, 873
+  size: 82, 137
+  orig: 84, 139
+  offset: 1, 1
+  index: -1
+
+ON-Manager2.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Leg-R-U
+  rotate: false
+  xy: 2, 2
+  size: 217, 243
+  orig: 219, 245
+  offset: 1, 1
+  index: -1

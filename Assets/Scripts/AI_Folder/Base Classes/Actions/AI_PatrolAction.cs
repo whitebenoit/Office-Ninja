@@ -10,6 +10,7 @@ public class AI_PatrolAction : AI_Action
     private SplineLine ptrSplineLine;
     public float currentTransformProgress;
     public float speedDamptime = 0.1f;
+    public float stopDist = 0.1f;
 
     public override void Act(AI_BehaviorBrain brain)
     {
@@ -18,17 +19,17 @@ public class AI_PatrolAction : AI_Action
 
     private void Patrol(AI_BehaviorBrain brain)
     {
-        
         NavMeshAgent agent = brain.navMeshAgent;
         AI_PatrolData patrolData = brain.GetComponent<AI_PatrolData>();
         ptrSplineLine = patrolData.ptrSplineLine;
         currentTransformProgress = patrolData.currentTransformProgress;
 
-        if (agent != null)
+        if (agent != null && ptrSplineLine !=null)
         {
             //Vector3 nextDest = ptrSplineLine.GetNextControlPoint(currentTransformProgress);
             agent.destination = ptrSplineLine.transform.TransformPoint(ptrSplineLine.GetNextControlPoint(currentTransformProgress));
             agent.isStopped = false;
+            agent.stoppingDistance = stopDist;
             if (agent.remainingDistance <= agent.stoppingDistance
                 && !agent.pathPending)
             {
@@ -36,9 +37,9 @@ public class AI_PatrolAction : AI_Action
                 int nextPointIndex = ptrSplineLine.GetNextControlPointIndex((int)(currentTransformProgress * pointCnt));
                 patrolData.currentTransformProgress = (float)nextPointIndex / pointCnt;
             }
-            float agSpeed = agent.speed;
-            if (agSpeed > 0.1f) brain.brain_animator.SetFloat("Speed", agent.speed, speedDamptime, Time.deltaTime);
-            else brain.brain_animator.SetFloat("Speed", 0f, speedDamptime, Time.deltaTime);
+            //float agSpeed = agent.speed;
+            //if (agSpeed > 0.1f) brain.brain_animator.SetFloat("Speed", agent.speed, speedDamptime, Time.deltaTime);
+            //else brain.brain_animator.SetFloat("Speed", 0f, speedDamptime, Time.deltaTime);
 
         }
     }

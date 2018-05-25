@@ -45,7 +45,7 @@ public class SaveManager {
     {
         GameData gd = SaveManager.LoadFile(saveName);
 
-        GameMasterManager gMM = GameMasterManager.Instance;
+        GameMasterManager gMM = GameMasterManager.instance;
         gMM.gd_nextLevel = gd;
 
         SceneManager.LoadScene(gd.sceneName);

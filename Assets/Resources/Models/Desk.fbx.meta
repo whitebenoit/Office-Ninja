@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: e87cf407cab8d9f458b194176fbac9a9
-timeCreated: 1526546790
+guid: 91b02a810eb63444b98783b3566234ae
+timeCreated: 1526560827
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -17,12 +17,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: UnwrapChecker
-    second: {fileID: 2100000, guid: d68595f9f968f8441a3c637aa340f856, type: 2}
+    second: {fileID: 2100000, guid: 5544228b8151f394a9733b760f80ea80, type: 2}
   materials:
-    importMaterials: 1
-    materialName: 1
+    importMaterials: 0
+    materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

@@ -1,0 +1,160 @@
+
+ON-PC-Salaryman.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Arm-L-D
+  rotate: false
+  xy: 853, 426
+  size: 132, 84
+  orig: 134, 86
+  offset: 1, 1
+  index: -1
+Arm-L-U
+  rotate: false
+  xy: 534, 218
+  size: 116, 126
+  orig: 118, 128
+  offset: 1, 1
+  index: -1
+Arm-R-D
+  rotate: false
+  xy: 271, 167
+  size: 122, 152
+  orig: 124, 154
+  offset: 1, 1
+  index: -1
+Arm-R-U
+  rotate: false
+  xy: 114, 2
+  size: 122, 131
+  orig: 124, 133
+  offset: 1, 1
+  index: -1
+Body
+  rotate: false
+  xy: 395, 207
+  size: 137, 137
+  orig: 139, 139
+  offset: 1, 1
+  index: -1
+Chest
+  rotate: false
+  xy: 114, 321
+  size: 263, 189
+  orig: 265, 191
+  offset: 1, 1
+  index: -1
+Foot Idle
+  rotate: true
+  xy: 2, 26
+  size: 80, 108
+  orig: 82, 110
+  offset: 1, 1
+  index: -1
+Foot-L
+  rotate: false
+  xy: 458, 60
+  size: 77, 81
+  orig: 79, 83
+  offset: 1, 1
+  index: -1
+Foot-L-tip
+  rotate: true
+  xy: 804, 337
+  size: 88, 47
+  orig: 90, 49
+  offset: 1, 1
+  index: -1
+Foot-R
+  rotate: false
+  xy: 371, 65
+  size: 85, 76
+  orig: 87, 78
+  offset: 1, 1
+  index: -1
+Foot-R-tip
+  rotate: false
+  xy: 853, 373
+  size: 95, 51
+  orig: 97, 53
+  offset: 1, 1
+  index: -1
+Hand-L
+  rotate: false
+  xy: 395, 143
+  size: 102, 62
+  orig: 104, 64
+  offset: 1, 1
+  index: -1
+Hand-L-Repos
+  rotate: true
+  xy: 238, 37
+  size: 96, 59
+  orig: 98, 61
+  offset: 1, 1
+  index: -1
+Hand-R
+  rotate: false
+  xy: 721, 265
+  size: 80, 96
+  orig: 82, 98
+  offset: 1, 1
+  index: -1
+Hand-R-Repos
+  rotate: false
+  xy: 299, 72
+  size: 70, 93
+  orig: 72, 95
+  offset: 1, 1
+  index: -1
+Head
+  rotate: false
+  xy: 114, 135
+  size: 155, 184
+  orig: 157, 186
+  offset: 1, 1
+  index: -1
+Hip
+  rotate: false
+  xy: 2, 108
+  size: 110, 402
+  orig: 112, 404
+  offset: 1, 1
+  index: -1
+Leg-L-D
+  rotate: true
+  xy: 610, 427
+  size: 83, 241
+  orig: 85, 243
+  offset: 1, 1
+  index: -1
+Leg-L-U
+  rotate: true
+  xy: 379, 346
+  size: 59, 225
+  orig: 61, 227
+  offset: 1, 1
+  index: -1
+Leg-R-D
+  rotate: true
+  xy: 379, 407
+  size: 103, 229
+  orig: 105, 231
+  offset: 1, 1
+  index: -1
+Leg-R-U
+  rotate: true
+  xy: 610, 363
+  size: 62, 192
+  orig: 64, 194
+  offset: 1, 1
+  index: -1
+Neck
+  rotate: false
+  xy: 652, 248
+  size: 67, 113
+  orig: 69, 115
+  offset: 1, 1
+  index: -1

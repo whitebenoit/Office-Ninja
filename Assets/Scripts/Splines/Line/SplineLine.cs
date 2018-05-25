@@ -249,31 +249,7 @@ public class SplineLine : MonoBehaviour {
 
 
 
-    //public void AddCurve()
-    //{
-    //    int ptLength = points.Length;
-    //    Array.Resize(ref points, ptLength + 1);
-    //    ptLength++;
-    //    if (Loop)
-    //    {
-    //        points[ptLength - 1] = points[0];
-    //        if (ptLength >= 3)
-    //        {
-    //            points[ptLength - 2] = (points[0] + points[ptLength - 3]) / 2;
-    //        }
-    //        else
-    //        {
-    //            points[ptLength - 2] = points[0] + Vector3.right;
-    //        }
-
-    //    }
-    //    else
-    //    {
-    //        Vector3 point = points[ptLength - 1];
-    //        point.x += 1f;
-    //        points[ptLength - 1] = point;
-    //    }
-    //}
+   
 
     public void AddCurve(int index)
     {

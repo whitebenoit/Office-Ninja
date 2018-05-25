@@ -28,8 +28,8 @@ public class TextInteractionController : ObjectInteractionController
                 }
                 else if (textMan.isFinished)
                 {
-                    otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.READING] = false;
-                    otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
+                    otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.READING, false);
+                    otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.ROOTED, false);
                     textMan.textComp.text = "";
                     textMan.gameObject.SetActive(false);
                     //textMan.transform.parent.gameObject.SetActive(false);
@@ -42,8 +42,8 @@ public class TextInteractionController : ObjectInteractionController
             else
             {
                 // Start reading
-                otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.READING] = true;
-                otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = true;
+                otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.READING, true);
+                otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.ROOTED, true);
                 //textMan.textComp.text = text;
                 textMan.gameObject.SetActive(true);
                 //textMan.transform.parent.gameObject.SetActive(true);

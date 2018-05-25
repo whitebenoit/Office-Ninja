@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AI_Enjmin/Condition/WatchPlayer")]
 public class AI_CondWatchPlayer : AI_Condition {
 
+    public bool isNinjaOnly = false;
+    public bool isSalarymanOnly = false;
     public Color gizmosColor = Color.red;
     private GameObject gameObjectToWatchFor;
     private string tag = Tags.player;
@@ -27,6 +29,7 @@ public class AI_CondWatchPlayer : AI_Condition {
 
     public override bool Evaluate(AI_BehaviorBrain brain)
     {
+
         //\\ METHOD RAYCASTING 
         //RaycastHit[] rayCastHits;
         //rayCastHits = Physics.SphereCastAll(brain.transform.position+ height*brain.transform.up, watchSphereRadius, brain.transform.forward, watchRange);
@@ -42,16 +45,22 @@ public class AI_CondWatchPlayer : AI_Condition {
 
         //\\ METHOD SIGHT CONE
         gameObjectToWatchFor = GameObject.FindGameObjectsWithTag(tag)[0];
-        if (! gameObjectToWatchFor.GetComponent<SplinePlayerCharacterController>().currPlayerStatus[statusHIDDEN])
+        SplinePlayerCharacterController spcc = gameObjectToWatchFor.GetComponent<SplinePlayerCharacterController>();
+        if( (!isNinjaOnly && !isSalarymanOnly) ||
+            (isNinjaOnly && spcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA]) ||
+            (isSalarymanOnly && !spcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA]))
         {
-            Vector3 gORelatPos = gameObjectToWatchFor.transform.position - brain.transform.position;
-            //Debug.Log("gameObjectToWatchFor" + gameObjectToWatchFor.transform.position);
-            if (gORelatPos.magnitude < watchRange)
+            if (!spcc.currPlayerStatus[statusHIDDEN])
             {
-                //Debug.Log("Player Found");
-                Vector3 frwdVect = brain.transform.forward;
-                float angle = Vector3.Angle(frwdVect, gORelatPos);
-                if (angle < watchRadius) return true;
+                Vector3 gORelatPos = gameObjectToWatchFor.transform.position - brain.transform.position;
+                //Debug.Log("gameObjectToWatchFor" + gameObjectToWatchFor.transform.position);
+                if (gORelatPos.magnitude < watchRange)
+                {
+                    //Debug.Log("Player Found");
+                    Vector3 frwdVect = brain.transform.forward;
+                    float angle = Vector3.Angle(frwdVect, gORelatPos);
+                    if (angle < watchRadius) return true;
+                }
             }
         }
         
@@ -59,12 +68,15 @@ public class AI_CondWatchPlayer : AI_Condition {
 
         //\\ METHODE SPRITE WITH COLLIDER
         
+    }
 
+    public override void InitializeStateForBrain(AI_BehaviorBrain brain)
+    {
 
+    }
 
+    public override void EndStateForBrain(AI_BehaviorBrain brain)
+    {
 
-
-
-        return false;
     }
 }

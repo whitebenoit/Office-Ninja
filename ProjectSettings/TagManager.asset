@@ -8,6 +8,8 @@ TagManager:
   - Envirronment
   - Sight
   - TextUI
+  - Manager
+  - FadePanel
   layers:
   - Default
   - TransparentFX

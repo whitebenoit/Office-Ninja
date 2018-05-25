@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class AI_State : ScriptableObject {
 
+    public string[] brainAnimBoolList;
+
     [System.Serializable]
     [HideInInspector]
     public struct ActionListElement { public AI_Condition condition;public AI_Action action; }
@@ -55,6 +57,29 @@ public abstract class AI_State : ScriptableObject {
         return null;
     }
 
+    public void InitializeStateForBrain(AI_BehaviorBrain brain)
+    {
+        for (int i = 0; i < brainAnimBoolList.Length; i++)
+        {
+            brain.brain_animator.SetBool(brainAnimBoolList[i], true);
+        }
+        for (int i = 0; i < transitionsList.Length; i++)
+        {
+            transitionsList[i].condition.InitializeStateForBrain(brain);
+        }
+    }
+
+    public void EndStateForBrain(AI_BehaviorBrain brain)
+    {
+        for (int i = 0; i < brainAnimBoolList.Length; i++)
+        {
+            brain.brain_animator.SetBool(brainAnimBoolList[i], false);
+        }
+        for (int i = 0; i < transitionsList.Length; i++)
+        {
+            transitionsList[i].condition.EndStateForBrain(brain);
+        }
+    }
 
     public abstract void BeforeActions(AI_BehaviorBrain brain);
     public abstract void BetweenActions(AI_BehaviorBrain brain);

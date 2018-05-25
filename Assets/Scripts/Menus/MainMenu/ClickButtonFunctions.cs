@@ -20,7 +20,7 @@ public class ClickButtonFunctions : MonoBehaviour {
         gd.sceneName = sceneName;
         gd.toiletNum = 100;
 
-        GameMasterManager gMM = GameMasterManager.Instance;
+        GameMasterManager gMM = GameMasterManager.instance;
         SaveManager.Save(gd,gMM.saveName);
         gMM.gd_nextLevel = gd;
 

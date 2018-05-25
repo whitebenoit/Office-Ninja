@@ -16,8 +16,7 @@ public class SplineCameraController : MonoBehaviour {
     public cameraPosition currCameraPos = cameraPosition.left;
 
     public GameObject gO;
-
-    public SplinePlayerCharacterController sPCC;
+    
 
     private Vector3 objPosition;
     private Quaternion objRotation;

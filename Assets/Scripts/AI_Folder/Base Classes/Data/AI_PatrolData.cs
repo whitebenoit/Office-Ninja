@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class AI_PatrolData : MonoBehaviour {
 
     public SplineLine ptrSplineLine;
-    public float speed = 0.05f;
+    public float speed = 1.0f;
     public float startPatrolPointProgress = 0;
     public float currentTransformProgress;
 

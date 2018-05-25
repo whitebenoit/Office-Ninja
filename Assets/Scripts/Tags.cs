@@ -13,6 +13,9 @@ public class Tags : MonoBehaviour {
     public const string sight = "Sight";
     public const string respawn = "Respawn";
     public const string textUI = "TextUI";
+    public const string manager = "Manager";
+    public const string fadePanel = "FadePanel";
+    
 
 
 

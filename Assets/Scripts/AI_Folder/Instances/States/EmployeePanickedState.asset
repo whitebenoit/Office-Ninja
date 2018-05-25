@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76151e9dedbdc934a9740e5e84e2a93f, type: 3}
+  m_Name: EmployeePanickedState
+  m_EditorClassIdentifier: 
+  brainAnimBoolList:
+  - isPanicked
+  actionsList:
+  - condition: {fileID: 11400000, guid: 4774021224e23d74b9e4fa9a206f735a, type: 2}
+    action: {fileID: 11400000, guid: f6d6e03d82e15864da0d70dfdc2058ca, type: 2}
+  transitionsList:
+  - condition: {fileID: 11400000, guid: 0703e1fd8036f7c439162cb30b228b11, type: 2}
+    nextState: {fileID: 11400000, guid: 8b48ec01f9960244ca9c5468e88b5c36, type: 2}

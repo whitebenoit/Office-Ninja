@@ -7,12 +7,14 @@ public class PlantInteractionController : ObjectInteractionController
 {
     public Transform hidePosition;
     public SplineLine plantSpline;
-    public float plantProgress;
+    private float plantProgress;
 
     private void Awake()
     {
         this.isModifyingMove = true;
         SpawnButton();
+        //hidePosition.position = plantSpline.GetNearestPointOnSpline(this.transform.position) - this.transform.position;
+        plantProgress = plantSpline.GetNearestProgressOnSpline(this.transform.position);
 
     }
 
@@ -21,15 +23,17 @@ public class PlantInteractionController : ObjectInteractionController
         if (other.tag == Tags.player)
         {
             SplinePlayerCharacterController otherPcc = other.transform.GetComponent<SplinePlayerCharacterController>();
-            bool isHidden = otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.HIDDEN];
-            if (!isHidden)
+            bool isBehindPot = otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.BEHINDPOT];
+            if (!isBehindPot)
             {
-                otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.HIDDEN] = true;
+                otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.BEHINDPOT, true);
+                otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, true);
                 otherPcc.transform.SetPositionAndRotation(hidePosition.position, otherPcc.transform.rotation);
             }
             else
             {
-                otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.HIDDEN] = false;
+                otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, false);
+                otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.BEHINDPOT, false);
                 otherPcc.progress = otherPcc.lSpline.GetNearestProgressOnSpline(this.transform.position);
 
                 otherPcc.Move(otherPcc.transform.forward);
@@ -43,9 +47,10 @@ public class PlantInteractionController : ObjectInteractionController
         if (other.tag == Tags.player)
         {
             SplinePlayerCharacterController otherPcc = other.transform.GetComponent<SplinePlayerCharacterController>();
-            bool isHidden = otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.HIDDEN];
-            if (isHidden)
+            bool isBehindPot = otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.BEHINDPOT];
+            if (isBehindPot)
             {
+                otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, true);
                 PrivModifiedMove(direction, oicCaller, other);
             }
             else
@@ -59,27 +64,39 @@ public class PlantInteractionController : ObjectInteractionController
     private void PrivModifiedMove(Vector3 direction, ObjectInteractionController oicCaller, Collider other)
     {
         SplinePlayerCharacterController otherPcc = other.transform.GetComponent<SplinePlayerCharacterController>();
-
         float dotMagnitude = Vector3.Dot(plantSpline.GetDirection(plantProgress).normalized, direction);
-        if (Math.Abs(dotMagnitude) > 0.05f)
+        if (!otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED])
         {
-            // Lerp-Rotate the rigidbody toward the direction
-            //Math.Sign(dotMagnitude) * charSpeed * Time.deltaTime
-            plantProgress = plantSpline.GetLengthAtDistFromParametric(Math.Sign(dotMagnitude) * otherPcc.charSpeed * Time.deltaTime, plantProgress);
-            Vector3 newPosition = plantSpline.GetPoint(plantProgress);
+            if (Math.Abs(dotMagnitude) > 0.05f)
+            {
+           
+                // Lerp-Rotate the rigidbody toward the direction
+                //Math.Sign(dotMagnitude) * charSpeed * Time.deltaTime
+                plantProgress = plantSpline.GetLengthAtDistFromParametric(Math.Sign(dotMagnitude) * otherPcc.charSpeed * Time.deltaTime, plantProgress);
+                Vector3 newPosition = plantSpline.GetPoint(plantProgress);
 
-            Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * plantSpline.GetDirection(plantProgress).normalized, Vector3.up);
-            Quaternion newRotation = Quaternion.Lerp(otherPcc.pcc_rigidbody.rotation, targetRotation, otherPcc.turnSmooth);
+                Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * plantSpline.GetDirection(plantProgress).normalized, Vector3.up);
+                Quaternion newRotation = Quaternion.Lerp(otherPcc.pcc_rigidbody.rotation, targetRotation, otherPcc.turnSmooth);
 
-            otherPcc.transform.SetPositionAndRotation(newPosition, newRotation);
-            transform.position = otherPcc.transform.position - hidePosition.localPosition;
+                otherPcc.transform.SetPositionAndRotation(newPosition, newRotation);
+                transform.position = otherPcc.transform.position - hidePosition.localPosition;
 
 
-            otherPcc.pcc_animator.SetFloat("Speed", 5.7f, otherPcc.speedDamptime, Time.deltaTime);
+                otherPcc.pcc_animator.SetFloat("Speed", 5.7f, otherPcc.speedDamptime, Time.deltaTime);
+                otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, false);
+            }
+            else
+            {
+                otherPcc.pcc_animator.SetFloat("Speed", 0f, otherPcc.speedDamptime, Time.deltaTime);
+            }
         }
         else
         {
-            otherPcc.pcc_animator.SetFloat("Speed", 0f, otherPcc.speedDamptime, Time.deltaTime);
+            if (Math.Abs(dotMagnitude) > 0.05f)
+            {
+                otherPcc.transform.rotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * plantSpline.GetDirection(plantProgress).normalized, Vector3.up);
+                otherPcc.pcc_animator.SetFloat("Speed", 0f, otherPcc.speedDamptime, Time.deltaTime);
+            }
         }
     }
 }

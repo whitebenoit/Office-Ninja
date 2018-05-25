@@ -8,12 +8,13 @@ public class LevelLoaderManager : MonoBehaviour {
 
     private void Awake()
     {
-        gMM = GameMasterManager.Instance;
+        gMM = GameMasterManager.instance;
         
     }
 
     private void Start()
     {
         gMM.LevelSetUp();
+
     }
 }

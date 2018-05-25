@@ -5,9 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "AI_Enjmin/Action/GameOver")]
 public class AI_GameOverAction : AI_Action {
 
+    SplinePlayerCharacterController spcc;
+    public float fadeInDuration = 1.0f;
+    public string text = "Game Over";
+
+
     public override void Act(AI_BehaviorBrain brain)
     {
-        GameMasterManager.Instance.Restart(brain);
+        spcc = GameObject.FindGameObjectWithTag(Tags.player).GetComponent<SplinePlayerCharacterController>();
+        spcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = true;
+        FadeInOutController.instance.FadeIn(() =>
+        {
+            GameMasterManager.instance.Restart(brain);
+        }, fadeInDuration, text);
+
+        //GameMasterManager.Instance.Restart(brain);
     }
     
 }

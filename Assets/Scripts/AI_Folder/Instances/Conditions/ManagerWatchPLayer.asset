@@ -11,7 +11,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 182cd4e0cf96a054d8fbda71a711fc24, type: 3}
   m_Name: ManagerWatchPLayer
   m_EditorClassIdentifier: 
+  isNinjaOnly: 0
+  isSalarymanOnly: 0
   gizmosColor: {r: 1, g: 0, b: 0, a: 1}
   height: 1
-  watchRange: 2
+  watchRange: 3.2
   watchRadius: 112

@@ -9,7 +9,7 @@ public class RechargerInteractionController : ObjectInteractionController
     {
         //string saveName = "Save_001";
 
-        GameMasterManager.Instance.Restart(this);
+        GameMasterManager.instance.Restart(this);
 
     }
 

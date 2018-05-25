@@ -53,4 +53,12 @@ public class AI_CondWatch : AI_Condition {
 
         return false;
     }
+
+    public override void InitializeStateForBrain(AI_BehaviorBrain brain)
+    {
+    }
+
+    public override void EndStateForBrain(AI_BehaviorBrain brain)
+    {
+    }
 }

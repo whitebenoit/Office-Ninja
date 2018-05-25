@@ -8,17 +8,23 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public abstract class PlayerCharacterController : MonoBehaviour {
 
+
+    public GameObject salarymanModel;
+    public GameObject ninjaModel;
+
     [HideInInspector]
     public Animator pcc_animator;
     [HideInInspector]
     public Rigidbody pcc_rigidbody;
     protected Collider pcc_collider;
 
+    public float speedDamptime = 0.0f;
+
     [HideInInspector]
     public enum ActionListElement { HIDE, INTERACT, DASH, USE };
 
     [HideInInspector]
-    public enum StatusListElement { NINJA, ROOTED, HIDDEN, READING };
+    public enum StatusListElement { NINJA, ROOTED, HIDDEN, READING , BEHINDPOT};
     public Dictionary<StatusListElement,bool> currPlayerStatus;
 
     public delegate void MoveAction(Vector3 direction, ObjectInteractionController oicCaller, Collider other);
@@ -106,13 +112,17 @@ public abstract class PlayerCharacterController : MonoBehaviour {
 
     public void Move(Vector3 direction)
     {
-        if(!currPlayerStatus[StatusListElement.ROOTED])
-        { 
+        //if(!currPlayerStatus[StatusListElement.ROOTED])
+        //{ 
             if (moveList.Count != 0)
             {
                 moveList[0].Move(direction);
             }else ImplementedMove(direction);
-        }
+        //}
+        //else
+        //{
+        //    pcc_animator.SetFloat("Speed", 0f, speedDamptime, Time.deltaTime);
+        //}
     }
         
     public abstract void ImplementedMove(Vector3 direction);
@@ -218,6 +228,34 @@ public abstract class PlayerCharacterController : MonoBehaviour {
                 }
                 break;
             default:
+                break;
+        }
+    }
+
+
+    public void ChangeStatus(StatusListElement statusListElmt)
+    {
+        if (currPlayerStatus[statusListElmt]) ChangeStatus(statusListElmt, false);
+        else ChangeStatus(statusListElmt, true);
+    }
+
+
+    public void ChangeStatus(StatusListElement statusListElmt, bool valueBool)
+    {
+        switch (statusListElmt)
+        {
+            case StatusListElement.NINJA:
+                salarymanModel.SetActive(!valueBool);
+                ninjaModel.SetActive(valueBool);
+                pcc_animator.SetBool("isNinja", valueBool);
+                currPlayerStatus[statusListElmt] = valueBool;
+                break;
+            case StatusListElement.HIDDEN:
+                pcc_animator.SetBool("isHiding", valueBool);
+                currPlayerStatus[statusListElmt] = valueBool;
+                break;
+            default:
+                currPlayerStatus[statusListElmt] = valueBool;
                 break;
         }
     }
