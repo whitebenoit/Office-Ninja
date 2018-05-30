@@ -11,16 +11,18 @@ public class Dictionaries : MonoBehaviour
     [SerializeField]
     public Dictionary<PlayerCharacterController.ActionListElement, Sprite> dic_BtnUIImageRess = new Dictionary<PlayerCharacterController.ActionListElement, Sprite>();
 
-    public enum DirectionElement { FORWARD, RIGHT, LEFT, BACK }
-    //{
-    //    {PlayerCharacterController.ActionListElement.INTERACT, (Sprite)Resources.Load("Sprites/btn_A")},
-    //    {PlayerCharacterController.ActionListElement.HIDE, (Sprite)Resources.Load("Sprites/btn_B")},
-    //    {PlayerCharacterController.ActionListElement.USE, (Sprite)Resources.Load("Sprites/btn_X")},
-    //    {PlayerCharacterController.ActionListElement.DASH, (Sprite)Resources.Load("Sprites/btn_Y")}
-    //};
+    public enum DirectionElement { FORWARD, RIGHT, LEFT, BACK };
+    
+    public enum ColorNames { SIGHT_RED, SIGHT_BLUE};
 
 
-    private void Start()
+    public enum ItemName { SCREWDRIVER, LAXATIVE, SHURIKEN, CALTROPS };
+    public enum ItemStateName { OWNED, MISSING, NOTIMPLEMENTEDYET };
+    [SerializeField]
+    public Dictionary<ColorNames, Color> dic_Colors = new Dictionary<ColorNames, Color>();
+
+
+    private void Awake()
     {
         dic_BtnUIImageRess.Add(PlayerCharacterController.ActionListElement.INTERACT, Resources.Load<Sprite>("Sprites/btn_A"));
         dic_BtnUIImageRess.Add(PlayerCharacterController.ActionListElement.HIDE, Resources.Load<Sprite>("Sprites/btn_B"));
@@ -31,5 +33,8 @@ public class Dictionaries : MonoBehaviour
         dic_directions.Add(DirectionElement.RIGHT, Vector3.right);
         dic_directions.Add(DirectionElement.LEFT, Vector3.left);
         dic_directions.Add(DirectionElement.BACK, Vector3.back);
+
+        dic_Colors.Add(ColorNames.SIGHT_RED, new Color(255, 0, 0));
+        dic_Colors.Add(ColorNames.SIGHT_BLUE, new Color(0, 0, 255));
     }
 }

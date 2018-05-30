@@ -34,7 +34,7 @@ public class FadeInOutController : MonoBehaviour {
 
 
     /// <summary>
-    /// The gameobject that the sound manager is attached to
+    /// The gameobject that the FadeInOutController is attached to
     /// </summary>
     public static GameObject gameobject { get { return instance.gameObject; } }
 

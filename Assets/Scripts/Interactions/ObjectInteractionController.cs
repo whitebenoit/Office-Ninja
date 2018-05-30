@@ -33,6 +33,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
         buttonCanvasGO.transform.position = this.transform.TransformPoint(buttonPosition);
         buttonCanvasGO.transform.SetParent(this.transform);
         btnUIImageController = buttonCanvasGO.GetComponent<ButtonUIImageController>();
+        btnUIImageController.SetAction(actionType);
         buttonCanvasGO.SetActive(false);
     }
 

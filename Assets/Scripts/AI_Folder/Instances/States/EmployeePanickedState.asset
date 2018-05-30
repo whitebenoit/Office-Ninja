@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76151e9dedbdc934a9740e5e84e2a93f, type: 3}
   m_Name: EmployeePanickedState
   m_EditorClassIdentifier: 
+  isToStopOnEnter: 1
   brainAnimBoolList:
   - isPanicked
   actionsList:
@@ -18,4 +19,4 @@ MonoBehaviour:
     action: {fileID: 11400000, guid: f6d6e03d82e15864da0d70dfdc2058ca, type: 2}
   transitionsList:
   - condition: {fileID: 11400000, guid: 0703e1fd8036f7c439162cb30b228b11, type: 2}
-    nextState: {fileID: 11400000, guid: 8b48ec01f9960244ca9c5468e88b5c36, type: 2}
+    nextState: {fileID: 11400000, guid: 4891899bc8aea1744ba0352d1f4cea82, type: 2}

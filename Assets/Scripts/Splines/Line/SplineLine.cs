@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SplineLine : MonoBehaviour {
 
-    [Range(0f,1f)]
+    [Range(0f, 1f)]
     public float t;
 
     public float cDistance;
@@ -32,6 +32,8 @@ public class SplineLine : MonoBehaviour {
         }
     }
 
+    
+
     public int GetControlPointCount
     {
         get
@@ -55,15 +57,26 @@ public class SplineLine : MonoBehaviour {
         }
         points[index] = point;
     }
-
+               
     public int GetNextControlPointIndex(int index)
     {
         int indexMax = points.Length - 1;
         if (index < indexMax) { return index + 1; }
         else
         {
-            if (Loop) { return 0;}
+            if (Loop) { return 0; }
             else { return indexMax; }
+        }
+    }
+
+    public int GetPreviousControlPointIndex(int index)
+    {
+        int indexMax = points.Length - 1;
+        if (index >0 && index <= indexMax) { return index - 1; }
+        else
+        {
+            if (Loop) { return indexMax; }
+            else { return 0; }
         }
     }
 
@@ -81,7 +94,7 @@ public class SplineLine : MonoBehaviour {
         if (t >= 1f)
         {
             t = 1f;
-            i = GetLineCount-1;
+            i = GetLineCount - 1;
         }
         else
         {
@@ -137,7 +150,7 @@ public class SplineLine : MonoBehaviour {
         for (int i = 0; i < GetLineCount; i++)
         {
             float lineDist = Vector3.Distance(points[i], points[i + 1]);
-            if(currDist + lineDist >= dist)
+            if (currDist + lineDist >= dist)
             {
                 currIndex = i;
                 break;
@@ -147,7 +160,7 @@ public class SplineLine : MonoBehaviour {
                 currDist += lineDist;
             }
         }
-        return ( currIndex + Line.GetParametricLength(points[currIndex], points[currIndex + 1], dist - currDist)) / GetLineCount;  
+        return (currIndex + Line.GetParametricLength(points[currIndex], points[currIndex + 1], dist - currDist)) / GetLineCount;
     }
 
     public float GetLengthAtDistFromParametric(float movedDist, float originT)
@@ -161,17 +174,27 @@ public class SplineLine : MonoBehaviour {
         return newT;
     }
 
-    public Vector3 GetPointAtDistFromParametric( float movedDist, float originT)
+    public Vector3 GetPointAtDistFromParametric(float movedDist, float originT)
     {
         return GetPoint(GetLengthAtDistFromParametric(movedDist, originT));
     }
 
 
-    public Vector3 GetPreviousControlPoint (float t)
+    public Vector3 GetPreviousControlPoint(int index)
+    {
+        return GetControlPoint(GetPreviousControlPointIndex(index));
+    }
+
+    public Vector3 GetPreviousControlPoint(float t)
+    {
+        return GetControlPoint(GetPreviousControlPointIndex(t));
+    }
+
+    public int GetPreviousControlPointIndex(float t)
     {
         if (t == 1.0f)
         {
-            return GetControlPoint(GetLineCount-1);
+            return GetLineCount - 1;
         }
         float tempT = t;
         if (Loop)
@@ -181,14 +204,37 @@ public class SplineLine : MonoBehaviour {
         }
         tempT = Mathf.Clamp01(tempT) * GetLineCount;
         int i = (int)tempT;
-        return GetControlPoint(i);
+        return i;
+    }
+
+    public Vector3 GetNextControlPoint(int index)
+    {
+        return GetControlPoint(GetNextControlPointIndex(index));
     }
 
     public Vector3 GetNextControlPoint(float t)
     {
+        return GetControlPoint(GetNextControlPointIndex(t));
+    }
+
+
+    public int GetNextControlPointIndex(float t)
+    {
+        //float tempT = t;
+        //if (Loop)
+        //{
+        //    while (tempT > 1f) tempT -= 1f;
+        //    while (tempT < 0f) tempT += 1f;
+        //}
+        //if (tempT == 1.0f)
+        //{
+        //    return GetLineCount;
+        //}
+        //tempT = Mathf.Clamp01(tempT) * GetLineCount;
+        //int i = (int)tempT;
         if (t == 1.0f)
         {
-            return GetControlPoint(GetLineCount);
+            return GetLineCount;
         }
         float tempT = t;
         if (Loop)
@@ -198,9 +244,8 @@ public class SplineLine : MonoBehaviour {
         }
         tempT = Mathf.Clamp01(tempT) * GetLineCount;
         int i = (int)tempT;
-        return GetControlPoint(i+1);
+        return i + 1;
     }
-
     public Vector3 GetDirection(float t)
     {
         return GetNextControlPoint(t) - GetPreviousControlPoint(t);

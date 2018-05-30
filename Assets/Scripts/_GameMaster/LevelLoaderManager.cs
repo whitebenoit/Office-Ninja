@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LevelLoaderManager : MonoBehaviour {
 
-    public GameMasterManager gMM;
+    //[HideInInspector]
+    private GameMasterManager gMM;
 
     private void Awake()
     {
@@ -15,6 +16,5 @@ public class LevelLoaderManager : MonoBehaviour {
     private void Start()
     {
         gMM.LevelSetUp();
-
     }
 }

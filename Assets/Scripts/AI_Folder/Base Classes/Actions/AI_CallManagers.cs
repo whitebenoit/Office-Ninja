@@ -11,6 +11,8 @@ public class AI_CallManagers : AI_Action
     public int minimumChanged = 1;
     public float stopDist = 1.0f;
 
+    public AI_State[] noReplacedState;
+
     private AI_BehaviorBrain[] managerBrainList;
 
     public override void Act(AI_BehaviorBrain brain)
@@ -53,11 +55,30 @@ public class AI_CallManagers : AI_Action
     {
         foreach (AI_BehaviorBrain currbrain in brainList)
         {
-            currbrain.currentState = state;
+            //Debug.Log(currbrain.gameObject.name+" from:"+ currbrain.currentState.ToString()+" to:"+state.ToString());
+            AI_State currBrainState = currbrain.currentState;
+            if (currBrainState != state)
+            {
+                bool replace = true;
+                foreach (AI_State curState in noReplacedState)
+                {
+                    if(currBrainState == curState)
+                    {
+                        replace = false;
+                        break;
+                    }
+                }
+                if (replace)
+                {
+                    currbrain.ChangeState(state);
+                   //currbrain.currentState = state;
+                }
+            }
 
             AI_GoToData goToData = currbrain.GetComponent<AI_GoToData>();
             if (goToData != null) {
-                goToData.destination = brain.transform.position;
+                if(goToData.destination != brain.transform.position)
+                    goToData.destination = brain.transform.position;
                 goToData.stopDist = stopDist;
             }
         }

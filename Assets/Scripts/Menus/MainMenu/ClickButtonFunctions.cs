@@ -26,4 +26,20 @@ public class ClickButtonFunctions : MonoBehaviour {
 
         SceneManager.LoadScene(gd.sceneName);
     }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+
+    public void DebugWrite(string text)
+    {
+        Debug.Log(Time.timeSinceLevelLoad + "|| " + text);
+    }
+
+    public void PC_Continue()
+    {
+        PauseController.instance.TogglePause();
+    }
 }

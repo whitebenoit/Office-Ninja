@@ -14,20 +14,25 @@ public class ButtonUIImageController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         currentImage = this.transform.parent.GetComponentInChildren<Image>();
-
+        SetImage();
     }
 	
 	// Update is called once per frame
-	void Update () {
-        SetImage();
-    }
+	//void Update () {
+    //    //SetImage();
+    //}
 
 
     void SetImage()
     {
-        actionType = this.transform.parent.GetComponentInChildren<ObjectInteractionController>().actionType;
+        //actionType = this.transform.parent.GetComponentInChildren<ObjectInteractionController>().actionType;
         dicSprite = GameObject.Find("ScriptManager").GetComponent<Dictionaries>().dic_BtnUIImageRess[actionType];
         
         currentImage.sprite = Instantiate<Sprite>(dicSprite);
+    }
+
+    public void SetAction(PlayerCharacterController.ActionListElement actionType)
+    {
+        this.actionType = actionType;
     }
 }

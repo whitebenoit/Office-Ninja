@@ -5,7 +5,10 @@ using UnityEngine;
 
 public abstract class AI_State : ScriptableObject {
 
+    public bool isToStopOnEnter = false;
+
     public string[] brainAnimBoolList;
+
 
     [System.Serializable]
     [HideInInspector]
@@ -59,6 +62,8 @@ public abstract class AI_State : ScriptableObject {
 
     public void InitializeStateForBrain(AI_BehaviorBrain brain)
     {
+        if (isToStopOnEnter)
+            brain.navMeshAgent.isStopped = true;
         for (int i = 0; i < brainAnimBoolList.Length; i++)
         {
             brain.brain_animator.SetBool(brainAnimBoolList[i], true);

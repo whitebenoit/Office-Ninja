@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameMasterManager : MonoBehaviour  {
 
+
+    public GameData gd_currentLevel;
     public GameData gd_nextLevel = new GameData();
     public string saveName = "Save_001";
 
@@ -12,7 +14,6 @@ public class GameMasterManager : MonoBehaviour  {
     private static bool initialized = false;
     private GameMasterManager() {}
     
-    public List<MonoBehaviour> DontDestroyList { get; set; }
 
 
     public static GameMasterManager instance
@@ -35,28 +36,23 @@ public class GameMasterManager : MonoBehaviour  {
     private void Awake()
     {
         instance.Init();
+        gd_currentLevel = SaveManager.LoadFile(saveName);
     }
 
     void Init()
     {
         if (!initialized)
         {
-            DontDestroyList = new List<MonoBehaviour>();
             initialized = true;
-            instance.DontDestroyOnLoadGM(instance);
+            GameMasterManager.DontDestroyOnLoad(this);
         }
     }
-
-    public void DontDestroyOnLoadGM(MonoBehaviour mB)
-    {
-        instance.DontDestroyList.Add(mB);
-        GameObject.DontDestroyOnLoad(mB);
-    }
+    
     
     public void LevelSetUp()
     {
         //ReAwakeNotDestroyOnLoad();
-
+        //Debug.Log("LEVEL SETUP:" + gd_nextLevel.sceneName + " - " + gd_nextLevel.toiletNum);
         if(gd_nextLevel != null)
         {
             GameObject player = GameObject.FindGameObjectWithTag(Tags.player);

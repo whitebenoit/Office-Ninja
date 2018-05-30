@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4492465124533776}
   - component: {fileID: 65407588090744072}
   - component: {fileID: 114134421674935714}
+  - component: {fileID: 114105215342965320}
   m_Layer: 0
   m_Name: BambooPlantInteractible
   m_TagString: Untagged
@@ -82,7 +83,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1168061500564492}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 17.23, y: -0.5, z: 2.05}
+  m_LocalPosition: {x: 26.14, y: -0.5, z: 33.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4871569954378576}
@@ -185,6 +186,26 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114105215342965320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1168061500564492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f23147c7aafc74fa5304b246812737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isNinjaOnly: 0
+  isSalaryManOnly: 1
+  buttonPosition: {x: 0, y: 2, z: 0}
+  actionType: 1
+  isModifyingMove: 0
+  text:
+  - "Quel \xE9norme pot\u2026 Alors, c\u2019est \xE7a qu\u2019on appelle une plante
+    grasse ?"
+  - "Ca ferait une planque id\xE9ale."
 --- !u!114 &114134421674935714
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -15,7 +15,9 @@ public class Tags : MonoBehaviour {
     public const string textUI = "TextUI";
     public const string manager = "Manager";
     public const string fadePanel = "FadePanel";
-    
+    public const string employee = "Employee";
+    public const string pauseMenu = "PauseMenu";
+
 
 
 

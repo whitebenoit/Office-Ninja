@@ -14,7 +14,9 @@ public class PlantInteractionController : ObjectInteractionController
         this.isModifyingMove = true;
         SpawnButton();
         //hidePosition.position = plantSpline.GetNearestPointOnSpline(this.transform.position) - this.transform.position;
-        plantProgress = plantSpline.GetNearestProgressOnSpline(this.transform.position);
+        if (plantSpline != null)
+            plantProgress = plantSpline.GetNearestProgressOnSpline(this.transform.position);
+        else Debug.Log("ERROR: NO Spline for plant :" + transform.position.ToString());
 
     }
 
@@ -69,9 +71,23 @@ public class PlantInteractionController : ObjectInteractionController
         {
             if (Math.Abs(dotMagnitude) > 0.05f)
             {
-           
+
                 // Lerp-Rotate the rigidbody toward the direction
-                //Math.Sign(dotMagnitude) * charSpeed * Time.deltaTime
+
+                Debug.Log(Time.timeSinceLevelLoad+" - SplineDir " + plantSpline.GetDirection(plantProgress).normalized
+                          +"playerDir"+ direction);
+
+                //plantProgress = plantSpline.GetLengthAtDistFromParametric(Math.Sign(dotMagnitude) * otherPcc.charSpeed * Time.deltaTime, plantProgress);
+                //Vector3 newPosition = plantSpline.GetPoint(plantProgress);
+
+                //Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * plantSpline.GetDirection(plantProgress).normalized, Vector3.up);
+                //Quaternion newRotation = Quaternion.Lerp(otherPcc.pcc_rigidbody.rotation, targetRotation, otherPcc.turnSmooth);
+
+                //transform.SetPositionAndRotation(newPosition, newRotation);
+
+
+                //otherPcc.pcc_animator.SetFloat("Speed", 4.5f, otherPcc.speedDamptime, Time.deltaTime);
+
                 plantProgress = plantSpline.GetLengthAtDistFromParametric(Math.Sign(dotMagnitude) * otherPcc.charSpeed * Time.deltaTime, plantProgress);
                 Vector3 newPosition = plantSpline.GetPoint(plantProgress);
 
@@ -79,10 +95,12 @@ public class PlantInteractionController : ObjectInteractionController
                 Quaternion newRotation = Quaternion.Lerp(otherPcc.pcc_rigidbody.rotation, targetRotation, otherPcc.turnSmooth);
 
                 otherPcc.transform.SetPositionAndRotation(newPosition, newRotation);
-                transform.position = otherPcc.transform.position - hidePosition.localPosition;
+                
+
+                transform.position = otherPcc.transform.position + (this.transform.position - hidePosition.position );
 
 
-                otherPcc.pcc_animator.SetFloat("Speed", 5.7f, otherPcc.speedDamptime, Time.deltaTime);
+                //otherPcc.pcc_animator.SetFloat("Speed", 5.7f, otherPcc.speedDamptime, Time.deltaTime);
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, false);
             }
             else

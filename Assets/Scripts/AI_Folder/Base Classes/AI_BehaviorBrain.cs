@@ -12,7 +12,9 @@ public class AI_BehaviorBrain : MonoBehaviour {
     Vector3 velocity;
     public float moveSpeedDamp = 0.1f;
     public AI_State initialState;
-    [HideInInspector] public AI_State currentState;
+    //[HideInInspector]
+    public AI_State currentState;
+                      private AI_State previousState;
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public Animator brain_animator;
     [HideInInspector] public Rigidbody brain_rigidbody;
@@ -36,11 +38,13 @@ public class AI_BehaviorBrain : MonoBehaviour {
         if (currentState != null)
         {
             AI_State nextState = currentState.UpdateState(this);
+            if(nextState is AI_PreviousState)
+            {
+                nextState = previousState;
+            }
             if (nextState != null)
             {
-                currentState.EndStateForBrain(this);
-                currentState = nextState;
-                currentState.InitializeStateForBrain(this);
+                ChangeState(nextState);
             }
             //Update Animation Speed
             velocity = navMeshAgent.velocity;
@@ -57,5 +61,13 @@ public class AI_BehaviorBrain : MonoBehaviour {
             else if (velocity.magnitude > 0.1f) { brain_animator.SetFloat("Speed", 2.0f, moveSpeedDamp, Time.deltaTime); }
             else { brain_animator.SetFloat("Speed", 0f, moveSpeedDamp, Time.deltaTime); }
         }
+    }
+
+    public void ChangeState(AI_State nextState)
+    {
+        currentState.EndStateForBrain(this);
+        previousState = currentState;
+        currentState = nextState;
+        currentState.InitializeStateForBrain(this);
     }
 }

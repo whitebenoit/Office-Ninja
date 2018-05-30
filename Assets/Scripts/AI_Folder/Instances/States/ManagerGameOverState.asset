@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01a26f6e750680244a91d97ac695c30c, type: 3}
   m_Name: ManagerGameOverState
   m_EditorClassIdentifier: 
+  isToStopOnEnter: 1
   brainAnimBoolList:
   - isCatching
   actionsList:

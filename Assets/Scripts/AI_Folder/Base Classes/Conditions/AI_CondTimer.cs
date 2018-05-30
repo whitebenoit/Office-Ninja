@@ -8,6 +8,9 @@ public class AI_CondTimer : AI_Condition
     public float duration;
     private Dictionary<AI_BehaviorBrain, float> brainList = new Dictionary<AI_BehaviorBrain, float>();
 
+    public bool isCondNoOut = false;
+    public AI_Condition ai_CondNoOut;
+
 
     public override void InitializeStateForBrain(AI_BehaviorBrain brain)
     {
@@ -16,6 +19,10 @@ public class AI_CondTimer : AI_Condition
 
     public override bool Evaluate(AI_BehaviorBrain brain)
     {
+        if (isCondNoOut && ai_CondNoOut !=null && ai_CondNoOut.Evaluate(brain))
+        {
+            brainList[brain] = Time.realtimeSinceStartup;
+        }
         if (brainList.ContainsKey(brain))
         {
             float startTime = brainList[brain];

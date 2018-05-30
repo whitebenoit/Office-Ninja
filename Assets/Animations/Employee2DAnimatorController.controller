@@ -13,19 +13,19 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isPanicked
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: isSitting
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -439,7 +439,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events: []
---- !u!114 &114255587549651800
+--- !u!114 &114254577235901878
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -447,11 +447,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25693eb4d50efbf47a69eba5e35e06e1, type: 3}
+  m_Script: {fileID: 11500000, guid: e0db06eaeaae73d47800fe7b7ed14719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   motionName: Panique
---- !u!114 &114283369174878798
+  speedAnim: 1
+  sightNinja: 2
+  sightSalaryman: 2
+--- !u!114 &114271996709459312
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -459,35 +462,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25693eb4d50efbf47a69eba5e35e06e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motionName: Sitting
---- !u!114 &114666121985278920
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25693eb4d50efbf47a69eba5e35e06e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motionName: Walk
---- !u!114 &114700171296730084
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25693eb4d50efbf47a69eba5e35e06e1, type: 3}
+  m_Script: {fileID: 11500000, guid: e0db06eaeaae73d47800fe7b7ed14719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   motionName: Idle
---- !u!114 &114825225132804652
+  speedAnim: 1
+  sightNinja: 1
+  sightSalaryman: 0
+--- !u!114 &114335427841884418
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -495,10 +477,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25693eb4d50efbf47a69eba5e35e06e1, type: 3}
+  m_Script: {fileID: 11500000, guid: e0db06eaeaae73d47800fe7b7ed14719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motionName: Sitting
+  speedAnim: 1
+  sightNinja: 3
+  sightSalaryman: 3
+--- !u!114 &114433807491649478
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0db06eaeaae73d47800fe7b7ed14719, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   motionName: Detecte
+  speedAnim: 1
+  sightNinja: 2
+  sightSalaryman: 2
+--- !u!114 &114732064279485534
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0db06eaeaae73d47800fe7b7ed14719, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motionName: Walk
+  speedAnim: 1
+  sightNinja: 1
+  sightSalaryman: 0
 --- !u!1101 &1101369986025061958
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -724,7 +739,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101369986025061958}
   m_StateMachineBehaviours:
-  - {fileID: 114255587549651800}
+  - {fileID: 114254577235901878}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -752,7 +767,7 @@ AnimatorState:
   - {fileID: 1101942760693378712}
   - {fileID: 1101847960363707682}
   m_StateMachineBehaviours:
-  - {fileID: 114666121985278920}
+  - {fileID: 114732064279485534}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -780,7 +795,7 @@ AnimatorState:
   - {fileID: 1101453917863280802}
   - {fileID: 1101978949356688228}
   m_StateMachineBehaviours:
-  - {fileID: 114825225132804652}
+  - {fileID: 114433807491649478}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -809,7 +824,7 @@ AnimatorState:
   - {fileID: 1101675084234183406}
   - {fileID: 1101390120890024436}
   m_StateMachineBehaviours:
-  - {fileID: 114700171296730084}
+  - {fileID: 114271996709459312}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -836,7 +851,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1101420333154436422}
   m_StateMachineBehaviours:
-  - {fileID: 114283369174878798}
+  - {fileID: 114335427841884418}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

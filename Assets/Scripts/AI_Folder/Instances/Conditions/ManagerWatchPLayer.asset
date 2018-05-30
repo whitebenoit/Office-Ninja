@@ -16,4 +16,4 @@ MonoBehaviour:
   gizmosColor: {r: 1, g: 0, b: 0, a: 1}
   height: 1
   watchRange: 3.2
-  watchRadius: 112
+  watchRadius: 30

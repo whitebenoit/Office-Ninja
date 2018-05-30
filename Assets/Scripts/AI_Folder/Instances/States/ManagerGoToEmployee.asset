@@ -11,10 +11,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc3e0cc455f6b394faa97ba7be5af18c, type: 3}
   m_Name: ManagerGoToEmployee
   m_EditorClassIdentifier: 
+  isToStopOnEnter: 0
   brainAnimBoolList: []
   actionsList:
   - condition: {fileID: 11400000, guid: 4774021224e23d74b9e4fa9a206f735a, type: 2}
     action: {fileID: 11400000, guid: 700ec11442d6be242b9afab0b6269aa1, type: 2}
   transitionsList:
   - condition: {fileID: 11400000, guid: a9198eb883f199b4caea2434c4a8418c, type: 2}
-    nextState: {fileID: 11400000, guid: 06c66c1e04699c64dbb88299abebd9f1, type: 2}
+    nextState: {fileID: 11400000, guid: 4891899bc8aea1744ba0352d1f4cea82, type: 2}
+  - condition: {fileID: 11400000, guid: 5d299c84ce4e8d243a654f871036d0ad, type: 2}
+    nextState: {fileID: 11400000, guid: cd35f36b8ee65bc4ba19e19944c41a8c, type: 2}

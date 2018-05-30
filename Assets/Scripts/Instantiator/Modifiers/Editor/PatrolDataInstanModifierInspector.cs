@@ -35,7 +35,8 @@ public class PatrolDataInstanModifierInspector : Editor
         //AI_PatrolData pd = instanMod.instan.gOToInst.GetComponent<AI_PatrolData>();
         //if (pd != null)
         //{
-            DrawSplineLine("Spline line", ref instanMod.sl);
+        DrawSplineLine("Spline line", ref instanMod.sl);
+        //DrawValue("Speed", ref instanMod.patSpeed);
         //}
         //else
         //{
@@ -49,6 +50,18 @@ public class PatrolDataInstanModifierInspector : Editor
     {
         EditorGUI.BeginChangeCheck();
         SplineLine propertyTemp = (SplineLine)EditorGUILayout.ObjectField(name, property, typeof(SplineLine));
+        if (EditorGUI.EndChangeCheck())
+        {
+            Undo.RecordObject(instanMod, name + " change");
+            EditorUtility.SetDirty(instanMod);
+            property = propertyTemp;
+        }
+    }
+
+    private void DrawValue(string name, ref float property)
+    {
+        EditorGUI.BeginChangeCheck();
+        float propertyTemp = EditorGUILayout.FloatField(name,property);
         if (EditorGUI.EndChangeCheck())
         {
             Undo.RecordObject(instanMod, name + " change");

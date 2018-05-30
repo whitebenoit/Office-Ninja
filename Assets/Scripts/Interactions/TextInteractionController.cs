@@ -14,6 +14,7 @@ public class TextInteractionController : ObjectInteractionController
         SpawnButton();
         textMan = GameObject.FindGameObjectWithTag(Tags.textUI).GetComponent<TextManager>();
     }
+    
     public override void Interaction(ObjectInteractionController oicCaller, Collider other)
     {
         if (other.tag == Tags.player)

@@ -56,9 +56,9 @@ public class AI_CondWatchPlayer : AI_Condition {
                 //Debug.Log("gameObjectToWatchFor" + gameObjectToWatchFor.transform.position);
                 if (gORelatPos.magnitude < watchRange)
                 {
-                    //Debug.Log("Player Found");
                     Vector3 frwdVect = brain.transform.forward;
                     float angle = Vector3.Angle(frwdVect, gORelatPos);
+                    //Debug.Log(brain.gameObject.name + "Player (angle: "+angle+" ) Found at " + brain.currentState.ToString());
                     if (angle < watchRadius) return true;
                 }
             }

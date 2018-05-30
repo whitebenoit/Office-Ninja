@@ -249,6 +249,7 @@ public abstract class PlayerCharacterController : MonoBehaviour {
                 ninjaModel.SetActive(valueBool);
                 pcc_animator.SetBool("isNinja", valueBool);
                 currPlayerStatus[statusListElmt] = valueBool;
+                //UpdateEmployeeSight();
                 break;
             case StatusListElement.HIDDEN:
                 pcc_animator.SetBool("isHiding", valueBool);
@@ -259,5 +260,21 @@ public abstract class PlayerCharacterController : MonoBehaviour {
                 break;
         }
     }
+
+    //private void UpdateEmployeeSight()
+    //{
+    //    GameObject[] gOList = GameObject.FindGameObjectsWithTag(Tags.employee);
+    //    if (gOList.Length > 0)
+    //    {
+    //        foreach (GameObject gO in gOList)
+    //        {
+    //            SightSpriteController ssc = gO.GetComponent<SightSpriteController>();
+    //            if(ssc != null)
+    //            {
+    //                ssc.isPlayerNinja = currPlayerStatus[StatusListElement.NINJA];
+    //            }
+    //        }
+    //    }
+    //}
 
 }

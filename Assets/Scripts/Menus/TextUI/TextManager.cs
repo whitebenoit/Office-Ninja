@@ -25,7 +25,7 @@ public class TextManager : MonoBehaviour {
     private Coroutine coroutine;
 
     // Use this for initialization
-    private void Awake()
+    private void Start()
     {
         textComp.text = "";
         gameObject.SetActive(false);

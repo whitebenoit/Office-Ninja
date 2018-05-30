@@ -8,12 +8,20 @@ public class AI_PatrolData : MonoBehaviour {
 
     public SplineLine ptrSplineLine;
     public float speed = 1.0f;
-    public float startPatrolPointProgress = 0;
-    public float currentTransformProgress;
+    //public int startDestinationIndex = 0;
+    //public float startPatrolPointProgress = 0;
+    //public float currentTransformProgress;
+    public int startingDestPointIndex = 0;
+    [HideInInspector]
+    public int currentPreviousSplinePoint = 0;
 
     private void OnEnable()
     {
-        currentTransformProgress = startPatrolPointProgress;
+        if(ptrSplineLine != null)
+        {
+            //Debug.Log("sDPI: " + startingDestPointIndex + " -> " + ptrSplineLine.GetPreviousControlPointIndex(startingDestPointIndex));
+            currentPreviousSplinePoint = ptrSplineLine.GetPreviousControlPointIndex(startingDestPointIndex);
+        }
         transform.GetComponent<NavMeshAgent>().speed = speed;
     }
 

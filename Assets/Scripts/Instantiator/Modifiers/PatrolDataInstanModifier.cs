@@ -6,6 +6,7 @@ using UnityEngine;
 public class PatrolDataInstanModifier : InstanModifier {
     
     public SplineLine sl;
+    //public float patSpeed = 3;
 
     public override void Modify(GameObject gO)
     {
@@ -13,6 +14,7 @@ public class PatrolDataInstanModifier : InstanModifier {
         if (pd != null)
         {
             pd.ptrSplineLine = sl;
+            //pd.speed = patSpeed;
         }
     }
     

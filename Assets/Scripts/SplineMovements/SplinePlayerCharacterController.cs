@@ -47,6 +47,7 @@ public class SplinePlayerCharacterController : PlayerCharacterController
                 {
                     transform.rotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * lSpline.GetDirection(progress).normalized, Vector3.up);
                 }
+                pcc_animator.SetFloat("Speed", 0f, speedDamptime, Time.deltaTime);
             }
         }
         

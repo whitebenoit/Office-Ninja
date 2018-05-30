@@ -10,6 +10,8 @@ TagManager:
   - TextUI
   - Manager
   - FadePanel
+  - Employee
+  - PauseMenu
   layers:
   - Default
   - TransparentFX

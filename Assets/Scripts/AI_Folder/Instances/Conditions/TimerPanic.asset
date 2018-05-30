@@ -12,3 +12,5 @@ MonoBehaviour:
   m_Name: TimerPanic
   m_EditorClassIdentifier: 
   duration: 3
+  isCondNoOut: 1
+  ai_CondNoOut: {fileID: 11400000, guid: bf62997138b8126439c58ab225672921, type: 2}

@@ -4,55 +4,71 @@ using UnityEngine;
 
 [RequireComponent(typeof(SplinePlayerCharacterController))]
 public class SplinePlayerInputController : MonoBehaviour
-    {
+{
 
-        private SplinePlayerCharacterController pic_charContr;
-        private Transform pic_CamTrans;
+    private SplinePlayerCharacterController pic_charContr;
+    private Transform pic_CamTrans;
     
-        private Vector3 pic_CamTransFoward;
-        
-        private void Awake()
-        {
-            if (Camera.main != null)
-            {
-                pic_CamTrans = Camera.main.transform;
-            }
+    private Vector3 pic_CamTransFoward;
+    private PauseController pauseController;
 
-            pic_charContr = GetComponent<SplinePlayerCharacterController>();
+    private void Awake()
+    {
+        if (Camera.main != null)
+        {
+            pic_CamTrans = Camera.main.transform;
         }
 
-        private void FixedUpdate()
+        pic_charContr = GetComponent<SplinePlayerCharacterController>();
+
+        pauseController = PauseController.instance;
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Cancel"))
         {
-            pic_charContr.Move(MovementDirectionCalc());
-
-            if (Input.GetButtonDown("Hide"))
-                pic_charContr.DoAction(SplinePlayerCharacterController.ActionListElement.HIDE);
-            else if (Input.GetButtonDown("Interact"))
-                pic_charContr.DoAction(SplinePlayerCharacterController.ActionListElement.INTERACT);
-            else if (Input.GetButtonDown("Dash"))
-                pic_charContr.DoAction(SplinePlayerCharacterController.ActionListElement.DASH);
-            else if (Input.GetButtonDown("Use"))
-                pic_charContr.DoAction(SplinePlayerCharacterController.ActionListElement.USE);
-
-        }
-
-        private Vector3 MovementDirectionCalc()
-        {
-            Vector3 moveDirection;
-
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-
-
-            if (pic_CamTrans != null)
-            {
-                pic_CamTransFoward = Vector3.Scale(pic_CamTrans.forward, new Vector3(1, 0, 1)).normalized;
-                moveDirection = v * pic_CamTransFoward + h * pic_CamTrans.right;
-            }
-            else
-            {
-                moveDirection = v * Vector3.forward + h * Vector3.right;
-            }
-            return moveDirection;
+            pauseController.TogglePause();
         }
     }
+
+
+
+    private void FixedUpdate()
+    {
+        pic_charContr.Move(MovementDirectionCalc());
+
+        if (Input.GetButtonDown("Hide"))
+            pic_charContr.DoAction(SplinePlayerCharacterController.ActionListElement.HIDE);
+        else if (Input.GetButtonDown("Interact"))
+            pic_charContr.DoAction(SplinePlayerCharacterController.ActionListElement.INTERACT);
+        else if (Input.GetButtonDown("Dash"))
+            pic_charContr.DoAction(SplinePlayerCharacterController.ActionListElement.DASH);
+        else if (Input.GetButtonDown("Use"))
+            pic_charContr.DoAction(SplinePlayerCharacterController.ActionListElement.USE);
+
+            
+
+    }
+
+    private Vector3 MovementDirectionCalc()
+    {
+        Vector3 moveDirection;
+
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+
+
+        if (pic_CamTrans != null)
+        {
+            //pic_CamTransFoward = Vector3.Scale(pic_CamTrans.forward, new Vector3(1, 0, 1)).normalized;
+            moveDirection = v * pic_CamTrans.forward + h * pic_CamTrans.right;
+            //Debug.Log(Time.timeSinceLevelLoad +"/"+moveDirection);
+        }
+        else
+        {
+            moveDirection = v * Vector3.forward + h * Vector3.right;
+        }
+        return moveDirection;
+    }
+}
