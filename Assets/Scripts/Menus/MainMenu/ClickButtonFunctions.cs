@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ClickButtonFunctions : MonoBehaviour {
 
+    string newGameSaveName;
+
+    private void Awake()
+    {
+        newGameSaveName = GameMasterManager.instance.saveName;
+    }
+
     public void Quit()
     {
         #if UNITY_EDITOR
@@ -32,6 +39,18 @@ public class ClickButtonFunctions : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
+    public void StartNewGame()
+    {
+        GameData gd = new GameData();
+        gd.sceneName = SceneManager.GetSceneByBuildIndex(0).name;
+        gd.toiletNum = 100;
+
+        GameMasterManager gMM = GameMasterManager.instance;
+        SaveManager.Save(gd, gMM.saveName);
+        gMM.gd_nextLevel = gd;
+        SaveManager.Load(gMM.saveName, this);
+        //SceneManager.LoadScene(gd.sceneName);
+    }
 
     public void DebugWrite(string text)
     {

@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class ToiletInteractionController : ObjectInteractionController
 {
     public int toiletNum;
+    private float fadeInDuration = 0.5f;
+    private string text = "sauvegarde";
     public override void Interaction(ObjectInteractionController oicCaller, Collider other)
     {
         if (other.tag == Tags.player)
@@ -23,7 +25,7 @@ public class ToiletInteractionController : ObjectInteractionController
                         {
                             pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
                         });
-                    });
+                    }, fadeInDuration, text);
                     
                 }
                 else
@@ -35,7 +37,7 @@ public class ToiletInteractionController : ObjectInteractionController
                         {
                             pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
                         });
-                    });
+                    },fadeInDuration, text);
                 }
             }
             this.SaveGame();
