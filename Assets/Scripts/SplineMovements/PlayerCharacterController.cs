@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EazyTools.SoundManager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ using UnityEngine;
 public abstract class PlayerCharacterController : MonoBehaviour {
 
 
+    [Header("Models")]
     public GameObject salarymanModel;
     public GameObject ninjaModel;
 
@@ -20,12 +22,19 @@ public abstract class PlayerCharacterController : MonoBehaviour {
 
     public float speedDamptime = 0.0f;
 
+    [Header("Dectection Cooldown")]
+    public float dectectionCd = 10;
+    [HideInInspector]
+    public float lastDectectionTime = -10000;
+
     [HideInInspector]
     public enum ActionListElement { HIDE, INTERACT, DASH, USE };
 
     [HideInInspector]
-    public enum StatusListElement { NINJA, ROOTED, HIDDEN, READING , BEHINDPOT};
+    public enum StatusListElement { NINJA, ROOTED, BLOCKED, HIDDEN, READING , BEHINDPOT, DETECTED};
     public Dictionary<StatusListElement,bool> currPlayerStatus;
+
+    public Dictionary<Dictionaries.ItemName, bool> currPlayerObjectStatus;
 
     public delegate void MoveAction(Vector3 direction, ObjectInteractionController oicCaller, Collider other);
     public struct MoveStruct
@@ -48,7 +57,9 @@ public abstract class PlayerCharacterController : MonoBehaviour {
         public NextAction Interaction;
     }
 
-    
+    [HideInInspector]
+    public int audioDetected;
+
     [HideInInspector]
     public List<NextActionStruct> hideActionList = new List<NextActionStruct>();
     [HideInInspector]
@@ -72,6 +83,26 @@ public abstract class PlayerCharacterController : MonoBehaviour {
         {
             currPlayerStatus.Add(key, false);
         }
+
+
+        currPlayerObjectStatus = new Dictionary<Dictionaries.ItemName, bool>();
+        foreach (Dictionaries.ItemName key in Enum.GetValues(typeof(Dictionaries.ItemName)))
+        {
+            currPlayerObjectStatus.Add(key, false);
+        }
+        UpdateObjectStatus();
+
+        PlayerUnitytoSpineController pUSCDetecte = StateMachineBehaviourUtilities.GetBehaviourByName<PlayerUnitytoSpineController>(this.pcc_animator, "Detecte");
+        pUSCDetecte.onStateExitCallbacks.Add(() =>
+        {
+            this.ChangeStatus(StatusListElement.BLOCKED, false);
+            this.ChangeStatus(StatusListElement.DETECTED, false);
+        });
+        
+    }
+    private void Start()
+    {
+        audioDetected = Dictionaries.instance.dic_audioID[Dictionaries.AudioName.DETECTED];
     }
 
 
@@ -112,12 +143,14 @@ public abstract class PlayerCharacterController : MonoBehaviour {
 
     public void Move(Vector3 direction)
     {
-        //if(!currPlayerStatus[StatusListElement.ROOTED])
-        //{ 
+        if (!currPlayerStatus[StatusListElement.BLOCKED])
+        {
             if (moveList.Count != 0)
             {
                 moveList[0].Move(direction);
-            }else ImplementedMove(direction);
+            }
+            else ImplementedMove(direction);
+        }
         //}
         //else
         //{
@@ -255,26 +288,37 @@ public abstract class PlayerCharacterController : MonoBehaviour {
                 pcc_animator.SetBool("isHiding", valueBool);
                 currPlayerStatus[statusListElmt] = valueBool;
                 break;
+            case StatusListElement.DETECTED:
+                //if (!valueBool)
+                //{
+                //    pcc_animator.SetBool("isDetecte", valueBool);
+                //}
+                // else if(dectectionCd < Time.timeSinceLevelLoad - lastDectectionTime)
+                //{
+                //    lastDectectionTime = Time.timeSinceLevelLoad;
+                //    pcc_animator.SetBool("isDetecte", valueBool);
+                //}
+                if (valueBool)
+                {
+                    pcc_animator.SetTrigger("isDetecte");
+                    if (SoundManager.soundsAudio.Count <= 0)
+                        Dictionaries.instance.FillDictionaries();
+                    SoundManager.GetAudio(audioDetected).Play();
+                }
+                currPlayerStatus[statusListElmt] = valueBool;
+                break;
             default:
                 currPlayerStatus[statusListElmt] = valueBool;
                 break;
         }
     }
 
-    //private void UpdateEmployeeSight()
-    //{
-    //    GameObject[] gOList = GameObject.FindGameObjectsWithTag(Tags.employee);
-    //    if (gOList.Length > 0)
-    //    {
-    //        foreach (GameObject gO in gOList)
-    //        {
-    //            SightSpriteController ssc = gO.GetComponent<SightSpriteController>();
-    //            if(ssc != null)
-    //            {
-    //                ssc.isPlayerNinja = currPlayerStatus[StatusListElement.NINJA];
-    //            }
-    //        }
-    //    }
-    //}
+    public void UpdateObjectStatus()
+    {
+        GameMasterManager gMM = GameMasterManager.instance;
+        currPlayerObjectStatus[Dictionaries.ItemName.SCREWDRIVER] = gMM.gd_currentLevel.isScrewUnlocked;
+        currPlayerObjectStatus[Dictionaries.ItemName.LAXATIVE] = gMM.gd_currentLevel.isLaxaUnlocked;
+
+    }
 
 }

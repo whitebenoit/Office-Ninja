@@ -121,6 +121,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 93e6a1130d005f44a827a21043f00f58, type: 2}
   m_StaticBatchInfo:
@@ -155,13 +156,8 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 5758c151e1b945b488873399c6640cd7, type: 2}
-  - {fileID: 2100000, guid: 01705969a3bed7a4795e41d7f2c6b249, type: 2}
-  - {fileID: 2100000, guid: 5758c151e1b945b488873399c6640cd7, type: 2}
-  - {fileID: 2100000, guid: 01705969a3bed7a4795e41d7f2c6b249, type: 2}
-  - {fileID: 2100000, guid: 5758c151e1b945b488873399c6640cd7, type: 2}
-  - {fileID: 2100000, guid: 01705969a3bed7a4795e41d7f2c6b249, type: 2}
   - {fileID: 2100000, guid: 5758c151e1b945b488873399c6640cd7, type: 2}
   - {fileID: 2100000, guid: 01705969a3bed7a4795e41d7f2c6b249, type: 2}
   - {fileID: 2100000, guid: 5758c151e1b945b488873399c6640cd7, type: 2}
@@ -240,6 +236,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114077234425476012
 MonoBehaviour:
   m_ObjectHideFlags: 1

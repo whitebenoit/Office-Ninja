@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using EazyTools.SoundManager;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemInteractionController : ObjectInteractionController
 {
     public Dictionaries.ItemName itemName;
+    int audioNewObject;
 
     public override void Interaction(ObjectInteractionController oicCaller, Collider other)
     {
@@ -22,11 +24,32 @@ public class ItemInteractionController : ObjectInteractionController
             default:
                 break;
         }
+        if (CheckInteractionValidity(other))
+        {
+            pcc.UpdateObjectStatus();
+        }
+        
     }
 
     protected override void ModifiedMove(Vector3 direction, ObjectInteractionController oicCaller, Collider other)
     {
         throw new System.NotImplementedException();
+    }
+
+    private void Awake()
+    {
+        SplinePlayerCharacterController spcc = GameObject.FindGameObjectWithTag(Tags.player).GetComponent<SplinePlayerCharacterController>();
+        if (spcc.currPlayerObjectStatus[Dictionaries.ItemName.SCREWDRIVER])
+        {
+            Destroy(gameObject);
+        }
+        SpawnButton();
+    }
+
+    private void Start()
+    {
+        AddAudioObject();
+        audioNewObject =Dictionaries.instance.dic_audioID[Dictionaries.AudioName.NEW_OBJECT];
     }
 
     private void AddItem(Dictionaries.ItemName itemName)
@@ -44,6 +67,8 @@ public class ItemInteractionController : ObjectInteractionController
                 break;
         }
         PauseController.instance.UpdateItemDisplay();
+        SoundManager.GetAudio(audioNewObject).Play();
         SaveManager.Save(gMM.gd_currentLevel, gMM.saveName);
+        Destroy(gameObject);
     }
 }

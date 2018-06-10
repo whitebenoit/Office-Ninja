@@ -88,7 +88,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1502442455434196}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 25.945, y: -0.5, z: 0.92}
+  m_LocalPosition: {x: -1.967, y: -0.5, z: 0.889}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4908067667154712}
@@ -116,8 +116,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1663024131120424}
   m_LocalRotation: {x: 0.030077117, y: 0.70646685, z: 0.030077117, w: 0.70646685}
-  m_LocalPosition: {x: -0, y: 1.55, z: 0.157}
-  m_LocalScale: {x: 0.2, y: 0.19, z: 1}
+  m_LocalPosition: {x: -0, y: 1.65, z: 0.157}
+  m_LocalScale: {x: 0.15, y: 0.14, z: 1}
   m_Children:
   - {fileID: 4702362132898602}
   m_Father: {fileID: 4597558840359352}
@@ -149,6 +149,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 72c27343171907e42b60bbb0c2b0e914, type: 2}
   - {fileID: 2100000, guid: 82112c1d40517f64fbf00a0d3bd3fdfe, type: 2}
@@ -211,6 +212,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114058072050843100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,8 +256,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ptrSplineLine: {fileID: 0}
   speed: 2
-  startPatrolPointProgress: 0
-  currentTransformProgress: 0
+  startingDestPointIndex: 0
+  currentPreviousSplinePoint: 0
 --- !u!114 &114840371755005532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,7 +296,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1502442455434196}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.2
   m_Speed: 3.5
   m_Acceleration: 500
   avoidancePriority: 50
@@ -320,6 +322,7 @@ SpriteRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:

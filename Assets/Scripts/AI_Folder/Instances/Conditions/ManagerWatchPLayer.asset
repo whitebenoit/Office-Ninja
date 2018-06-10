@@ -15,5 +15,5 @@ MonoBehaviour:
   isSalarymanOnly: 0
   gizmosColor: {r: 1, g: 0, b: 0, a: 1}
   height: 1
-  watchRange: 3.2
+  watchRange: 2.3
   watchRadius: 30

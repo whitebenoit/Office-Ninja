@@ -11,10 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc9e1b49f37d67c4eb8951e17256408c, type: 3}
   m_Name: PatrolManagerGOState
   m_EditorClassIdentifier: 
+  isToStopOnEnter: 0
   brainAnimBoolList: []
   actionsList:
   - condition: {fileID: 11400000, guid: 4774021224e23d74b9e4fa9a206f735a, type: 2}
-    action: {fileID: 11400000, guid: b680186830f3ffe40bdad294e9cab588, type: 2}
+    action: {fileID: 11400000, guid: e3749bcd4fffe8044aad4ba9b6544984, type: 2}
   transitionsList:
   - condition: {fileID: 11400000, guid: 5d299c84ce4e8d243a654f871036d0ad, type: 2}
     nextState: {fileID: 11400000, guid: cd35f36b8ee65bc4ba19e19944c41a8c, type: 2}

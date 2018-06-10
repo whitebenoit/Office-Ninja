@@ -6,7 +6,6 @@ using UnityEngine;
 public class PrinterInteractionController : ObjectInteractionController
 {
     public Transform hidePosition;
-    //public Transform outPosition;
     public override void Interaction(ObjectInteractionController oicCaller, Collider other)
     {
         if (other.tag == Tags.player)
@@ -17,7 +16,8 @@ public class PrinterInteractionController : ObjectInteractionController
             {
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.ROOTED, true);
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, true);
-                otherPcc.transform.SetPositionAndRotation(hidePosition.position, otherPcc.transform.rotation);
+                TpPlayerOut(hidePosition.position, otherPcc.transform.rotation, otherPcc);
+                //otherPcc.transform.SetPositionAndRotation(hidePosition.position, otherPcc.transform.rotation);
             }
             else
             {
@@ -25,13 +25,19 @@ public class PrinterInteractionController : ObjectInteractionController
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.ROOTED, false);
                 otherPcc.progress = otherPcc.lSpline.GetNearestProgressOnSpline(this.transform.position);
 
-                otherPcc.Move(otherPcc.transform.forward);
+                TpPlayerOut(otherPcc.lSpline.GetNearestPointOnSpline(this.transform.position), otherPcc.transform.rotation, otherPcc);
+                //otherPcc.Move(otherPcc.transform.forward);
             }
 
         }
-        
-        
     }
+
+    
+
+
+
+
+
 
     protected override void ModifiedMove(Vector3 direction, ObjectInteractionController oicCaller, Collider other)
     {

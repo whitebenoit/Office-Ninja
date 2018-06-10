@@ -26,7 +26,7 @@ public class ButtonUIImageController : MonoBehaviour {
     void SetImage()
     {
         //actionType = this.transform.parent.GetComponentInChildren<ObjectInteractionController>().actionType;
-        dicSprite = GameObject.Find("ScriptManager").GetComponent<Dictionaries>().dic_BtnUIImageRess[actionType];
+        dicSprite =Dictionaries.instance.dic_BtnUIImageRess[actionType];
         
         currentImage.sprite = Instantiate<Sprite>(dicSprite);
     }

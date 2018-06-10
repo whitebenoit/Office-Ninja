@@ -7,11 +7,13 @@ public class AI_CondWatchPlayer : AI_Condition {
 
     public bool isNinjaOnly = false;
     public bool isSalarymanOnly = false;
-    public Color gizmosColor = Color.red;
+
+    //public Color gizmosColor = Color.red;
     private GameObject gameObjectToWatchFor;
     private string tag = Tags.player;
     private SplinePlayerCharacterController.StatusListElement statusHIDDEN = PlayerCharacterController.StatusListElement.HIDDEN;
 
+    public bool setIsDetected = true;
     public float height = 1;
     public float watchRange = 2;
     public float watchRadius = 90;
@@ -59,7 +61,16 @@ public class AI_CondWatchPlayer : AI_Condition {
                     Vector3 frwdVect = brain.transform.forward;
                     float angle = Vector3.Angle(frwdVect, gORelatPos);
                     //Debug.Log(brain.gameObject.name + "Player (angle: "+angle+" ) Found at " + brain.currentState.ToString());
-                    if (angle < watchRadius) return true;
+                    if (angle < watchRadius)
+                    {
+                        if (setIsDetected && (spcc.dectectionCd < Time.timeSinceLevelLoad - spcc.lastDectectionTime))
+                        {
+                            spcc.lastDectectionTime = Time.timeSinceLevelLoad;
+                            gameObjectToWatchFor.GetComponent<PlayerCharacterController>().ChangeStatus(PlayerCharacterController.StatusListElement.BLOCKED, true);
+                            gameObjectToWatchFor.GetComponent<PlayerCharacterController>().ChangeStatus(PlayerCharacterController.StatusListElement.DETECTED, true);
+                        }
+                        return true;
+                    }
                 }
             }
         }

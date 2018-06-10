@@ -74,8 +74,8 @@ public class PlantInteractionController : ObjectInteractionController
 
                 // Lerp-Rotate the rigidbody toward the direction
 
-                Debug.Log(Time.timeSinceLevelLoad+" - SplineDir " + plantSpline.GetDirection(plantProgress).normalized
-                          +"playerDir"+ direction);
+                //Debug.Log(Time.timeSinceLevelLoad+" - SplineDir " + plantSpline.GetDirection(plantProgress).normalized
+                //          +"playerDir"+ direction);
 
                 //plantProgress = plantSpline.GetLengthAtDistFromParametric(Math.Sign(dotMagnitude) * otherPcc.charSpeed * Time.deltaTime, plantProgress);
                 //Vector3 newPosition = plantSpline.GetPoint(plantProgress);

@@ -39,16 +39,27 @@ public class ClickButtonFunctions : MonoBehaviour {
         SceneManager.LoadScene(0);
     }
 
-    public void StartNewGame()
+    public void StartNewGame(string sceneName)
     {
-        GameData gd = new GameData();
-        gd.sceneName = SceneManager.GetSceneByBuildIndex(0).name;
-        gd.toiletNum = 100;
+        GameData gd = new GameData
+        {
+            sceneName = sceneName,
+            toiletNum = 100
+        };
+
+        ////Debug.Log(SceneManager.GetSceneByBuildIndex(1).name);
+        //for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+        //{
+        //    Debug.Log(SceneManager.GetSceneByBuildIndex(i));
+        //}
+
 
         GameMasterManager gMM = GameMasterManager.instance;
         SaveManager.Save(gd, gMM.saveName);
         gMM.gd_nextLevel = gd;
         SaveManager.Load(gMM.saveName, this);
+
+
         //SceneManager.LoadScene(gd.sceneName);
     }
 

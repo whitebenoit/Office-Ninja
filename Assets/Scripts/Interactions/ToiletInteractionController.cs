@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using EazyTools.SoundManager;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,15 @@ public class ToiletInteractionController : ObjectInteractionController
     public int toiletNum;
     private float fadeInDuration = 0.5f;
     private string text = "sauvegarde";
+    int audioToilet;
+
+    private void Start()
+    {
+        AddAudioObject();
+        audioToilet =Dictionaries.instance.dic_audioID[Dictionaries.AudioName.TOILET];
+    }
+
+
     public override void Interaction(ObjectInteractionController oicCaller, Collider other)
     {
         if (other.tag == Tags.player)
@@ -21,9 +31,11 @@ public class ToiletInteractionController : ObjectInteractionController
                     FadeInOutController.instance.FadeIn(() =>
                     {
                         TransformToSalaryman(pcc);
+                        SoundManager.GetAudio(audioToilet).Play();
                         FadeInOutController.instance.FadeOut(() =>
                         {
                             pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
+                            this.SaveGame();
                         });
                     }, fadeInDuration, text);
                     
@@ -33,14 +45,15 @@ public class ToiletInteractionController : ObjectInteractionController
                     FadeInOutController.instance.FadeIn(() =>
                     {
                         TransformToNinja(pcc);
+                        SoundManager.GetAudio(audioToilet).Play();
                         FadeInOutController.instance.FadeOut(() =>
                         {
                             pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
+                            this.SaveGame();
                         });
                     },fadeInDuration, text);
                 }
             }
-            this.SaveGame();
         }
     }
 
@@ -49,6 +62,7 @@ public class ToiletInteractionController : ObjectInteractionController
         string saveName = "Save_001";
         GameData gd = SaveManager.LoadFile(saveName);
 
+        gd.isNinja = pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.NINJA];
         gd.toiletNum = toiletNum;
         gd.sceneName = SceneManager.GetActiveScene().name;
 

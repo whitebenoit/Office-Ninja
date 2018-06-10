@@ -30,7 +30,7 @@ public class SaveManager {
         if (File.Exists(destination)) file = File.OpenRead(destination);
         else
         {
-            Debug.LogError("File not found - new Empty file returned");
+            Debug.Log("File not found - new Empty file returned");
             return gd;
         }
 

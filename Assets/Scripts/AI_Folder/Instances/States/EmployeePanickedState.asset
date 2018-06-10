@@ -17,6 +17,8 @@ MonoBehaviour:
   actionsList:
   - condition: {fileID: 11400000, guid: 4774021224e23d74b9e4fa9a206f735a, type: 2}
     action: {fileID: 11400000, guid: f6d6e03d82e15864da0d70dfdc2058ca, type: 2}
+  - condition: {fileID: 11400000, guid: 4774021224e23d74b9e4fa9a206f735a, type: 2}
+    action: {fileID: 11400000, guid: ca83f155f0657fe4f9689725039482cf, type: 2}
   transitionsList:
   - condition: {fileID: 11400000, guid: 0703e1fd8036f7c439162cb30b228b11, type: 2}
     nextState: {fileID: 11400000, guid: 4891899bc8aea1744ba0352d1f4cea82, type: 2}

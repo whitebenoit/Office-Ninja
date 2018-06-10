@@ -1,0 +1,55 @@
+
+ON-Ninja.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Cloud Back
+  rotate: true
+  xy: 2, 28
+  size: 474, 242
+  orig: 476, 244
+  offset: 1, 1
+  index: -1
+Cloud Left
+  rotate: true
+  xy: 246, 109
+  size: 393, 268
+  orig: 395, 270
+  offset: 1, 1
+  index: -1
+Cloud Middle
+  rotate: true
+  xy: 873, 347
+  size: 155, 116
+  orig: 157, 118
+  offset: 1, 1
+  index: -1
+Cloud Right
+  rotate: false
+  xy: 516, 218
+  size: 355, 284
+  orig: 357, 286
+  offset: 1, 1
+  index: -1
+Small Cloud Back
+  rotate: true
+  xy: 246, 2
+  size: 105, 92
+  orig: 107, 94
+  offset: 1, 1
+  index: -1
+Small Cloud Left
+  rotate: true
+  xy: 340, 6
+  size: 101, 76
+  orig: 103, 78
+  offset: 1, 1
+  index: -1
+Small Cloud Right
+  rotate: true
+  xy: 418, 6
+  size: 101, 76
+  orig: 103, 78
+  offset: 1, 1
+  index: -1

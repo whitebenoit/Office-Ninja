@@ -6,8 +6,11 @@ using UnityEngine;
 public class GameMasterManager : MonoBehaviour  {
 
 
+    [HideInInspector]
     public GameData gd_currentLevel;
+    [HideInInspector]
     public GameData gd_nextLevel = new GameData();
+    public ChangeFloorData cfd_nextLevel = null; 
     public string saveName = "Save_001";
 
     private static GameMasterManager _instance = null;
@@ -51,42 +54,124 @@ public class GameMasterManager : MonoBehaviour  {
     
     public void LevelSetUp()
     {
-        //ReAwakeNotDestroyOnLoad();
-        //Debug.Log("LEVEL SETUP:" + gd_nextLevel.sceneName + " - " + gd_nextLevel.toiletNum);
-        if(gd_nextLevel != null)
+        PauseController.instance.ClosePause();
+        if(cfd_nextLevel != null)
         {
-            GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
-            SplinePlayerCharacterController spcc = player.GetComponent<SplinePlayerCharacterController>();
-
-            if (spcc != null)
-            {
-                SplineLine spline = spcc.lSpline;
-                GameObject[] resGOList = GameObject.FindGameObjectsWithTag(Tags.respawn);
-                foreach (GameObject go in resGOList)
-                {
-                    ToiletInteractionController tIntCont = go.GetComponent<ToiletInteractionController>();
-                    if (tIntCont != null)
-                    {
-                        if (tIntCont.toiletNum == gd_nextLevel.toiletNum)
-                        {
-                            spcc.transform.position = spline.GetNearestPointOnSpline(tIntCont.transform.position);
-                            spcc.progress = spline.GetNearestProgressOnSpline(tIntCont.transform.position);
-                            spcc.transform.rotation = Quaternion.LookRotation(spline.GetDirection(spcc.progress));
-                            SplineCameraController sMCC = new SplineCameraController();
-                            sMCC.gO = player;
-                            Vector3 newPos = new Vector3();
-                            Quaternion newRot = new Quaternion();
-                            sMCC.MoveCamera(ref newPos, ref newRot);
-                            Camera.main.transform.position = newPos;
-                            Camera.main.transform.rotation = newRot;
-                        }
-                    }
-                }
-            }
-            gd_nextLevel = null;
+            LevelSetupChangeFLoor(ref cfd_nextLevel);
+        }
+        else if (gd_nextLevel != null)
+        {
+            LevelSetupDoor(ref gd_nextLevel);
         }
 
     }
+
+    private void LevelSetupDoor(ref GameData gdd)
+    {
+
+        GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
+        SplinePlayerCharacterController spcc = player.GetComponent<SplinePlayerCharacterController>();
+
+        SetUpSPCC(spcc,ref gdd);
+
+        if (spcc != null)
+        {
+            SplineLine spline = spcc.lSpline;
+            GameObject[] resGOList = GameObject.FindGameObjectsWithTag(Tags.respawn);
+            foreach (GameObject go in resGOList)
+            {
+                ToiletInteractionController tIntCont = go.GetComponent<ToiletInteractionController>();
+                if (tIntCont != null)
+                {
+                    if (tIntCont.toiletNum == gdd.toiletNum)
+                    {
+
+                        PositionPlayer(tIntCont.transform, spcc);
+                        //spcc.transform.position = spline.GetNearestPointOnSpline(tIntCont.transform.position);
+                        //spcc.progress = spline.GetNearestProgressOnSpline(tIntCont.transform.position);
+                        //spcc.transform.rotation = Quaternion.LookRotation(spline.GetDirection(spcc.progress));
+
+                        //SplineCameraController sMCC = new SplineCameraController
+                        //{
+                        //    gO = player
+                        //};
+
+                        //Vector3 newPos = new Vector3();
+                        //Quaternion newRot = new Quaternion();
+                        //sMCC.MoveCamera(ref newPos, ref newRot);
+
+                        //Camera.main.transform.position = newPos;
+                        //Camera.main.transform.rotation = newRot;
+                    }
+                }
+            }
+        }
+        gdd = null;
+    }
+
+    private void LevelSetupChangeFLoor(ref ChangeFloorData gfc)
+    {
+        GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
+        SplinePlayerCharacterController spcc = player.GetComponent<SplinePlayerCharacterController>();
+        if(gd_currentLevel !=  null)
+            SetUpSPCC(spcc, ref gd_currentLevel);
+
+        if(gfc != null)
+        {
+            ChangeFloorInteractionController[] cficList = GameObject.FindObjectsOfType<ChangeFloorInteractionController>();
+            if(cficList.Length > 0)
+            {
+                ChangeFloorInteractionController correctCFIC = null;
+                foreach (ChangeFloorInteractionController curCFIC in cficList)
+                {
+                    if (curCFIC.floorDoorNum == gfc.floorDoorNum)
+                        correctCFIC = curCFIC;
+                }
+
+                if(correctCFIC != null)
+                {
+                    PositionPlayer(correctCFIC.transform, spcc);
+                    spcc.ChangeStatus(PlayerCharacterController.StatusListElement.NINJA, gfc.isNinja);
+                }
+                else
+                {
+                    Debug.LogError("Correct CFIC not Found");
+                }
+
+
+            }
+        }
+
+
+    }
+
+    private void PositionPlayer(Transform transf,SplinePlayerCharacterController spcc)
+    {
+        spcc.transform.position = spcc.lSpline.GetNearestPointOnSpline(transf.position);
+        spcc.progress = spcc.lSpline.GetNearestProgressOnSpline(transf.position);
+        spcc.transform.rotation = Quaternion.LookRotation(spcc.lSpline.GetDirection(spcc.progress));
+
+        GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
+        SplineCameraController sMCC = new SplineCameraController
+        {
+            gO = player
+        };
+
+        Vector3 newPos = new Vector3();
+        Quaternion newRot = new Quaternion();
+        sMCC.MoveCamera(ref newPos, ref newRot);
+
+        Camera.main.transform.position = newPos;
+        Camera.main.transform.rotation = newRot;
+    }
+
+    private void SetUpSPCC(SplinePlayerCharacterController spcc,ref GameData gdd)
+    {
+        spcc.currPlayerObjectStatus[Dictionaries.ItemName.SCREWDRIVER] = gdd.isScrewUnlocked;
+        spcc.currPlayerObjectStatus[Dictionaries.ItemName.LAXATIVE] = gdd.isLaxaUnlocked;
+        spcc.ChangeStatus(PlayerCharacterController.StatusListElement.NINJA, gdd.isNinja);
+    }
+    
 
     //private void ReAwakeNotDestroyOnLoad()
     //{

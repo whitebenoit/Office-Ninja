@@ -6,8 +6,10 @@ using UnityEngine;
 
 public class SplinePlayerCharacterController : PlayerCharacterController
 {
+    [Header("Character Movements")]
     public float charSpeed = 1f;
     public float turnSmooth = 15f;
+    [Header("Spline Parameters")]
     public SplineLine lSpline;
     public float progress = 0;
     //public Vector3 TESTSplinePosition;

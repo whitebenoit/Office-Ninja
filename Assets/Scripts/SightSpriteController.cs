@@ -40,14 +40,14 @@ public class SightSpriteController : MonoBehaviour {
                 new Vector3(0.0f, 1.4f, 0.17f),
                 new Vector3(0.0f, 90.0f, 0.0f),
                 new Vector3(0.2f, 0.19f, 1.0f),
-                GameObject.Find("ScriptManager").GetComponent<Dictionaries>().dic_Colors[Dictionaries.ColorNames.SIGHT_RED]));
+               Dictionaries.instance.dic_Colors[Dictionaries.ColorNames.SIGHT_RED]));
         
         dic_SightPosition.Add(SightPosName.BLUE_DOWN,
             new SightPosition(
                 new Vector3(0.0f, 1.23f, 0.286f),
                 new Vector3(0.0f, 90.0f, 76.22f),
                 new Vector3(0.2f, 0.13f, 1.0f),
-                GameObject.Find("ScriptManager").GetComponent<Dictionaries>().dic_Colors[Dictionaries.ColorNames.SIGHT_BLUE]));
+               Dictionaries.instance.dic_Colors[Dictionaries.ColorNames.SIGHT_BLUE]));
 
 
         dic_SightPosition.Add(SightPosName.RED_DOWN,
@@ -55,7 +55,7 @@ public class SightSpriteController : MonoBehaviour {
                 new Vector3(0.0f, 1.23f, 0.286f),
                 new Vector3(0.0f, 90.0f, 76.22f),
                 new Vector3(0.2f, 0.13f, 1.0f),
-                GameObject.Find("ScriptManager").GetComponent<Dictionaries>().dic_Colors[Dictionaries.ColorNames.SIGHT_RED]));
+               Dictionaries.instance.dic_Colors[Dictionaries.ColorNames.SIGHT_RED]));
 
 
         dic_SightPosition.Add(SightPosName.NONE,
@@ -63,7 +63,7 @@ public class SightSpriteController : MonoBehaviour {
                 new Vector3(0.0f, 0.0f, 0.0f),
                 new Vector3(0.0f, 90.0f, 0.0f),
                 new Vector3(0.0f, 0.0f, 0.0f),
-                GameObject.Find("ScriptManager").GetComponent<Dictionaries>().dic_Colors[Dictionaries.ColorNames.SIGHT_RED]));
+               Dictionaries.instance.dic_Colors[Dictionaries.ColorNames.SIGHT_RED]));
 
 
         SetSightState(currSight);

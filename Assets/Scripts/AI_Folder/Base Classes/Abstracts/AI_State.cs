@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using EazyTools.SoundManager;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -40,7 +41,15 @@ public abstract class AI_State : ScriptableObject {
         {
             if (actionsList[i].condition.Evaluate(brain))
             {
-                actionsList[i].action.Act(brain);
+                Dictionaries.AudioName aN = actionsList[i].action.audioToPlay;
+                if(aN != Dictionaries.AudioName.NONE)
+                {
+                    int ID = Dictionaries.instance.dic_audioID[aN];
+                    if(!SoundManager.GetAudio(ID).playing)
+                        SoundManager.GetAudio(ID).Play();
+                }
+                
+               actionsList[i].action.Act(brain);
             }
             BetweenActions(brain);
         }

@@ -11,9 +11,9 @@ namespace EazyTools.SoundManager
         private static float soundsVol = 1f;
         private static float UISoundsVol = 1f;
 
-        private static Dictionary<int, Audio> musicAudio;
-        private static Dictionary<int, Audio> soundsAudio;
-        private static Dictionary<int, Audio> UISoundsAudio;
+        public static Dictionary<int, Audio> musicAudio;
+        public static Dictionary<int, Audio> soundsAudio;
+        public static Dictionary<int, Audio> UISoundsAudio;
 
         private static bool initialized = false;
 
@@ -119,40 +119,40 @@ namespace EazyTools.SoundManager
             instance.Init();
         }
 
-        void OnLevelWasLoaded(int level)
-        {
-            List<int> keys;
+        //void OnLevelWasLoaded(int level)
+        //{
+        //    List<int> keys;
 
-            // Stop and remove all non-persistent music audio
-            keys = new List<int>(musicAudio.Keys);
-            foreach (int key in keys)
-            {
-                Audio audio = musicAudio[key];
-                if (!audio.persist && audio.activated)
-                {
-                    Destroy(audio.audioSource);
-                    musicAudio.Remove(key);
-                }
-            }
+        //    // Stop and remove all non-persistent music audio
+        //    keys = new List<int>(musicAudio.Keys);
+        //    foreach (int key in keys)
+        //    {
+        //        Audio audio = musicAudio[key];
+        //        if (!audio.persist && audio.activated)
+        //        {
+        //            Destroy(audio.audioSource);
+        //            musicAudio.Remove(key);
+        //        }
+        //    }
 
-            // Stop and remove all sound fx
-            keys = new List<int>(soundsAudio.Keys);
-            foreach (int key in keys)
-            {
-                Audio audio = soundsAudio[key];
-                Destroy(audio.audioSource);
-                soundsAudio.Remove(key);
-            }
+        //    // Stop and remove all sound fx
+        //    keys = new List<int>(soundsAudio.Keys);
+        //    foreach (int key in keys)
+        //    {
+        //        Audio audio = soundsAudio[key];
+        //        Destroy(audio.audioSource);
+        //        soundsAudio.Remove(key);
+        //    }
 
-            // Stop and remove all UI sound fx
-            keys = new List<int>(UISoundsAudio.Keys);
-            foreach (int key in keys)
-            {
-                Audio audio = UISoundsAudio[key];
-                Destroy(audio.audioSource);
-                UISoundsAudio.Remove(key);
-            }
-        }
+        //    // Stop and remove all UI sound fx
+        //    keys = new List<int>(UISoundsAudio.Keys);
+        //    foreach (int key in keys)
+        //    {
+        //        Audio audio = UISoundsAudio[key];
+        //        Destroy(audio.audioSource);
+        //        UISoundsAudio.Remove(key);
+        //    }
+        //}
 
         void Update()
         {
