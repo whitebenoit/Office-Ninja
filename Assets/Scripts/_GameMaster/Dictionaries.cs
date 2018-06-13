@@ -66,7 +66,14 @@ public class Dictionaries : MonoBehaviour
                             TOILET,PANIC,SCREWDRIVER,DETECTED,
                             MENU_IN, MENU_OUT,VENTILATION}
     public Dictionary<AudioName, int> dic_audioID = new Dictionary<AudioName, int>();
-    
+
+
+    public enum MusicName
+    {
+        NONE, SALARYMAN, NINJA
+    }
+    public Dictionary<MusicName, int> dic_musicID = new Dictionary<MusicName, int>();
+
 
     public void FillDictionaries()
     {
@@ -102,6 +109,13 @@ public class Dictionaries : MonoBehaviour
             AddToDicAudio(AudioName.TP, "Sounds/audioTP");
             AddToDicAudio(AudioName.VENTILATION, "Sounds/audioVentilation");
         }
+
+        if (dic_musicID.Count <= 0 || (SoundManager.musicAudio == null || SoundManager.musicAudio.Count <= 0))
+        {
+            dic_musicID.Clear();
+            AddToDicMusic(MusicName.SALARYMAN, "Sounds/Music/musicSalaryman");
+            //AddToDicMusic(MusicName.NINJA, "Sounds/Music/audioMainMenu");
+        }
     }
 
     private void AddToDicAudio(AudioName audioName, string fileName)
@@ -115,7 +129,22 @@ public class Dictionaries : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Missing " + fileName);
+            Debug.LogError("Missing Audio " + fileName);
+        }
+    }
+
+    private void AddToDicMusic(MusicName musicName, string fileName)
+    {
+        AudioClip ac = (AudioClip)Resources.Load(fileName);
+        if (ac != null)
+        {
+            int i = SoundManager.PlayMusic(ac,1.0f,true,true);
+            dic_musicID.Add(musicName, i);
+            SoundManager.GetMusicAudio(dic_musicID[musicName]).Stop();
+        }
+        else
+        {
+            Debug.LogError("Missing Musique " + fileName);
         }
     }
 }

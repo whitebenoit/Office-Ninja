@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EazyTools.SoundManager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,8 @@ public class GameMasterManager : MonoBehaviour  {
     private static GameMasterManager _instance = null;
     private static bool initialized = false;
     private GameMasterManager() {}
-    
 
+    
 
     public static GameMasterManager instance
     {
@@ -40,6 +41,9 @@ public class GameMasterManager : MonoBehaviour  {
     {
         instance.Init();
         gd_currentLevel = SaveManager.LoadFile(saveName);
+        GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
+        if(player != null)
+            SetUpSPCC(player.GetComponent<SplinePlayerCharacterController>(), ref gd_currentLevel);
     }
 
     void Init()
@@ -54,6 +58,7 @@ public class GameMasterManager : MonoBehaviour  {
     
     public void LevelSetUp()
     {
+        SoundManager.StopAll();
         PauseController.instance.ClosePause();
         if(cfd_nextLevel != null)
         {
@@ -87,21 +92,11 @@ public class GameMasterManager : MonoBehaviour  {
                     {
 
                         PositionPlayer(tIntCont.transform, spcc);
-                        //spcc.transform.position = spline.GetNearestPointOnSpline(tIntCont.transform.position);
-                        //spcc.progress = spline.GetNearestProgressOnSpline(tIntCont.transform.position);
-                        //spcc.transform.rotation = Quaternion.LookRotation(spline.GetDirection(spcc.progress));
-
-                        //SplineCameraController sMCC = new SplineCameraController
-                        //{
-                        //    gO = player
-                        //};
-
-                        //Vector3 newPos = new Vector3();
-                        //Quaternion newRot = new Quaternion();
-                        //sMCC.MoveCamera(ref newPos, ref newRot);
-
-                        //Camera.main.transform.position = newPos;
-                        //Camera.main.transform.rotation = newRot;
+                        SplineCameraController mCC = Camera.main.GetComponent<SplineCameraController>();
+                        if (mCC != null)
+                        {
+                            mCC.currCameraPos = tIntCont.nextCameraPosition;
+                        }
                     }
                 }
             }
@@ -113,10 +108,11 @@ public class GameMasterManager : MonoBehaviour  {
     {
         GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
         SplinePlayerCharacterController spcc = player.GetComponent<SplinePlayerCharacterController>();
-        if(gd_currentLevel !=  null)
-            SetUpSPCC(spcc, ref gd_currentLevel);
+        if(gd_currentLevel ==  null)
+            gd_currentLevel = SaveManager.LoadFile(saveName);
+        SetUpSPCC(spcc, ref gd_currentLevel);
 
-        if(gfc != null)
+        if (gfc != null)
         {
             ChangeFloorInteractionController[] cficList = GameObject.FindObjectsOfType<ChangeFloorInteractionController>();
             if(cficList.Length > 0)
@@ -131,6 +127,11 @@ public class GameMasterManager : MonoBehaviour  {
                 if(correctCFIC != null)
                 {
                     PositionPlayer(correctCFIC.transform, spcc);
+                    SplineCameraController mCC = Camera.main.GetComponent<SplineCameraController>();
+                    if (mCC != null)
+                    {
+                        mCC.currCameraPos = correctCFIC.nextCameraPosition;
+                    }
                     spcc.ChangeStatus(PlayerCharacterController.StatusListElement.NINJA, gfc.isNinja);
                 }
                 else
@@ -142,6 +143,7 @@ public class GameMasterManager : MonoBehaviour  {
             }
         }
 
+        gfc = null;
 
     }
 
@@ -165,20 +167,13 @@ public class GameMasterManager : MonoBehaviour  {
         Camera.main.transform.rotation = newRot;
     }
 
-    private void SetUpSPCC(SplinePlayerCharacterController spcc,ref GameData gdd)
+    public void SetUpSPCC(SplinePlayerCharacterController spcc,ref GameData gdd)
     {
         spcc.currPlayerObjectStatus[Dictionaries.ItemName.SCREWDRIVER] = gdd.isScrewUnlocked;
         spcc.currPlayerObjectStatus[Dictionaries.ItemName.LAXATIVE] = gdd.isLaxaUnlocked;
         spcc.ChangeStatus(PlayerCharacterController.StatusListElement.NINJA, gdd.isNinja);
     }
     
-
-    //private void ReAwakeNotDestroyOnLoad()
-    //{
-    //    foreach (MonoBehaviour mB in DontDestroyList)
-    //    {
-    //    }
-    //}
 
     public void Restart(MonoBehaviour caller)
     {

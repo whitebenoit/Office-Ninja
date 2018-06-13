@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EazyTools.SoundManager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,11 @@ public class PrinterInteractionController : ObjectInteractionController
             {
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.ROOTED, true);
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, true);
-                TpPlayerOut(hidePosition.position, otherPcc.transform.rotation, otherPcc);
-                //otherPcc.transform.SetPositionAndRotation(hidePosition.position, otherPcc.transform.rotation);
+                //TpPlayerOut(hidePosition.position, otherPcc.transform.rotation, otherPcc);
+
+                SoundManager.GetAudio(audioTPID).Play();
+                GameObject.Instantiate(Resources.Load("Prefabs/TPCloud"), pcc.transform.position, pcc.transform.rotation);
+                otherPcc.transform.SetPositionAndRotation(hidePosition.position, otherPcc.transform.rotation);
             }
             else
             {
@@ -25,8 +29,12 @@ public class PrinterInteractionController : ObjectInteractionController
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.ROOTED, false);
                 otherPcc.progress = otherPcc.lSpline.GetNearestProgressOnSpline(this.transform.position);
 
-                TpPlayerOut(otherPcc.lSpline.GetNearestPointOnSpline(this.transform.position), otherPcc.transform.rotation, otherPcc);
-                //otherPcc.Move(otherPcc.transform.forward);
+                //TpPlayerOut(otherPcc.lSpline.GetNearestPointOnSpline(this.transform.position), otherPcc.transform.rotation, otherPcc);
+
+
+                SoundManager.GetAudio(audioTPID).Play();
+                GameObject.Instantiate(Resources.Load("Prefabs/TPCloud"), pcc.transform.position, pcc.transform.rotation);
+                otherPcc.Move(otherPcc.transform.forward);
             }
 
         }

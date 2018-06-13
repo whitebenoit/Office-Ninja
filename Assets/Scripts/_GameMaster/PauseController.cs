@@ -175,20 +175,24 @@ public class PauseController : MonoBehaviour {
         switch (itemStateName)
         {
             case Dictionaries.ItemStateName.OWNED:
-                currImage.color = new Color(0.8f, 0.8f, 0.8f);
-                currText.color = new Color(0.5f, 0.5f, 0.5f);
+                //currImage.color = new Color(0.8f, 0.8f, 0.8f);
+                currImage.color = new Color(0.5f, 0.5f, 0.5f);
+                currText.color = currImage.color;
                 break;
             case Dictionaries.ItemStateName.MISSING:
-                currImage.color = new Color(1.0f, 1.0f, 1.0f);
-                currText.color = new Color(0.7f, 0.7f, 0.7f);
+                //currImage.color = new Color(1.0f, 1.0f, 1.0f);
+                currImage.color = new Color(0.7f, 0.7f, 0.7f);
+                currText.color = currImage.color;
                 break;
             case Dictionaries.ItemStateName.NOTIMPLEMENTEDYET:
-                currImage.color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
-                currText.color = new Color(0.7f, 0.7f, 0.7f, 0.3f);
+                //currImage.color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
+                currImage.color = new Color(0.7f, 0.7f, 0.7f, 0.3f);
+                currText.color = currImage.color;
                 break;
             default:
-                currImage.color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
-                currText.color = new Color(0.7f, 0.7f, 0.7f, 0.3f);
+                //currImage.color = new Color(1.0f, 1.0f, 1.0f, 0.3f);
+                currImage.color = new Color(0.7f, 0.7f, 0.7f, 0.3f);
+                currText.color = currImage.color;
                 break;
         }
 

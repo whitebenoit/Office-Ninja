@@ -9,5 +9,12 @@ EditorBuildSettings:
     path: Assets/_scenes/mainMenuScene.unity
     guid: fe89641c4ac16824ebcc12dfdd1e4602
   - enabled: 1
-    path: Assets/_scenes/testingStartingFloor.unity
-    guid: 4b8f5806968f4a7449e3124952a34dab
+    path: Assets/_scenes/introductionScene.unity
+    guid: 73e9939a7528e464198180a34ec3faa4
+  - enabled: 1
+    path: Assets/_scenes/startingFloor.unity
+    guid: 906c319512654854fb1bedebede68fea
+  - enabled: 1
+    path: Assets/_scenes/secondFloor.unity
+    guid: e3848439236554f47881aa4488207e0c
+  m_configObjects: {}

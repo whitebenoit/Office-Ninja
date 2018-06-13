@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using EazyTools.SoundManager;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -36,6 +37,7 @@ public class ClickButtonFunctions : MonoBehaviour {
 
     public void LoadMainMenu()
     {
+        SoundManager.StopAll();
         SceneManager.LoadScene(0);
     }
 
@@ -45,6 +47,7 @@ public class ClickButtonFunctions : MonoBehaviour {
         {
             sceneName = sceneName,
             toiletNum = 100
+            
         };
 
         ////Debug.Log(SceneManager.GetSceneByBuildIndex(1).name);

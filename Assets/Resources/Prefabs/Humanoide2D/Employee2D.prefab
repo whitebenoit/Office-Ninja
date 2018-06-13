@@ -59,6 +59,7 @@ GameObject:
   - component: {fileID: 54608321826407176}
   - component: {fileID: 95267256651941090}
   - component: {fileID: 195651486533966806}
+  - component: {fileID: 114058217119418818}
   m_Layer: 0
   m_Name: Employee2D
   m_TagString: Employee
@@ -242,6 +243,17 @@ MonoBehaviour:
   _animationName: Idle
   loop: 1
   timeScale: 1
+--- !u!114 &114058217119418818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1655428985574454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 371809493657c01428fb6a510cf44136, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114521274196046974
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,7 +317,7 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1655428985574454}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.2
   m_Speed: 3.5

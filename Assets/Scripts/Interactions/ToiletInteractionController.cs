@@ -10,6 +10,7 @@ public class ToiletInteractionController : ObjectInteractionController
     private float fadeInDuration = 0.5f;
     private string text = "sauvegarde";
     int audioToilet;
+    public SplineCameraController.cameraPosition nextCameraPosition = SplineCameraController.cameraPosition.front;
 
     private void Start()
     {
@@ -31,12 +32,17 @@ public class ToiletInteractionController : ObjectInteractionController
                     FadeInOutController.instance.FadeIn(() =>
                     {
                         TransformToSalaryman(pcc);
+                        SplineCameraController mCC = Camera.main.GetComponent<SplineCameraController>();
+                        if (mCC != null)
+                        {
+                            mCC.currCameraPos = nextCameraPosition;
+                        }
                         SoundManager.GetAudio(audioToilet).Play();
                         FadeInOutController.instance.FadeOut(() =>
                         {
                             pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
                             this.SaveGame();
-                        });
+                        }, fadeInDuration,"");
                     }, fadeInDuration, text);
                     
                 }
@@ -45,12 +51,17 @@ public class ToiletInteractionController : ObjectInteractionController
                     FadeInOutController.instance.FadeIn(() =>
                     {
                         TransformToNinja(pcc);
+                        SplineCameraController mCC = Camera.main.GetComponent<SplineCameraController>();
+                        if (mCC != null)
+                        {
+                            mCC.currCameraPos = nextCameraPosition;
+                        }
                         SoundManager.GetAudio(audioToilet).Play();
                         FadeInOutController.instance.FadeOut(() =>
                         {
                             pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
                             this.SaveGame();
-                        });
+                        }, fadeInDuration, "");
                     },fadeInDuration, text);
                 }
             }
@@ -67,6 +78,7 @@ public class ToiletInteractionController : ObjectInteractionController
         gd.sceneName = SceneManager.GetActiveScene().name;
 
         SaveManager.Save(gd, saveName);
+        GameMasterManager.instance.gd_currentLevel = gd;
     }
 
     private void TransformToNinja(PlayerCharacterController pcc)

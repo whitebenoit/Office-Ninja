@@ -73,9 +73,12 @@ public abstract class AI_State : ScriptableObject {
     {
         if (isToStopOnEnter)
             brain.navMeshAgent.isStopped = true;
-        for (int i = 0; i < brainAnimBoolList.Length; i++)
+        if (brainAnimBoolList != null)
         {
-            brain.brain_animator.SetBool(brainAnimBoolList[i], true);
+            for (int i = 0; i < brainAnimBoolList.Length; i++)
+            {
+                brain.brain_animator.SetBool(brainAnimBoolList[i], true);
+            }
         }
         for (int i = 0; i < transitionsList.Length; i++)
         {

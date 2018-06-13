@@ -15,6 +15,7 @@ public class PlayerUnitytoSpineController : StateMachineBehaviour
 
     public string motionName;
     public float speedAnim = 1;
+    public bool isLoop = true;
 
    
 
@@ -61,9 +62,9 @@ public class PlayerUnitytoSpineController : StateMachineBehaviour
             skelAnim = animator.GetComponent<PlayerCharacterController>().salarymanModel.GetComponent<SkeletonAnimation>();
         }
         Spine.TrackEntry currTrack = skelAnim.AnimationState.GetCurrent(0);
-        if (currTrack == null || currTrack.Animation != skelAnim.skeleton.Data.FindAnimation(motionName))
+        if ( (currTrack == null || currTrack.Animation != skelAnim.skeleton.Data.FindAnimation(motionName)))
         {
-            skelAnim.AnimationState.SetAnimation(0, motionName, true).timeScale = speedAnim;
+            skelAnim.AnimationState.SetAnimation(0, motionName, isLoop).timeScale = speedAnim;
         }
     }
 

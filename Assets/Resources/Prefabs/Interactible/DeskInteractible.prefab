@@ -68,15 +68,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1961934423389500}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.426, y: -0.5, z: -0.283}
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: -0.7071068}
+  m_LocalPosition: {x: 13.689053, y: -0.5, z: 4.460907}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4637517447495880}
   - {fileID: 4404225251894618}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
 --- !u!4 &4404225251894618
 Transform:
   m_ObjectHideFlags: 1
@@ -116,6 +116,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 5544228b8151f394a9733b760f80ea80, type: 2}
   m_StaticBatchInfo:
@@ -173,6 +174,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114727720357109786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,8 +189,10 @@ MonoBehaviour:
   t: 0.117
   cDistance: 0.18138106
   points:
-  - {x: 0.031697273, y: 0, z: -0.056900024}
-  - {x: 2.5883174, y: 0, z: -0.054780483}
+  - {x: 0.015475512, y: 0, z: 0.15450066}
+  - {x: 0.31114608, y: 0, z: -0.05365306}
+  - {x: 2.2095685, y: 0, z: -0.055842996}
+  - {x: 2.519031, y: 0, z: 0.20501268}
   loop: 0
 --- !u!114 &114805495594456496
 MonoBehaviour:
@@ -203,6 +207,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isNinjaOnly: 1
   isSalaryManOnly: 0
+  isRequireObject: 0
+  requiredObject: 0
   buttonPosition: {x: 0, y: 2, z: 0}
   actionType: 0
   isModifyingMove: 1

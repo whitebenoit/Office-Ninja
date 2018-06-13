@@ -1618,7 +1618,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: testingStartingFloor
+          m_StringArgument: startingFloor
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -1920,7 +1920,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: b6abbf00c954d844bb879225e07ccc46, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d57d9a871f12c6340935ae797d701747, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

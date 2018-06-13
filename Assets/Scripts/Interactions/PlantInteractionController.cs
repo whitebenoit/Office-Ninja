@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EazyTools.SoundManager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,6 +31,10 @@ public class PlantInteractionController : ObjectInteractionController
             {
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.BEHINDPOT, true);
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, true);
+
+
+                SoundManager.GetAudio(audioTPID).Play();
+                GameObject.Instantiate(Resources.Load("Prefabs/TPCloud"), pcc.transform.position, pcc.transform.rotation);
                 otherPcc.transform.SetPositionAndRotation(hidePosition.position, otherPcc.transform.rotation);
             }
             else
@@ -38,6 +43,10 @@ public class PlantInteractionController : ObjectInteractionController
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.BEHINDPOT, false);
                 otherPcc.progress = otherPcc.lSpline.GetNearestProgressOnSpline(this.transform.position);
 
+
+
+                SoundManager.GetAudio(audioTPID).Play();
+                GameObject.Instantiate(Resources.Load("Prefabs/TPCloud"), pcc.transform.position, pcc.transform.rotation);
                 otherPcc.Move(otherPcc.transform.forward);
             }
 
@@ -66,7 +75,7 @@ public class PlantInteractionController : ObjectInteractionController
     private void PrivModifiedMove(Vector3 direction, ObjectInteractionController oicCaller, Collider other)
     {
         SplinePlayerCharacterController otherPcc = other.transform.GetComponent<SplinePlayerCharacterController>();
-        float dotMagnitude = Vector3.Dot(plantSpline.GetDirection(plantProgress).normalized, direction);
+        float dotMagnitude = Vector3.Dot(plantSpline.transform.TransformVector(plantSpline.GetDirection(plantProgress).normalized), direction);
         if (!otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED])
         {
             if (Math.Abs(dotMagnitude) > 0.05f)
@@ -91,7 +100,7 @@ public class PlantInteractionController : ObjectInteractionController
                 plantProgress = plantSpline.GetLengthAtDistFromParametric(Math.Sign(dotMagnitude) * otherPcc.charSpeed * Time.deltaTime, plantProgress);
                 Vector3 newPosition = plantSpline.GetPoint(plantProgress);
 
-                Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * plantSpline.GetDirection(plantProgress).normalized, Vector3.up);
+                Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * plantSpline.transform.TransformVector(plantSpline.GetDirection(plantProgress).normalized), Vector3.up);
                 Quaternion newRotation = Quaternion.Lerp(otherPcc.pcc_rigidbody.rotation, targetRotation, otherPcc.turnSmooth);
 
                 otherPcc.transform.SetPositionAndRotation(newPosition, newRotation);

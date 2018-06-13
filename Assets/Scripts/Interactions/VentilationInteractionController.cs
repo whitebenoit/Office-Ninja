@@ -38,7 +38,7 @@ public class VentilationInteractionController : ObjectInteractionController
     private void UseVentialtion(ObjectInteractionController oicCaller, Collider other)
     {
         spcc = other.GetComponent<SplinePlayerCharacterController>();
-        if (pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.BLOCKED])
+        if (!pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.BLOCKED])
         {
             pcc.ChangeStatus(PlayerCharacterController.StatusListElement.BLOCKED, true);
             PlayerUnitytoSpineController pUSC = StateMachineBehaviourUtilities.GetBehaviourByName<PlayerUnitytoSpineController>(pcc.pcc_animator, "Screwdriver");
@@ -48,15 +48,15 @@ public class VentilationInteractionController : ObjectInteractionController
                 StartToMoveInVentialtion(oicCaller, other);
                 pUSC.onStateExitCallbacks.Clear();
             });
-            pcc.pcc_animator.SetBool("isUsingScrew", true);
+            pcc.pcc_animator.SetTrigger("isUsingScrew");
             SoundManager.GetAudio(audioScrewdriver).Play();
         }
     }
 
     private void StartToMoveInVentialtion(ObjectInteractionController oicCaller, Collider other)
     {
-        pcc.pcc_animator.SetBool("isUsingScrew", false);
-        if(pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.DETECTED] == false)
+        SoundManager.GetAudio(audioScrewdriver).Stop();
+        if (pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.DETECTED] == false)
         {
             pcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, true);
             pcc.ninjaModel.SetActive(false);

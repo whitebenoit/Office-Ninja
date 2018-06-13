@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -12,9 +11,9 @@ public abstract class ObjectInteractionController : MonoBehaviour {
     public bool isSalaryManOnly = false;
     public bool isRequireObject = false;
     public Dictionaries.ItemName requiredObject;
-    public Vector3 buttonPosition = new Vector3(0, 2, 0);
+    public Vector3 buttonPosition = new Vector3(0, 1, 0);
     //private GameObject buttonUIGO_TEST ;
-    private int audioTPID;
+    protected int audioTPID;
     private ButtonUIImageController btnUIImageController;
     protected PlayerCharacterController pcc;
     private GameObject buttonCanvasGO;
@@ -108,7 +107,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
         }
     }
 
-    private void AddInteraction(Collider other)
+    protected void AddInteraction(Collider other)
     {
         if (CheckInteractionValidity(other))
         {
@@ -117,7 +116,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
         }
     }
 
-    private void RemoveInteraction(Collider other)
+    protected void RemoveInteraction(Collider other)
     {
         if (CheckInteractionValidity(other))
         {
@@ -176,7 +175,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
         pcc.pcc_animator.SetBool("isTPOut", true);
         SoundManager.GetAudio(audioTPID).Play();
         GameObject.Instantiate(Resources.Load("Prefabs/TPCloud"), pcc.transform);
-
+        pcc.ninjaModel.SetActive(false);
     }
     
 
@@ -193,6 +192,7 @@ public abstract class ObjectInteractionController : MonoBehaviour {
             pUSC.onStateExitCallbacks.Clear();
         });
         pcc.transform.SetPositionAndRotation(nextPos, nextRot);
+        pcc.ninjaModel.SetActive(true);
         pcc.pcc_animator.SetBool("isTPIn", true);
         GameObject.Instantiate(Resources.Load("Prefabs/TPCLoud"),pcc.transform);
         SoundManager.GetAudio(audioTPID).Play();

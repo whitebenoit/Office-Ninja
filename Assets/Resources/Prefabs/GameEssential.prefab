@@ -630,7 +630,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1234095218492826}
   m_LocalRotation: {x: 0.41153628, y: -0.20618609, z: 0.096146144, w: 0.88254243}
-  m_LocalPosition: {x: -3.23, y: -2.2949219, z: -0.13964844}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4139210892196304}
@@ -661,7 +661,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1971439802726458}
   m_LocalRotation: {x: 0.17364816, y: -0, z: -0, w: 0.9848078}
-  m_LocalPosition: {x: -8.67, y: 2.5, z: -2.3}
+  m_LocalPosition: {x: -92.37, y: 9.81, z: -51.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4468034146723816}
@@ -958,7 +958,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: eb2d9b9514342e44dae79e3b79f8bdb0, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5aef5d6f2225a514682340422542cd3b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1421,7 +1421,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 68ef4d5ef790dfe458d5c193a38554e5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8e8864b99c9e22740aef9dc9485a0db6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1462,7 +1462,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: ef1aa1e9ce1d4ae41bc578423fbf6e9d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: adc5ab55497159940b485134af791ac2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   cameraVertAngle: 20
   cameraDistance: 3.9
   cameraHeight: 3.5
-  forwardCameraDistance: 1.9
+  forwardCameraDistance: 1.6
   linearLerpSpeed: 0.1
   angularLerpSpeed: 0.05
   currCameraPos: 1
@@ -1816,7 +1816,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: dd64a1e7f49c87444a0ed9667349e54d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f84a6b67d2f6b4f45a966687dc7b7970, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

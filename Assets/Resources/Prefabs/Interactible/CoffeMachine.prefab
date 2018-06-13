@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4155393593252506}
   - component: {fileID: 33549536283928538}
   - component: {fileID: 23450137265185246}
+  - component: {fileID: 65631491220592368}
+  - component: {fileID: 114496999041385900}
   m_Layer: 0
   m_Name: CoffeMachine
   m_TagString: Untagged
@@ -84,3 +86,35 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1440591613639326}
   m_Mesh: {fileID: 4300000, guid: f5f5ed40d4b2fe740a97c6d3fb081757, type: 3}
+--- !u!65 &65631491220592368
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440591613639326}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 90, y: 100, z: 180}
+  m_Center: {x: 0, y: 0, z: 85}
+--- !u!114 &114496999041385900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1440591613639326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0f23147c7aafc74fa5304b246812737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isNinjaOnly: 0
+  isSalaryManOnly: 1
+  isRequireObject: 0
+  requiredObject: 0
+  buttonPosition: {x: 0, y: 1, z: 0}
+  actionType: 1
+  isModifyingMove: 0
+  text:
+  - "Tiens\u2026 Ils font Expresso en intraveineuse maintenant !?"

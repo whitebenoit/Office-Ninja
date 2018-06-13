@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EazyTools.SoundManager;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,14 +29,29 @@ public class DeskInteractionController : ObjectInteractionController
             {
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.BEHINDPOT, true);
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, true);
-                otherPcc.transform.SetPositionAndRotation(deskSpline.GetNearestPointOnSpline(otherPcc.transform.position), otherPcc.transform.rotation);
                 deskProgress = deskSpline.GetNearestProgressOnSpline(otherPcc.transform.position);
+                //otherPcc.transform.SetPositionAndRotation(deskSpline.GetNearestPointOnSpline(otherPcc.transform.position),
+                //    Quaternion.Euler(deskSpline.transform.TransformVector(deskSpline.GetDirection(deskProgress).normalized)));
+
+
+                SoundManager.GetAudio(audioTPID).Play();
+                GameObject.Instantiate(Resources.Load("Prefabs/TPCloud"),pcc.transform.position, pcc.transform.rotation);
+
+                float dotMagnitude = Vector3.Dot(otherPcc.transform.forward, Camera.main.transform.right);
+                //Debug.Log("dotMagnitude:" + dotMagnitude);
+
+                otherPcc.transform.SetPositionAndRotation(deskSpline.GetNearestPointOnSpline(otherPcc.transform.position),
+                    Quaternion.LookRotation(dotMagnitude * deskSpline.transform.TransformVector(deskSpline.GetDirection(deskProgress).normalized), Vector3.up));
             }
             else
             {
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.HIDDEN, false);
                 otherPcc.ChangeStatus(PlayerCharacterController.StatusListElement.BEHINDPOT, false);
                 otherPcc.progress = otherPcc.lSpline.GetNearestProgressOnSpline(otherPcc.transform.position);
+
+
+                SoundManager.GetAudio(audioTPID).Play();
+                GameObject.Instantiate(Resources.Load("Prefabs/TPCloud"), pcc.transform.position, pcc.transform.rotation);
 
                 otherPcc.Move(otherPcc.transform.forward);
             }
@@ -68,7 +84,7 @@ public class DeskInteractionController : ObjectInteractionController
     private void PrivModifiedMove(Vector3 direction, ObjectInteractionController oicCaller, Collider other)
     {
         SplinePlayerCharacterController otherPcc = other.transform.GetComponent<SplinePlayerCharacterController>();
-        float dotMagnitude = Vector3.Dot(deskSpline.GetDirection(deskProgress).normalized, direction);
+        float dotMagnitude = Vector3.Dot(deskSpline.transform.TransformVector(deskSpline.GetDirection(deskProgress).normalized), direction);
         if (!otherPcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED])
         {
             if (Math.Abs(dotMagnitude) > 0.05f)
@@ -77,7 +93,7 @@ public class DeskInteractionController : ObjectInteractionController
                 deskProgress = deskSpline.GetLengthAtDistFromParametric(Math.Sign(dotMagnitude) * otherPcc.charSpeed * Time.deltaTime, deskProgress);
                 Vector3 newPosition = deskSpline.GetPoint(deskProgress);
 
-                Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * deskSpline.GetDirection(deskProgress).normalized, Vector3.up);
+                Quaternion targetRotation = Quaternion.LookRotation(Math.Sign(dotMagnitude) * deskSpline.transform.TransformVector(deskSpline.GetDirection(deskProgress).normalized), Vector3.up);
                 Quaternion newRotation = Quaternion.Lerp(otherPcc.pcc_rigidbody.rotation, targetRotation, otherPcc.turnSmooth);
 
                 otherPcc.transform.SetPositionAndRotation(newPosition, newRotation);

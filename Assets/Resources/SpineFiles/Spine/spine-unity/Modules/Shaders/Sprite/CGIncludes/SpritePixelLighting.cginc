@@ -57,7 +57,8 @@ inline fixed3 calculateLightDiffuse(VertexOutput input, float3 normalWorld, inou
 	//For directional lights _WorldSpaceLightPos0.w is set to zero
 	float3 lightWorldDirection = normalize(_WorldSpaceLightPos0.xyz - input.posWorld.xyz * _WorldSpaceLightPos0.w);
 	
-	float attenuation = LIGHT_ATTENUATION(input);
+	//float attenuation = LIGHT_ATTENUATION(input);
+	UNITY_LIGHT_ATTENUATION(attenuation, input, _LightColor0.rgb);
 	float angleDot = max(0, dot(normalWorld, lightWorldDirection));
 	
 #if defined(_DIFFUSE_RAMP)

@@ -18,6 +18,7 @@ public class SaveManager {
         BinaryFormatter bf = new BinaryFormatter();
         bf.Serialize(file, gd);
         file.Close();
+        
     }
 
     public static GameData LoadFile(string saveName)

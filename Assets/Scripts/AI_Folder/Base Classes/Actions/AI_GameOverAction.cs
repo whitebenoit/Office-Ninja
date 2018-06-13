@@ -6,7 +6,7 @@ using UnityEngine;
 public class AI_GameOverAction : AI_Action {
 
     SplinePlayerCharacterController spcc;
-    public float fadeInDuration = 1.0f;
+    public float fadeInDuration =  10.0f;
     public string text = "Game Over";
 
 

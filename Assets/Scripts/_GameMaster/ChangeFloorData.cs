@@ -6,6 +6,7 @@ public class ChangeFloorData {
 
     public int floorDoorNum = 0;
     public bool isNinja;
+    public SplineCameraController.cameraPosition cameraPosition;
 
     public ChangeFloorData(int floorDoorNum)
     {
@@ -16,5 +17,12 @@ public class ChangeFloorData {
     {
         this.floorDoorNum = floorDoorNum;
         this.isNinja = isNinja;
+    }
+
+    public ChangeFloorData(int floorDoorNum, bool isNinja, SplineCameraController.cameraPosition cameraPosition)
+    {
+        this.floorDoorNum = floorDoorNum;
+        this.isNinja = isNinja;
+        this.cameraPosition = cameraPosition;
     }
 }
