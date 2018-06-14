@@ -41,11 +41,15 @@ public class GameMasterManager : MonoBehaviour  {
     {
         instance.Init();
         gd_currentLevel = SaveManager.LoadFile(saveName);
-        GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
-        if(player != null)
-            SetUpSPCC(player.GetComponent<SplinePlayerCharacterController>(), ref gd_currentLevel);
+       
     }
 
+    private void Start()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag(Tags.player);
+        if (player != null)
+            SetUpSPCC(player.GetComponent<SplinePlayerCharacterController>(), ref gd_currentLevel);
+    }
     void Init()
     {
         if (!initialized)

@@ -15,7 +15,7 @@ public class IntroductionSceneController : MonoBehaviour {
     public List<Sprite> spriteList;
 
 
-    string sceneName = "testingStartingFloor";
+    string sceneName = "startingFloor";
 
     private void Start()
     {

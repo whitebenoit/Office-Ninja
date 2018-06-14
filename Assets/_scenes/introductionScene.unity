@@ -223,10 +223,20 @@ MonoBehaviour:
   mainImage: {fileID: 1793795159}
   timeBetweenImages: 5
   spriteList:
-  - {fileID: 21300000, guid: 23bf0576c08e9e941b5655df2ad719f3, type: 3}
-  - {fileID: 21300000, guid: 39e9cb9c37a4af64ebce0d9d21c1b6ae, type: 3}
-  - {fileID: 21300000, guid: 2ead042a28ee54a4597ab27ae03c94c2, type: 3}
-  - {fileID: 21300000, guid: 1353bf7bf121c8e428c8fc1effb252bf, type: 3}
+  - {fileID: 21300000, guid: c10942bf8edb67b4f95363a30f6eb8dc, type: 3}
+  - {fileID: 21300000, guid: e7306df53a6aae04c93e7f97a144e399, type: 3}
+  - {fileID: 21300000, guid: d8ab86b3ad5de3b4cae65bbc59f2657e, type: 3}
+  - {fileID: 21300000, guid: 68451734c3f52db4182a13585698b134, type: 3}
+  - {fileID: 21300000, guid: 0ca140636a0e1884e9293e2c92cfe865, type: 3}
+  - {fileID: 21300000, guid: a3c104f536c004948b9c44e237e70345, type: 3}
+  - {fileID: 21300000, guid: 8f2546d4088cced4485a5db191dc3001, type: 3}
+  - {fileID: 21300000, guid: eeb0b13d54868754b845fe76a5769944, type: 3}
+  - {fileID: 21300000, guid: 63d0532a2ca289e47b4078801b307d06, type: 3}
+  - {fileID: 21300000, guid: baf7fd8546547564bb5de98165b4cf5c, type: 3}
+  - {fileID: 21300000, guid: 4bdb556f4f9657b43ba1ef799ef0976e, type: 3}
+  - {fileID: 21300000, guid: 71d62438573f29f48bb09a5854a229db, type: 3}
+  - {fileID: 21300000, guid: 1de74ca437c428a4cadcb5c8e81988d3, type: 3}
+  - {fileID: 21300000, guid: 03a9eec14bc9702439487ecf22b1e4ec, type: 3}
 --- !u!1 &91482325
 GameObject:
   m_ObjectHideFlags: 0

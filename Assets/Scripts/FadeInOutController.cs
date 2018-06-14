@@ -145,10 +145,12 @@ public class FadeInOutController : MonoBehaviour {
         }
         float currentAlpha = panelImage.color.a;
         textElmt.text = Text;
+        float alphaSpeed = 0.0f;
 
         while (Math.Abs(currentAlpha - targetAlpha) >= 0.01f)
         {
-            currentAlpha = Mathf.Lerp(currentAlpha, targetAlpha, Time.fixedDeltaTime/duration);
+            currentAlpha = Mathf.SmoothDamp(currentAlpha, targetAlpha, ref alphaSpeed, duration);
+                //(currentAlpha, targetAlpha, Time.fixedDeltaTime/duration);
             var tempColor = panelImage.color;
             var tempTxtColor = textElmt.color;
             tempColor.a = currentAlpha;

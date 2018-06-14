@@ -31,7 +31,7 @@ public abstract class PlayerCharacterController : MonoBehaviour {
     public enum ActionListElement { HIDE, INTERACT, DASH, USE };
 
     [HideInInspector]
-    public enum StatusListElement { NINJA, ROOTED, BLOCKED, HIDDEN, READING , BEHINDPOT, DETECTED};
+    public enum StatusListElement { NINJA, ROOTED, BLOCKED, HIDDEN, READING , BEHINDPOT, DETECTED, GAMEOVER};
     public Dictionary<StatusListElement,bool> currPlayerStatus;
 
     public Dictionary<Dictionaries.ItemName, bool> currPlayerObjectStatus;

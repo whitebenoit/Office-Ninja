@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: GameOverAction
   m_EditorClassIdentifier: 
   audioToPlay: 2
-  fadeInDuration: 1.5
+  fadeInDuration: 1.2
   text: Game Over

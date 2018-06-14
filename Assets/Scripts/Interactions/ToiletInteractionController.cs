@@ -7,7 +7,8 @@ using UnityEngine.SceneManagement;
 public class ToiletInteractionController : ObjectInteractionController
 {
     public int toiletNum;
-    private float fadeInDuration = 0.5f;
+    private float fadeOutDuration = 0.5f;
+    private float fadeInDuration = 0.2f;
     private string text = "sauvegarde";
     int audioToilet;
     public SplineCameraController.cameraPosition nextCameraPosition = SplineCameraController.cameraPosition.front;
@@ -43,7 +44,7 @@ public class ToiletInteractionController : ObjectInteractionController
                             pcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = false;
                             this.SaveGame();
                         }, fadeInDuration,"");
-                    }, fadeInDuration, text);
+                    }, fadeOutDuration, text);
                     
                 }
                 else

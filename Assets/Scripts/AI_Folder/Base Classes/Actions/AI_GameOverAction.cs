@@ -6,18 +6,22 @@ using UnityEngine;
 public class AI_GameOverAction : AI_Action {
 
     SplinePlayerCharacterController spcc;
-    public float fadeInDuration =  10.0f;
+    public float fadeInDuration = 1.5f;
     public string text = "Game Over";
 
 
     public override void Act(AI_BehaviorBrain brain)
     {
         spcc = GameObject.FindGameObjectWithTag(Tags.player).GetComponent<SplinePlayerCharacterController>();
-        spcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = true;
-        FadeInOutController.instance.FadeIn(() =>
+        if(spcc.currPlayerStatus[PlayerCharacterController.StatusListElement.GAMEOVER] != true)
         {
-            GameMasterManager.instance.Restart(brain);
-        }, fadeInDuration, text);
+            spcc.currPlayerStatus[PlayerCharacterController.StatusListElement.GAMEOVER] = true;
+            spcc.currPlayerStatus[PlayerCharacterController.StatusListElement.ROOTED] = true;
+            FadeInOutController.instance.FadeIn(() =>
+            {
+                GameMasterManager.instance.Restart(brain);
+            }, fadeInDuration, text);
+        }
 
         //GameMasterManager.Instance.Restart(brain);
     }
