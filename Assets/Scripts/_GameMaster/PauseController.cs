@@ -51,8 +51,22 @@ public class PauseController : MonoBehaviour {
     private void Awake()
     {
         instance.Init();
-        pauseMenuPanel = GameObject.FindGameObjectWithTag(Tags.pauseMenu).GetComponent<RectTransform>();
+
+        FillProperties();
+
+        UpdateItemDisplay();
+
+        pauseMenuPanel.gameObject.SetActive(false);
+    }
+
+    private void FillProperties()
+    {
+        GameObject[] gO = GameObject.FindGameObjectsWithTag(Tags.pauseMenu);
+        if(gO.Length > 0)
+            pauseMenuPanel = gO[0].GetComponent<RectTransform>();
         RectTransform butPanel = null;
+        quitBtn = contBtn = null;
+        itemListPanel = new List<RectTransform>();
         foreach (RectTransform rectTrans in pauseMenuPanel.GetComponentsInChildren<RectTransform>(true))
         {
             if (rectTrans.gameObject.name == "ItemsPanel")
@@ -70,7 +84,7 @@ public class PauseController : MonoBehaviour {
         //itemListPanel = itemPanel.GetChild<RectTransform>();
         for (int i = 0; i < itemListPanel.Count; i++)
         {
-            if(itemListPanel[i].name != "Panel")
+            if (itemListPanel[i].name != "Panel")
             {
                 itemListPanel.RemoveAt(i);
                 i--;
@@ -82,16 +96,14 @@ public class PauseController : MonoBehaviour {
             //contBtn.
             quitBtn = butPanel.GetComponentsInChildren<Button>(true)[1];
         }
-        
+
         eventSystem = EventSystem.current;
-
-        UpdateItemDisplay();
-
-        pauseMenuPanel.gameObject.SetActive(false);
     }
+    
 
-    void Init()
+    public void Init()
     {
+        FillProperties();
         if (!initialized)
         {
             initialized = true;
@@ -108,6 +120,8 @@ public class PauseController : MonoBehaviour {
 
     public void TogglePause()
     {
+        if (pauseMenuPanel == null)
+            FillProperties();
         isPaused = pauseMenuPanel.gameObject.activeSelf;
         if (!isPaused)
         {
@@ -123,8 +137,10 @@ public class PauseController : MonoBehaviour {
 
     public void ClosePause()
     {
-        if(pauseMenuPanel != null)
-           pauseMenuPanel.gameObject.SetActive(false);
+        if (pauseMenuPanel == null)
+            FillProperties();
+        if (pauseMenuPanel != null)
+            pauseMenuPanel.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 

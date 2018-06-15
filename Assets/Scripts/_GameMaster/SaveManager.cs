@@ -9,6 +9,7 @@ public class SaveManager {
 
 	public static void Save(GameData gd, string saveName)
     {
+        // C:\Users\whitebenoit\AppData\LocalLow\Bento\Office Ninja
         string destination = Application.persistentDataPath + "/"+ saveName+".dat";
         FileStream file;
 

@@ -63,6 +63,7 @@ public class GameMasterManager : MonoBehaviour  {
     public void LevelSetUp()
     {
         SoundManager.StopAll();
+        PauseController.instance.Init();
         PauseController.instance.ClosePause();
         if(cfd_nextLevel != null)
         {
@@ -114,6 +115,17 @@ public class GameMasterManager : MonoBehaviour  {
         SplinePlayerCharacterController spcc = player.GetComponent<SplinePlayerCharacterController>();
         if(gd_currentLevel ==  null)
             gd_currentLevel = SaveManager.LoadFile(saveName);
+        if (spcc.currPlayerObjectStatus[Dictionaries.ItemName.SCREWDRIVER] || gd_currentLevel.isScrewUnlocked || (gd_nextLevel != null && gd_nextLevel.isScrewUnlocked))
+        {
+            spcc.currPlayerObjectStatus[Dictionaries.ItemName.SCREWDRIVER] = true;
+            if (gd_currentLevel != null)
+            {
+                gd_currentLevel.isScrewUnlocked = true;
+                SaveManager.Save(gd_currentLevel, saveName);
+            }
+            if (gd_nextLevel != null)
+                gd_nextLevel.isScrewUnlocked = true;
+        }
         SetUpSPCC(spcc, ref gd_currentLevel);
 
         if (gfc != null)
